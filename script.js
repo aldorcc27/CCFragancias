@@ -183,6 +183,22 @@ function placeholderDataUri(label = BRAND) {
    UI: CARD
    ========================= */
 function buildCard(p) {
+   function renderFeatured() {
+  const wrap = document.getElementById("featured");
+  if (!wrap) return;
+
+  const featured = products.filter(p => p.featured).slice(0, 4);
+
+  wrap.innerHTML = `
+    <div style="grid-column:1/-1">
+      <div class="featured-title">Selección C&C</div>
+      <div class="muted small">Nuestros 4 recomendados para decidir rápido</div>
+    </div>
+  `;
+
+  featured.forEach(p => wrap.appendChild(buildCard(p)));
+}
+
   const card = document.createElement("div");
   card.className = "product";
   card.dataset.cat = p.cat;
@@ -344,6 +360,7 @@ function init() {
       render(chip.dataset.filter, currentQuery);
     });
   });
+renderFeatured();
 
   render("todos");
 }
@@ -356,5 +373,6 @@ if (search) {
     render(currentFilter, e.target.value);
   });
 }
+
 
 
