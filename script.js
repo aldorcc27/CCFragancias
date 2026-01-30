@@ -294,14 +294,27 @@ function getOrderedProducts(filter) {
   return filtered.sort((a, b) => (b.featured === true) - (a.featured === true));
 }
 
-function render(filter) {
+function getOrderedProducts(filter, query) {
+  const q = (query || "").trim().toLowerCase();
+
+  let filtered = products.filter(p => (filter === "todos" ? true : p.cat === filter));
+
+  if (q) {
+    filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
+  }
+
+  return filtered.sort((a, b) => (b.featured === true) - (a.featured === true));
+}
+
+function render(filter = currentFilter, query = currentQuery) {
+  currentFilter = filter;
+  currentQuery = query;
+
   const grid = document.getElementById("grid");
   if (!grid) return;
-  grid.innerHTML = "";
 
-  getOrderedProducts(filter).forEach(p => {
-    grid.appendChild(buildCard(p));
-  });
+  grid.innerHTML = "";
+  getOrderedProducts(filter, query).forEach(p => grid.appendChild(buildCard(p)));
 }
 
 /* =========================
@@ -336,4 +349,11 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+const search = document.getElementById("search");
+if (search) {
+  search.addEventListener("input", (e) => {
+    render(currentFilter, e.target.value);
+  });
+}
 
