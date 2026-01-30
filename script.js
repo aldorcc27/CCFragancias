@@ -495,10 +495,11 @@ function init() {
       if (cat) cat.scrollIntoView({ behavior: "smooth" });
     }, 200);
   }
- setupCartUI();
+ 
+   render("todos", "");
+setupCartUI();
 refreshCartUI();
 
-  render("todos", "");
 }
 function buildCartMessage(){
   const { cart, items, total } = cartTotals();
@@ -606,6 +607,7 @@ function setupCartUI(){
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
