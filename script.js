@@ -72,45 +72,46 @@ const imageMap = {
    ========================= */
 const products = [
   // DAMAS
-  { cat: "damas", name: "FUGAZZI – Angel Dust", ml5: 1500, ml10: 2800, note: "Ideal para día · limpio · elegante", featured: true },
-  { cat: "damas", name: "ROOM 1015 – Wavechild", ml5: 1200, ml10: 2250 },
-  { cat: "damas", name: "Le Labo – Santal 33", ml5: 1500, ml10: 2700 },
-  { cat: "damas", name: "Sospiro – Vibrato", ml5: 1200, ml10: 2250, note: "Fresco · con carácter", featured: true },
-  { cat: "damas", name: "Initio – Musk Therapy", ml5: 1250, ml10: 2300 },
-  { cat: "damas", name: "Penhaligon’s – Duchess Rose", ml5: 1400, ml10: 2500 },
-  { cat: "damas", name: "Penhaligon’s – Empressa", ml5: 1200, ml10: 2200 },
-  { cat: "damas", name: "Gucci Flora – Gorgeous Gardenia", ml5: 950, ml10: 1800 },
-  { cat: "damas", name: "Chanel – Chance", ml5: 900, ml10: 1700 },
-  { cat: "damas", name: "Prada – Milano d’Iris", ml5: 800, ml10: 1500 },
-  { cat: "damas", name: "Montale – Ristretto Intense Café", ml5: 900, ml10: 1700 },
-  { cat: "damas", name: "Initio – Absolute Aphrodisiac", ml5: 1250, ml10: 2400 },
-  { cat: "damas", name: "Nishane – Ani", ml5: 1200, ml10: 2300 },
-  { cat: "damas", name: "BDK – Gris Charnel Extrait", ml5: 1450, ml10: 2600, note: "Ideal para noche · sofisticado", featured: true },
-  { cat: "damas", name: "Creed – Green Irish Tweed", ml5: 1300, ml10: 2500 },
-  { cat: "damas", name: "Parfums de Marly – Carlisle", ml5: 1250, ml10: 2300 },
-  { cat: "damas", name: "Xerjoff – Tony Iommi Monkey Special", ml5: 1500, ml10: 2750 },
-  { cat: "damas", name: "Parfums de Marly – Sedley", ml5: 1150, ml10: 2200 },
+  { cat: "damas", name: "FUGAZZI – Angel Dust", ml5: 1500, ml10: 2800, note: "Ideal para día · limpio · elegante", featured: true, tags:["dia","fresco"] },
+  { cat: "damas", name: "ROOM 1015 – Wavechild", ml5: 1200, ml10: 2250, tags:["dia","afrutado"] },
+  { cat: "damas", name: "Le Labo – Santal 33", ml5: 1500, ml10: 2700, tags:["dia","intenso"] },
+  { cat: "damas", name: "Sospiro – Vibrato", ml5: 1200, ml10: 2250, note: "Fresco · con carácter", featured: true, tags:["dia","afrutado"] },
+  { cat: "damas", name: "Initio – Musk Therapy", ml5: 1250, ml10: 2300, tags:["noche","dia","dulce"] },
+  { cat: "damas", name: "Penhaligon’s – Duchess Rose", ml5: 1400, ml10: 2500, tags:["dia","floral"] },
+  { cat: "damas", name: "Penhaligon’s – Empressa", ml5: 1200, ml10: 2200, tags:["dia","floral"] },
+  { cat: "damas", name: "Gucci Flora – Gorgeous Gardenia", ml5: 950, ml10: 1800, tags:["dia","floral"] },
+  { cat: "damas", name: "Chanel – Chance", ml5: 900, ml10: 1700, tags:["dia","fresco"]  },
+  { cat: "damas", name: "Prada – Milano d’Iris", ml5: 800, ml10: 1500, tags:["dia","floral"] },
+  { cat: "damas", name: "Montale – Ristretto Intense Café", ml5: 900, ml10: 1700, tags:["noche","intenso"] },
+  { cat: "damas", name: "Initio – Absolute Aphrodisiac", ml5: 1250, ml10: 2400, tags:["noche","dulce"] },
+  { cat: "damas", name: "Nishane – Ani", ml5: 1200, ml10: 2300, tags:["noche","dulce"] },
+  { cat: "damas", name: "BDK – Gris Charnel Extrait", ml5: 1450, ml10: 2600, note: "Ideal para noche · sofisticado", featured: true, tags:["noche","intenso"] },
+
 
   // CABALLEROS
-  { cat: "caballeros", name: "Gritti – Pomelo Sorrento", ml5: 1150, ml10: 2150 },
-  { cat: "caballeros", name: "Parfums de Marly – Greenley", ml5: 1150, ml10: 2200, note: "Fresco · muy cumplido", featured: true },
-  { cat: "caballeros", name: "Narcotica – Limonata", ml5: 1900, ml10: 3600 },
-  { cat: "caballeros", name: "Une Nuit Nomade – Sugar Leather", ml5: 1500, ml10: 2800 },
-  { cat: "caballeros", name: "Orto Parisi – Bergamask", ml5: 1400, ml10: 2700 },
-  { cat: "caballeros", name: "Tom Ford – Ombré Leather", ml5: 1200, ml10: 2300 },
-  { cat: "caballeros", name: "Armani – Stronger With You Absolutely", ml5: 850, ml10: 1550 },
-  { cat: "caballeros", name: "YSL – Y EDT", ml5: 750, ml10: 1350 },
-  { cat: "caballeros", name: "YSL – MYSLF", ml5: 900, ml10: 1650 },
-  { cat: "caballeros", name: "Valentino – Born in Roma Coral Fantasy", ml5: 800, ml10: 1500 },
-  { cat: "caballeros", name: "Paco Rabanne – Invictus Parfum", ml5: 900, ml10: 1700 },
-  { cat: "caballeros", name: "YSL – La Nuit de L’Homme Bleu Électrique", ml5: 900, ml10: 1800 },
-  { cat: "caballeros", name: "Carolina Herrera – CH", ml5: 650, ml10: 1100 },
-  { cat: "caballeros", name: "Jean Paul Gaultier – Le Beau", ml5: 850, ml10: 1550 },
-  { cat: "caballeros", name: "Paco Rabanne – 1 Million Lucky", ml5: 750, ml10: 1350 },
+  { cat: "caballeros", name: "Gritti – Pomelo Sorrento", ml5: 1150, ml10: 2150, tags:["dia","afrutado"] },
+  { cat: "caballeros", name: "Creed – Green Irish Tweed", ml5: 1300, ml10: 2500, tags:["dia","fresco"] },
+  { cat: "caballeros", name: "Parfums de Marly – Carlisle", ml5: 1250, ml10: 2300, tags:["noche","intenso"] },
+  { cat: "caballeros", name: "Xerjoff – Tony Iommi Monkey Special", ml5: 1500, ml10: 2750, tags:["noche","intenso"] },
+  { cat: "caballeros", name: "Parfums de Marly – Sedley", ml5: 1150, ml10: 2200, tags:["dia","fresco"] },
+  { cat: "caballeros", name: "Parfums de Marly – Greenley", ml5: 1150, ml10: 2200, note: "Fresco · muy cumplido", featured: true, tags:["dia","fresco"] },
+  { cat: "caballeros", name: "Narcotica – Limonata", ml5: 1900, ml10: 3600, tags:["dia","afrutado"] },
+  { cat: "caballeros", name: "Une Nuit Nomade – Sugar Leather", ml5: 1500, ml10: 2800, tags:["noche","dulce"] },
+  { cat: "caballeros", name: "Orto Parisi – Bergamask", ml5: 1400, ml10: 2700, tags:["dia","intenso"]},
+  { cat: "caballeros", name: "Tom Ford – Ombré Leather", ml5: 1200, ml10: 2300, tags:["noche","intenso"] },
+  { cat: "caballeros", name: "Armani – Stronger With You Absolutely", ml5: 850, ml10: 1550, tags:["noche","dulce"] },
+  { cat: "caballeros", name: "YSL – Y EDT", ml5: 750, ml10: 1350, tags:["dia","fresco"] },
+  { cat: "caballeros", name: "YSL – MYSLF", ml5: 900, ml10: 1650, tags:["dia","fresco"] },
+  { cat: "caballeros", name: "Valentino – Born in Roma Coral Fantasy", ml5: 800, ml10: 1500, tags:["dia","dulce"] },
+  { cat: "caballeros", name: "Paco Rabanne – Invictus Parfum", ml5: 900, ml10: 1700, tags:["noche","intenso"] },
+  { cat: "caballeros", name: "YSL – La Nuit de L’Homme Bleu Électrique", ml5: 900, ml10: 1800, tags:["noche","dulce"] },
+  { cat: "caballeros", name: "Carolina Herrera – CH", ml5: 650, ml10: 1100, tags:["dia","fresco"] },
+  { cat: "caballeros", name: "Jean Paul Gaultier – Le Beau", ml5: 850, ml10: 1550, tags:["dia","afrutado"] },
+  { cat: "caballeros", name: "Paco Rabanne – 1 Million Lucky", ml5: 750, ml10: 1350, tags:["noche","dulce"] },
   { cat: "caballeros", name: "Valentino – Uomo Born in Roma", ml5: 750, ml10: 1400 },
   { cat: "caballeros", name: "Chanel – Allure Homme", ml5: 650, ml10: 1300 },
-  { cat: "caballeros", name: "Montblanc – Explorer", ml5: 700, ml10: 1450 },
-  { cat: "caballeros", name: "Maison Margiela – Jazz Club", ml5: 750, ml10: 1500 },
+  { cat: "caballeros", name: "Montblanc – Explorer", ml5: 700, ml10: 1450, tags:["dia","fresco"] },
+  { cat: "caballeros", name: "Maison Margiela – Jazz Club", ml5: 750, ml10: 1500, tags:["noche","intenso"] },
   { cat: "caballeros", name: "Chanel – Égoïste Platinum", ml5: 750, ml10: 1500 },
   { cat: "caballeros", name: "Montblanc – Legend", ml5: 750, ml10: 1500 },
   { cat: "caballeros", name: "Ferragamo – Uomo Urban Feel", ml5: 700, ml10: 1400 },
@@ -264,7 +265,11 @@ function buildCard(p) {
 function getOrderedProducts(filter, query) {
   const q = (query || "").trim().toLowerCase();
 
-  let filtered = products.filter(p => filter === "todos" ? true : p.cat === filter);
+  let filtered = products.filter(p => {
+  if (filter === "todos") return true;
+  if (filter === "damas" || filter === "caballeros") return p.cat === filter;
+  return Array.isArray(p.tags) && p.tags.includes(filter);
+});
 
   if (q) {
     filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
@@ -381,6 +386,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
