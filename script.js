@@ -109,7 +109,7 @@ const products = [
   { cat: "caballeros", name: "Jean Paul Gaultier – Le Beau", ml5: 850, ml10: 1550, tags:["dia","afrutado"] },
   { cat: "caballeros", name: "Paco Rabanne – 1 Million Lucky", ml5: 750, ml10: 1350, tags:["noche","dulce"] },
   { cat: "caballeros", name: "Valentino – Uomo Born in Roma", ml5: 750, ml10: 1400 },
-  { cat: "caballeros", name: "Chanel – Allure Homme", ml5: 650, ml10: 1300 },
+  { cat: "caballeros", name: "Chanel – Allure Homme", ml5: 650, ml10: 1300, tags:["dia","noche","fresco"] },
   { cat: "caballeros", name: "Montblanc – Explorer", ml5: 700, ml10: 1450, tags:["dia","fresco"] },
   { cat: "caballeros", name: "Maison Margiela – Jazz Club", ml5: 750, ml10: 1500, tags:["noche","intenso"] },
   { cat: "caballeros", name: "Chanel – Égoïste Platinum", ml5: 750, ml10: 1500 },
@@ -417,6 +417,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
