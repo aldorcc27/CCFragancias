@@ -1,17 +1,10 @@
-// script.js (INTEGRADO FINAL)
-// ✅ Chips funcionan (Todos/Damas/Caballeros)
-// ✅ Búsqueda funciona + botón limpiar (X) + estado currentFilter/currentQuery
-// ✅ Mensaje “sin resultados” (nunca queda vacío raro)
-// ✅ Selección C&C (Angel Dust, Gris Charnel Extrait, Vibrato, Greenley)
-// ✅ Featured arriba + resto ordenado por nombre
-// ✅ WhatsApp cerrador + ciudad
-// ✅ Fotos desde /img/
-window.addEventListener("error", (e) => {
-  const box = document.createElement("div");
-  box.style.cssText = "position:fixed;left:10px;right:10px;bottom:10px;background:#111;color:#fff;padding:10px 12px;border-radius:14px;z-index:99999;font-size:12px;line-height:1.3;";
-  box.textContent = "ERROR JS: " + (e.message || "desconocido");
-  document.body.appendChild(box);
-});
+// script.js (INTEGRADO FINAL FIXED)
+// ✅ Chips funcionan + chips extras (dia/noche/fresco/intenso/dulce/floral/afrutado si lo usas)
+// ✅ Búsqueda + limpiar
+// ✅ Render catálogo OK
+// ✅ Best sellers + “Más pedido”
+// ✅ Selección C&C
+// ✅ Ads mode
 
 const PHONE_E164 = "18295733343";
 const BRAND = "C&Cfragancias";
@@ -20,7 +13,6 @@ const BRAND = "C&Cfragancias";
    MAPA DE IMÁGENES
    ========================= */
 const imageMap = {
-  // DAMAS
   "FUGAZZI – Angel Dust": "img/fugazzi angel dust.jpg",
   "ROOM 1015 – Wavechild": "img/room 1015 wavechild.png",
   "Le Labo – Santal 33": "img/Le labo santal 33.jpg",
@@ -40,7 +32,6 @@ const imageMap = {
   "Xerjoff – Tony Iommi Monkey Special": "img/XERJOFF - TONY IOMMI MONKEY SPECIAL.jpg",
   "Parfums de Marly – Sedley": "img/PARFUMS DE MARLY - SEDLEY.jpg",
 
-  // CABALLEROS
   "Gritti – Pomelo Sorrento": "img/GRITTI - POMELO SORRENTO.jpg",
   "Parfums de Marly – Greenley": "img/PDM - GREENLEY.jpg",
   "Narcotica – Limonata": "img/NARCOTICA - LIMONATA.jpg",
@@ -65,7 +56,7 @@ const imageMap = {
   "Ferragamo – Uomo Urban Feel": "img/FERRAGAMO UOMO - URBAN FEEL.jpg",
   "Cartier – Déclaration L’Eau": "img/CARTIER - DECLARATION L'EAU.jpg",
   "Terre d’Hermès": "img/TERRE D'HERMES.jpg",
-  "Jean Paul Gaultier – Monsieur": "img/JEAN PAUL GAULTIER - MONSIEUR.jpg",
+  "Jean Paul Gaultier – Monsieur": "img/JEAN PAUL GOUTIER - MONSIEUR.jpg",
   "Polo Blue": "img/POLO BLUE.jpg",
   "Polo Black": "img/POLO BLACK.jpg",
   "Ferragamo – F": "img/F - FERRAGAMO.jpg",
@@ -73,11 +64,9 @@ const imageMap = {
 };
 
 /* =========================
-   CATÁLOGO (SIN God of Fire, SIN Bleu de Chanel)
-   + featured + note para 4 seleccionados
+   CATÁLOGO
    ========================= */
 const products = [
-  // DAMAS
   { cat: "damas", name: "FUGAZZI – Angel Dust", ml5: 1500, ml10: 2800, note: "Ideal para día · limpio · elegante", featured: true, tags:["dia","fresco"] },
   { cat: "damas", name: "ROOM 1015 – Wavechild", ml5: 1200, ml10: 2250, tags:["dia","afrutado"] },
   { cat: "damas", name: "Le Labo – Santal 33", ml5: 1500, ml10: 2700, tags:["dia","intenso"] },
@@ -86,15 +75,13 @@ const products = [
   { cat: "damas", name: "Penhaligon’s – Duchess Rose", ml5: 1400, ml10: 2500, tags:["dia","floral"] },
   { cat: "damas", name: "Penhaligon’s – Empressa", ml5: 1200, ml10: 2200, tags:["dia","floral"] },
   { cat: "damas", name: "Gucci Flora – Gorgeous Gardenia", ml5: 950, ml10: 1800, tags:["dia","floral"] },
-  { cat: "damas", name: "Chanel – Chance", ml5: 900, ml10: 1700, tags:["dia","fresco"]  },
+  { cat: "damas", name: "Chanel – Chance", ml5: 900, ml10: 1700, tags:["dia","fresco"] },
   { cat: "damas", name: "Prada – Milano d’Iris", ml5: 800, ml10: 1500, tags:["dia","floral"] },
   { cat: "damas", name: "Montale – Ristretto Intense Café", ml5: 900, ml10: 1700, tags:["noche","intenso"] },
   { cat: "damas", name: "Initio – Absolute Aphrodisiac", ml5: 1250, ml10: 2400, tags:["noche","dulce"] },
   { cat: "damas", name: "Nishane – Ani", ml5: 1200, ml10: 2300, tags:["noche","dulce"] },
   { cat: "damas", name: "BDK – Gris Charnel Extrait", ml5: 1450, ml10: 2600, note: "Ideal para noche · sofisticado", featured: true, tags:["noche","intenso"] },
 
-
-  // CABALLEROS
   { cat: "caballeros", name: "Gritti – Pomelo Sorrento", ml5: 1150, ml10: 2150, tags:["dia","afrutado"] },
   { cat: "caballeros", name: "Creed – Green Irish Tweed", ml5: 1300, ml10: 2500, tags:["dia","fresco"] },
   { cat: "caballeros", name: "Parfums de Marly – Carlisle", ml5: 1250, ml10: 2300, tags:["noche","intenso"] },
@@ -140,40 +127,29 @@ let currentQuery = "";
    HELPERS
    ========================= */
 const pesos = (n) => `RD$${Number(n).toLocaleString("es-DO")}`;
-/* =========================
-   BEST SELLERS (LOCAL)
-   ========================= */
+
 function trackClick(name){
   const key = "cc_best_sellers";
   const data = JSON.parse(localStorage.getItem(key) || "{}");
   data[name] = (data[name] || 0) + 1;
   localStorage.setItem(key, JSON.stringify(data));
 }
-
 function getScore(name){
   const key = "cc_best_sellers";
   const data = JSON.parse(localStorage.getItem(key) || "{}");
   return data[name] || 0;
 }
-
 function waLink(message) {
   return `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(message)}`;
 }
-
 function placeholderDataUri(label = BRAND) {
   const svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ffffff"/>
-        <stop offset="1" stop-color="#f3eadb"/>
-      </linearGradient>
-    </defs>
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3eadb"/>
+    </linearGradient></defs>
     <rect width="100%" height="100%" fill="url(#g)"/>
-    <circle cx="70%" cy="35%" r="180" fill="#efe3d2" opacity="0.9"/>
-    <circle cx="30%" cy="70%" r="220" fill="#ffffff" opacity="0.65"/>
-    <text x="50%" y="52%" text-anchor="middle" font-family="Arial" font-size="34" fill="#1f1f1f">${label}</text>
-    <text x="50%" y="61%" text-anchor="middle" font-family="Arial" font-size="18" fill="#6b6b6b">Imagen no disponible</text>
+    <text x="50%" y="55%" text-anchor="middle" font-family="Arial" font-size="28" fill="#1f1f1f">${label}</text>
   </svg>`;
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
@@ -186,7 +162,6 @@ function buildCard(p) {
   card.className = "product";
   card.dataset.cat = p.cat;
 
-  // Imagen
   const imgWrap = document.createElement("div");
   imgWrap.className = "pimg-wrap";
   imgWrap.style.position = "relative";
@@ -195,30 +170,26 @@ function buildCard(p) {
   img.className = "pimg";
   img.loading = "lazy";
   img.alt = p.name;
-
-  const url = imageMap[p.name];
-  img.src = url || placeholderDataUri(BRAND);
+  img.src = (imageMap[p.name] || placeholderDataUri(BRAND));
   img.onerror = () => { img.src = placeholderDataUri(BRAND); };
-
   imgWrap.appendChild(img);
 
-  // Badge Selección
+  // Badges
   if (p.featured) {
     const badge = document.createElement("div");
     badge.className = "featured-badge";
     badge.textContent = "Selección C&C";
-    const score = getScore(p.name);
-if(score >= 3){
-  const hot = document.createElement("div");
-  hot.className = "hot-badge";
-  hot.textContent = "Más pedido";
-  imgWrap.appendChild(hot);
-}
-
     imgWrap.appendChild(badge);
   }
 
-  // Top
+  const score = getScore(p.name);
+  if (score >= 3) {
+    const hot = document.createElement("div");
+    hot.className = "hot-badge";
+    hot.textContent = "Más pedido";
+    imgWrap.appendChild(hot);
+  }
+
   const top = document.createElement("div");
   top.className = "product-top";
 
@@ -242,29 +213,21 @@ if(score >= 3){
   top.appendChild(left);
   top.appendChild(tag);
 
-  // Precios
   const prices = document.createElement("div");
   prices.className = "prices";
-
   const price5 = document.createElement("div");
   price5.className = "price";
   price5.innerHTML = `<div class="ml">5 ml</div><div class="rd">${pesos(p.ml5)}</div>`;
-
   const price10 = document.createElement("div");
   price10.className = "price";
   price10.innerHTML = `<div class="ml">10 ml</div><div class="rd">${pesos(p.ml10)}</div>`;
-
   prices.appendChild(price5);
   prices.appendChild(price10);
 
-  // Botones
   const btnRow = document.createElement("div");
   btnRow.style.display = "grid";
   btnRow.style.gridTemplateColumns = "1fr 1fr";
   btnRow.style.gap = "10px";
-
-btn5.addEventListener("click", () => trackClick(p.name));
-btn10.addEventListener("click", () => trackClick(p.name));
 
   const btn5 = document.createElement("a");
   btn5.className = "btn btn-primary";
@@ -272,6 +235,7 @@ btn10.addEventListener("click", () => trackClick(p.name));
   btn5.rel = "noopener";
   btn5.textContent = "Pedir 5 ml";
   btn5.href = waLink(`Hola 👋 quiero ${p.name} (5 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
+  btn5.addEventListener("click", () => trackClick(p.name));
 
   const btn10 = document.createElement("a");
   btn10.className = "btn btn-primary";
@@ -279,6 +243,7 @@ btn10.addEventListener("click", () => trackClick(p.name));
   btn10.rel = "noopener";
   btn10.textContent = "Pedir 10 ml";
   btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
+  btn10.addEventListener("click", () => trackClick(p.name));
 
   btnRow.appendChild(btn5);
   btnRow.appendChild(btn10);
@@ -298,28 +263,25 @@ function getOrderedProducts(filter, query) {
   const q = (query || "").trim().toLowerCase();
 
   let filtered = products.filter(p => {
-  if (filter === "todos") return true;
-  if (filter === "damas" || filter === "caballeros") return p.cat === filter;
-  return Array.isArray(p.tags) && p.tags.includes(filter);
-});
+    if (filter === "todos") return true;
+    if (filter === "damas" || filter === "caballeros") return p.cat === filter;
+    return Array.isArray(p.tags) && p.tags.includes(filter);
+  });
 
-  if (q) {
-    filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
-  }
+  if (q) filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
 
-  // Featured arriba, resto alfabético
- return filtered.sort((a, b) => {
-  const fa = a.featured === true ? 1 : 0;
-  const fb = b.featured === true ? 1 : 0;
-  if (fb !== fa) return fb - fa;
+  return filtered.sort((a, b) => {
+    const fa = a.featured === true ? 1 : 0;
+    const fb = b.featured === true ? 1 : 0;
+    if (fb !== fa) return fb - fa;
 
-  const sa = getScore(a.name);
-  const sb = getScore(b.name);
-  if (sb !== sa) return sb - sa;
+    const sa = getScore(a.name);
+    const sb = getScore(b.name);
+    if (sb !== sa) return sb - sa;
 
-  return a.name.localeCompare(b.name, "es");
-});
-
+    return a.name.localeCompare(b.name, "es");
+  });
+}
 
 function render(filter = currentFilter, query = currentQuery) {
   currentFilter = filter;
@@ -329,53 +291,30 @@ function render(filter = currentFilter, query = currentQuery) {
   if (!grid) return;
 
   grid.innerHTML = "";
-
   const list = getOrderedProducts(filter, query);
 
   if (list.length === 0) {
     grid.innerHTML = `<div class="muted" style="padding:14px;">No encontré ese perfume. Prueba con otra palabra (ej: Greenley, Vibrato).</div>`;
     return;
   }
-
   list.forEach(p => grid.appendChild(buildCard(p)));
 }
 
-/* =========================
-   FEATURED BLOQUE (si existe #featured)
-   ========================= */
 function renderFeatured() {
   const wrap = document.getElementById("featured");
   if (!wrap) return;
 
   const featured = products.filter(p => p.featured).slice(0, 4);
-
   wrap.innerHTML = `
     <div style="grid-column:1/-1">
       <div class="featured-title">Selección C&C</div>
       <div class="muted small">Nuestros 4 recomendados para decidir rápido</div>
     </div>
   `;
-
   featured.forEach(p => wrap.appendChild(buildCard(p)));
 }
 
-/* =========================
-   INIT
-   ========================= */
-const grid = document.getElementById("grid");
-if (!grid) {
-  const box = document.createElement("div");
-  box.style.cssText = "margin:14px;padding:12px;border:1px solid rgba(0,0,0,.15);border-radius:14px;background:rgba(255,255,255,.7)";
-  box.innerHTML = "<b>DEBUG:</b> No encuentro <code>#grid</code>. El catálogo no puede renderizar.";
-  document.body.appendChild(box);
-  return;
-}
-
-grid.innerHTML = `<div class="muted" style="padding:14px;">
-  <b>DEBUG:</b> JS cargó. products=${typeof products !== "undefined" ? products.length : "undefined"}.
-</div>`;
-
-   function setActiveChip(target) {
+function setActiveChip(target) {
   document.querySelectorAll(".chip").forEach(ch => {
     const active = ch === target;
     ch.classList.toggle("is-active", active);
@@ -393,7 +332,6 @@ function init() {
     if (el) el.href = generalHref;
   });
 
-  // Chips
   document.querySelectorAll(".chip").forEach(chip => {
     chip.addEventListener("click", () => {
       setActiveChip(chip);
@@ -401,20 +339,19 @@ function init() {
     });
   });
 
-  // Search input
   const search = document.getElementById("search");
+  const clearBtn = document.getElementById("clearSearch");
+
+  function syncClearButton() {
+    if (!search || !clearBtn) return;
+    clearBtn.classList.toggle("show", (search.value || "").trim().length > 0);
+  }
+
   if (search) {
     search.addEventListener("input", (e) => {
       render(currentFilter, e.target.value);
       syncClearButton();
     });
-  }
-
-  // Clear search button (si existe)
-  const clearBtn = document.getElementById("clearSearch");
-  function syncClearButton() {
-    if (!search || !clearBtn) return;
-    clearBtn.classList.toggle("show", (search.value || "").trim().length > 0);
   }
 
   if (search && clearBtn) {
@@ -428,18 +365,16 @@ function init() {
     syncClearButton();
   }
 
-  // Featured (si existe en HTML)
   renderFeatured();
-// Modo Ads: entra directo al catálogo
-const params = new URLSearchParams(window.location.search);
-if (params.get("ads") === "1") {
-  setTimeout(() => {
-    const cat = document.getElementById("catalogo");
-    if (cat) cat.scrollIntoView({ behavior: "smooth" });
-  }, 200);
-}
 
-  // Render inicial
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("ads") === "1") {
+    setTimeout(() => {
+      const cat = document.getElementById("catalogo");
+      if (cat) cat.scrollIntoView({ behavior: "smooth" });
+    }, 200);
+  }
+
   render("todos", "");
 }
 
