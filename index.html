@@ -139,10 +139,49 @@ v2
 </footer>
 
 <script src="script.js"></script>
+<!-- Carrito -->
+<div id="cartBar" class="cartbar" aria-live="polite">
+  <div class="cartbar-left">
+    <div class="cartbar-title">Carrito</div>
+    <div id="cartSummary" class="cartbar-summary">0 artículos</div>
+  </div>
+
+  <div class="cartbar-right">
+    <button id="cartOpen" class="btn btn-ghost" type="button">Ver</button>
+    <a id="cartCheckout" class="btn btn-primary" target="_blank" rel="noopener">Enviar pedido</a>
+  </div>
+</div>
+
+<div id="cartModal" class="cartmodal" aria-hidden="true">
+  <div class="cartmodal-card">
+    <div class="cartmodal-head">
+      <div>
+        <div class="cartmodal-title">Tu pedido</div>
+        <div class="muted small">Selecciona varios perfumes y envía un solo WhatsApp</div>
+      </div>
+      <button id="cartClose" class="btn btn-ghost" type="button">Cerrar</button>
+    </div>
+
+    <div id="cartItems" class="cartitems"></div>
+
+    <div class="cartmodal-foot">
+      <div class="carttotal">
+        <div class="muted">Total</div>
+        <div id="cartTotal" class="carttotal-amount">RD$0</div>
+      </div>
+      <div class="cartactions">
+        <button id="cartClear" class="btn btn-ghost" type="button">Vaciar</button>
+        <a id="cartCheckout2" class="btn btn-primary" target="_blank" rel="noopener">Enviar pedido</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 
 <!-- rebuild -->
+
 
 
 
