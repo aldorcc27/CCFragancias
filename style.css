@@ -372,4 +372,10 @@ body, .lead, .price, .btn{
   padding: 58px 0;
 }
 
+/* FORZAR VIBRA A AUN SIN GOOGLE FONTS */
+h1, h2, .product-name{
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+  letter-spacing: -0.01em !important;
+}
+
 
