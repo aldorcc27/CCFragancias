@@ -341,7 +341,7 @@ function init() {
   document.querySelectorAll(".chip").forEach(chip => {
     chip.addEventListener("click", () => {
       setActiveChip(chip);
-      render(chip.dataset.filter);
+      render(chip.dataset.filter, currentQuery);
     });
   });
 
@@ -356,4 +356,5 @@ if (search) {
     render(currentFilter, e.target.value);
   });
 }
+
 
