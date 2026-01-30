@@ -1,9 +1,10 @@
-// script.js (FIX COMPLETO)
+// script.js (INTEGRADO FINAL)
 // ✅ Chips funcionan (Todos/Damas/Caballeros)
-// ✅ Búsqueda funciona
-// ✅ Productos aparecen
-// ✅ Featured: Angel Dust, Gris Charnel Extrait, Vibrato, Greenley arriba
-// ✅ WhatsApp cerrador
+// ✅ Búsqueda funciona + botón limpiar (X) + estado currentFilter/currentQuery
+// ✅ Mensaje “sin resultados” (nunca queda vacío raro)
+// ✅ Selección C&C (Angel Dust, Gris Charnel Extrait, Vibrato, Greenley)
+// ✅ Featured arriba + resto ordenado por nombre
+// ✅ WhatsApp cerrador + ciudad
 // ✅ Fotos desde /img/
 
 const PHONE_E164 = "18295733343";
@@ -123,7 +124,7 @@ const products = [
 ];
 
 /* =========================
-   ESTADO (chips + búsqueda)
+   ESTADO
    ========================= */
 let currentFilter = "todos";
 let currentQuery = "";
@@ -269,8 +270,13 @@ function getOrderedProducts(filter, query) {
     filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
   }
 
-  // Featured arriba
-  return filtered.sort((a, b) => (b.featured === true) - (a.featured === true));
+  // Featured arriba, resto alfabético
+  return filtered.sort((a, b) => {
+    const fa = a.featured === true ? 1 : 0;
+    const fb = b.featured === true ? 1 : 0;
+    if (fb !== fa) return fb - fa;
+    return a.name.localeCompare(b.name, "es");
+  });
 }
 
 function render(filter = currentFilter, query = currentQuery) {
@@ -281,12 +287,19 @@ function render(filter = currentFilter, query = currentQuery) {
   if (!grid) return;
 
   grid.innerHTML = "";
-  getOrderedProducts(filter, query).forEach(p => grid.appendChild(buildCard(p)));
+
+  const list = getOrderedProducts(filter, query);
+
+  if (list.length === 0) {
+    grid.innerHTML = `<div class="muted" style="padding:14px;">No encontré ese perfume. Prueba con otra palabra (ej: Greenley, Vibrato).</div>`;
+    return;
+  }
+
+  list.forEach(p => grid.appendChild(buildCard(p)));
 }
 
 /* =========================
-   FEATURED BLOQUE (opcional)
-   Si no existe #featured en tu HTML, no rompe nada.
+   FEATURED BLOQUE (si existe #featured)
    ========================= */
 function renderFeatured() {
   const wrap = document.getElementById("featured");
@@ -333,12 +346,31 @@ function init() {
     });
   });
 
-  // Search
+  // Search input
   const search = document.getElementById("search");
   if (search) {
     search.addEventListener("input", (e) => {
       render(currentFilter, e.target.value);
+      syncClearButton();
     });
+  }
+
+  // Clear search button (si existe)
+  const clearBtn = document.getElementById("clearSearch");
+  function syncClearButton() {
+    if (!search || !clearBtn) return;
+    clearBtn.classList.toggle("show", (search.value || "").trim().length > 0);
+  }
+
+  if (search && clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      search.value = "";
+      currentQuery = "";
+      syncClearButton();
+      render(currentFilter, "");
+      search.focus();
+    });
+    syncClearButton();
   }
 
   // Featured (si existe en HTML)
@@ -349,6 +381,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
