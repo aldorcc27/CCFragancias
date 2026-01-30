@@ -1,15 +1,16 @@
-// script.js (FINAL)
-// - Catálogo completo con nombres + precios
-// - Filtros: Todos / Damas / Caballeros
-// - Botones WhatsApp con mensaje automático
-// - Fotos por perfume (usa img/<archivo> cuando las subas a GitHub)
-// - ELIMINADOS: God of Fire y Bleu de Chanel (en todas sus apariciones)
+// script.js (FINAL COMPLETO)
+// ✅ Catálogo + filtros
+// ✅ Fotos por perfume (desde /img/)
+// ✅ “Selección C&C” (badge) + micro-copy (note) para 4 perfumes
+// ✅ WhatsApp con mensaje cerrador
+// ✅ Eliminados: God of Fire + Bleu de Chanel
 
 const PHONE_E164 = "18295733343"; // +1 829...
 const BRAND = "C&Cfragancias";
 
-// Mapa: NOMBRE EXACTO -> RUTA EN TU REPO
-// IMPORTANTE: Para que se vean, sube las fotos a /img/ en GitHub (raíz).
+/* =========================
+   MAPA DE IMÁGENES (NOMBRE EXACTO -> RUTA)
+   ========================= */
 const imageMap = {
   // DAMAS
   "FUGAZZI – Angel Dust": "img/fugazzi angel dust.jpg",
@@ -43,11 +44,11 @@ const imageMap = {
   "YSL – MYSLF": "img/YSL - MYSLF.jpg",
   "Valentino – Born in Roma Coral Fantasy": "img/VALENTINO - BORN IN ROMA CORAL FANTASY.jpg",
   "Paco Rabanne – Invictus Parfum": "img/PACO RABANNE - INVICTUS PARFUM.jpg",
-  "YSL – La Nuit de L’Homme Bleu Électrique": "img/Yves Saint Laurent -.jpg", // tu zip trae ese nombre raro
+  "YSL – La Nuit de L’Homme Bleu Électrique": "img/Yves Saint Laurent -.jpg", // nombre raro del zip
   "Carolina Herrera – CH": "img/CAROLINA HERRERA - CH.png",
   "Jean Paul Gaultier – Le Beau": "img/Jean Paul Gaultier - Le Beau.jpg",
   "Paco Rabanne – 1 Million Lucky": "img/1 Million Lucky.jpg",
-  "Valentino – Uomo Born in Roma": "img/VALENTINO - UOMO BORN IN ROMA.jpg", // si no existe, verás placeholder
+  "Valentino – Uomo Born in Roma": "img/VALENTINO - UOMO BORN IN ROMA.jpg", // si no existe, se verá placeholder
   "Chanel – Allure Homme": "img/CHANEL - ALLURE HOMME.jpg",
   "Montblanc – Explorer": "img/MONT BLANC - EXPLORER.jpg",
   "Maison Margiela – Jazz Club": "img/MAISON MARGIELA JAZZ CLUB.jpg",
@@ -60,16 +61,33 @@ const imageMap = {
   "Polo Blue": "img/POLO BLUE.jpg",
   "Polo Black": "img/POLO BLACK.jpg",
   "Ferragamo – F": "img/F - FERRAGAMO.jpg",
-  "Perry Ellis – Perry Ellis": "img/PERRY ELLIS - PERRY ELLIS.jpg",
+  "Perry Ellis – Perry Ellis": "img/PERRY ELLIS - PERRY ELLIS.jpg"
 };
 
-// Catálogo FINAL (SIN God of Fire, SIN Bleu de Chanel)
+/* =========================
+   CATÁLOGO (SIN God of Fire, SIN Bleu de Chanel)
+   + featured + note en 4 seleccionados
+   ========================= */
 const products = [
-  // DAMAS
-  { cat: "damas", name: "FUGAZZI – Angel Dust", ml5: 1500, ml10: 2800 },
+  // ===== DAMAS =====
+  {
+    cat: "damas",
+    name: "FUGAZZI – Angel Dust",
+    ml5: 1500,
+    ml10: 2800,
+    note: "Ideal para día · limpio · elegante",
+    featured: true
+  },
   { cat: "damas", name: "ROOM 1015 – Wavechild", ml5: 1200, ml10: 2250 },
   { cat: "damas", name: "Le Labo – Santal 33", ml5: 1500, ml10: 2700 },
-  { cat: "damas", name: "Sospiro – Vibrato", ml5: 1200, ml10: 2250 },
+  {
+    cat: "damas",
+    name: "Sospiro – Vibrato",
+    ml5: 1200,
+    ml10: 2250,
+    note: "Fresco · con carácter",
+    featured: true
+  },
   { cat: "damas", name: "Initio – Musk Therapy", ml5: 1250, ml10: 2300 },
   { cat: "damas", name: "Penhaligon’s – Duchess Rose", ml5: 1400, ml10: 2500 },
   { cat: "damas", name: "Penhaligon’s – Empressa", ml5: 1200, ml10: 2200 },
@@ -79,15 +97,29 @@ const products = [
   { cat: "damas", name: "Montale – Ristretto Intense Café", ml5: 900, ml10: 1700 },
   { cat: "damas", name: "Initio – Absolute Aphrodisiac", ml5: 1250, ml10: 2400 },
   { cat: "damas", name: "Nishane – Ani", ml5: 1200, ml10: 2300 },
-  { cat: "damas", name: "BDK – Gris Charnel Extrait", ml5: 1450, ml10: 2600 },
+  {
+    cat: "damas",
+    name: "BDK – Gris Charnel Extrait",
+    ml5: 1450,
+    ml10: 2600,
+    note: "Ideal para noche · sofisticado",
+    featured: true
+  },
   { cat: "damas", name: "Creed – Green Irish Tweed", ml5: 1300, ml10: 2500 },
   { cat: "damas", name: "Parfums de Marly – Carlisle", ml5: 1250, ml10: 2300 },
   { cat: "damas", name: "Xerjoff – Tony Iommi Monkey Special", ml5: 1500, ml10: 2750 },
   { cat: "damas", name: "Parfums de Marly – Sedley", ml5: 1150, ml10: 2200 },
 
-  // CABALLEROS
+  // ===== CABALLEROS =====
   { cat: "caballeros", name: "Gritti – Pomelo Sorrento", ml5: 1150, ml10: 2150 },
-  { cat: "caballeros", name: "Parfums de Marly – Greenley", ml5: 1150, ml10: 2200 },
+  {
+    cat: "caballeros",
+    name: "Parfums de Marly – Greenley",
+    ml5: 1150,
+    ml10: 2200,
+    note: "Fresco · muy cumplido",
+    featured: true
+  },
   { cat: "caballeros", name: "Narcotica – Limonata", ml5: 1900, ml10: 3600 },
   { cat: "caballeros", name: "Une Nuit Nomade – Sugar Leather", ml5: 1500, ml10: 2800 },
   { cat: "caballeros", name: "Orto Parisi – Bergamask", ml5: 1400, ml10: 2700 },
@@ -114,16 +146,19 @@ const products = [
   { cat: "caballeros", name: "Polo Blue", ml5: 600, ml10: 1200 },
   { cat: "caballeros", name: "Polo Black", ml5: 600, ml10: 1200 },
   { cat: "caballeros", name: "Ferragamo – F", ml5: 400, ml10: 800 },
-  { cat: "caballeros", name: "Perry Ellis – Perry Ellis", ml5: 450, ml10: 900 },
+  { cat: "caballeros", name: "Perry Ellis – Perry Ellis", ml5: 450, ml10: 900 }
 ];
 
+/* =========================
+   HELPERS
+   ========================= */
 const pesos = (n) => `RD$${Number(n).toLocaleString("es-DO")}`;
 
 function waLink(message) {
   return `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(message)}`;
 }
 
-function placeholderDataUri(label = "C&Cfragancias") {
+function placeholderDataUri(label = BRAND) {
   const svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
     <defs>
@@ -136,11 +171,14 @@ function placeholderDataUri(label = "C&Cfragancias") {
     <circle cx="70%" cy="35%" r="180" fill="#efe3d2" opacity="0.9"/>
     <circle cx="30%" cy="70%" r="220" fill="#ffffff" opacity="0.65"/>
     <text x="50%" y="52%" text-anchor="middle" font-family="Arial" font-size="34" fill="#1f1f1f">${label}</text>
-    <text x="50%" y="61%" text-anchor="middle" font-family="Arial" font-size="18" fill="#6b6b6b">Sube las fotos a /img/</text>
+    <text x="50%" y="61%" text-anchor="middle" font-family="Arial" font-size="18" fill="#6b6b6b">Imagen no disponible</text>
   </svg>`;
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
 
+/* =========================
+   UI: CARD
+   ========================= */
 function buildCard(p) {
   const card = document.createElement("div");
   card.className = "product";
@@ -149,6 +187,7 @@ function buildCard(p) {
   // FOTO
   const imgWrap = document.createElement("div");
   imgWrap.className = "pimg-wrap";
+  imgWrap.style.position = "relative"; // para el badge
 
   const img = document.createElement("img");
   img.className = "pimg";
@@ -156,20 +195,37 @@ function buildCard(p) {
   img.alt = p.name;
 
   const url = imageMap[p.name];
-  img.src = url || placeholderDataUri("C&Cfragancias");
-  img.onerror = () => { img.src = placeholderDataUri("C&Cfragancias"); };
+  img.src = url || placeholderDataUri(BRAND);
+  img.onerror = () => { img.src = placeholderDataUri(BRAND); };
 
   imgWrap.appendChild(img);
+
+  // BADGE "Selección C&C"
+  if (p.featured) {
+    const badge = document.createElement("div");
+    badge.className = "featured-badge";
+    badge.textContent = "Selección C&C";
+    imgWrap.appendChild(badge);
+  }
 
   // TOP
   const top = document.createElement("div");
   top.className = "product-top";
 
   const left = document.createElement("div");
+
   const name = document.createElement("div");
   name.className = "product-name";
   name.textContent = p.name;
   left.appendChild(name);
+
+  // MICRO-COPY (note)
+  if (p.note) {
+    const note = document.createElement("div");
+    note.className = "product-note";
+    note.textContent = p.note;
+    left.appendChild(note);
+  }
 
   const tag = document.createElement("div");
   tag.className = "tag";
@@ -204,14 +260,14 @@ function buildCard(p) {
   btn5.target = "_blank";
   btn5.rel = "noopener";
   btn5.textContent = "Pedir 5 ml";
-  btn5.href = waLink(`Hola, quiero ${p.name} 5 ml. — ${BRAND}`);
+  btn5.href = waLink(`Hola 👋 quiero ${p.name} (5 ml). ¿Está disponible hoy? — ${BRAND}`);
 
   const btn10 = document.createElement("a");
   btn10.className = "btn btn-primary";
   btn10.target = "_blank";
   btn10.rel = "noopener";
   btn10.textContent = "Pedir 10 ml";
-  btn10.href = waLink(`Hola, quiero ${p.name} 10 ml. — ${BRAND}`);
+  btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy? — ${BRAND}`);
 
   btnRow.appendChild(btn5);
   btnRow.appendChild(btn10);
@@ -225,16 +281,29 @@ function buildCard(p) {
   return card;
 }
 
+/* =========================
+   RENDER
+   - Featured primero
+   ========================= */
+function getOrderedProducts(filter) {
+  const filtered = products.filter(p => filter === "todos" ? true : p.cat === filter);
+  // featured arriba, luego el resto
+  return filtered.sort((a, b) => (b.featured === true) - (a.featured === true));
+}
+
 function render(filter) {
   const grid = document.getElementById("grid");
   if (!grid) return;
   grid.innerHTML = "";
 
-  products
-    .filter(p => filter === "todos" ? true : p.cat === filter)
-    .forEach(p => grid.appendChild(buildCard(p)));
+  getOrderedProducts(filter).forEach(p => {
+    grid.appendChild(buildCard(p));
+  });
 }
 
+/* =========================
+   INIT
+   ========================= */
 function setActiveChip(target) {
   document.querySelectorAll(".chip").forEach(ch => {
     const active = ch === target;
@@ -247,14 +316,12 @@ function init() {
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  // CTAs generales
-  const generalHref = waLink(`Hola, quiero información para pedir un decant. — ${BRAND}`);
+  const generalHref = waLink(`Hola 👋 quiero información para pedir un decant. — ${BRAND}`);
   ["ctaTop", "ctaHero", "ctaBottom", "ctaFinal"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.href = generalHref;
   });
 
-  // Filtros
   document.querySelectorAll(".chip").forEach(chip => {
     chip.addEventListener("click", () => {
       setActiveChip(chip);
@@ -266,5 +333,3 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
-
-
