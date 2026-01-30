@@ -419,7 +419,7 @@ function init() {
     });
     syncClearButton();
   }
-
+  rotateFeaturedWeekly();
   renderFeatured();
 
   const params = new URLSearchParams(window.location.search);
@@ -434,6 +434,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
