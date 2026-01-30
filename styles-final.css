@@ -238,4 +238,80 @@ h2{font-size:26px;margin:0;}
   font-size:11px;
   border-radius:999px;
 }
+/* ==== CART ==== */
+.cartbar{
+  position:fixed; left:12px; right:12px; bottom:12px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.10);
+  backdrop-filter: blur(10px);
+  z-index:9999;
+}
+.cartbar-title{ font-weight:700; }
+.cartbar-summary{ font-size:12px; opacity:.75; }
+.cartbar-right{ display:flex; gap:10px; align-items:center; }
+
+.cartmodal{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.35);
+  display:none;
+  z-index:10000;
+  padding:18px;
+}
+.cartmodal.show{ display:flex; align-items:flex-end; justify-content:center; }
+.cartmodal-card{
+  width:min(920px, 100%);
+  max-height:85vh;
+  overflow:hidden;
+  border-radius:22px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.10);
+  box-shadow:0 30px 80px rgba(0,0,0,.25);
+}
+.cartmodal-head{
+  padding:16px 16px 12px;
+  display:flex; justify-content:space-between; gap:12px; align-items:center;
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+.cartmodal-title{ font-weight:800; font-size:18px; }
+.cartitems{
+  padding:10px 16px;
+  overflow:auto;
+  max-height:55vh;
+}
+.cartrow{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.cartrow-name{ font-weight:700; }
+.cartrow-meta{ font-size:12px; opacity:.75; margin-top:2px; }
+.cartrow-actions{ display:flex; gap:8px; align-items:center; }
+.qty{
+  min-width:34px;
+  text-align:center;
+  font-weight:700;
+}
+.cartmodal-foot{
+  padding:12px 16px 16px;
+  display:flex; justify-content:space-between; gap:12px; align-items:center;
+  border-top:1px solid rgba(0,0,0,.08);
+}
+.carttotal-amount{ font-weight:900; font-size:18px; }
+.cartactions{ display:flex; gap:10px; }
+
+.btn-mini{
+  padding:8px 10px;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.75);
+  cursor:pointer;
+}
+.btn-mini:hover{ transform: translateY(-1px); }
 
