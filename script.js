@@ -411,12 +411,21 @@ function init() {
 
   // Featured (si existe en HTML)
   renderFeatured();
+// Modo Ads: entra directo al catálogo
+const params = new URLSearchParams(window.location.search);
+if (params.get("ads") === "1") {
+  setTimeout(() => {
+    const cat = document.getElementById("catalogo");
+    if (cat) cat.scrollIntoView({ behavior: "smooth" });
+  }, 200);
+}
 
   // Render inicial
   render("todos", "");
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
