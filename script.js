@@ -1,15 +1,16 @@
-// script.js (FINAL COMPLETO)
-// ✅ Catálogo + filtros
-// ✅ Fotos por perfume (desde /img/)
-// ✅ “Selección C&C” (badge) + micro-copy (note) para 4 perfumes
-// ✅ WhatsApp con mensaje cerrador
-// ✅ Eliminados: God of Fire + Bleu de Chanel
+// script.js (FIX COMPLETO)
+// ✅ Chips funcionan (Todos/Damas/Caballeros)
+// ✅ Búsqueda funciona
+// ✅ Productos aparecen
+// ✅ Featured: Angel Dust, Gris Charnel Extrait, Vibrato, Greenley arriba
+// ✅ WhatsApp cerrador
+// ✅ Fotos desde /img/
 
-const PHONE_E164 = "18295733343"; // +1 829...
+const PHONE_E164 = "18295733343";
 const BRAND = "C&Cfragancias";
 
 /* =========================
-   MAPA DE IMÁGENES (NOMBRE EXACTO -> RUTA)
+   MAPA DE IMÁGENES
    ========================= */
 const imageMap = {
   // DAMAS
@@ -44,11 +45,11 @@ const imageMap = {
   "YSL – MYSLF": "img/YSL - MYSLF.jpg",
   "Valentino – Born in Roma Coral Fantasy": "img/VALENTINO - BORN IN ROMA CORAL FANTASY.jpg",
   "Paco Rabanne – Invictus Parfum": "img/PACO RABANNE - INVICTUS PARFUM.jpg",
-  "YSL – La Nuit de L’Homme Bleu Électrique": "img/Yves Saint Laurent -.jpg", // nombre raro del zip
+  "YSL – La Nuit de L’Homme Bleu Électrique": "img/Yves Saint Laurent -.jpg",
   "Carolina Herrera – CH": "img/CAROLINA HERRERA - CH.png",
   "Jean Paul Gaultier – Le Beau": "img/Jean Paul Gaultier - Le Beau.jpg",
   "Paco Rabanne – 1 Million Lucky": "img/1 Million Lucky.jpg",
-  "Valentino – Uomo Born in Roma": "img/VALENTINO - UOMO BORN IN ROMA.jpg", // si no existe, se verá placeholder
+  "Valentino – Uomo Born in Roma": "img/VALENTINO - UOMO BORN IN ROMA.jpg",
   "Chanel – Allure Homme": "img/CHANEL - ALLURE HOMME.jpg",
   "Montblanc – Explorer": "img/MONT BLANC - EXPLORER.jpg",
   "Maison Margiela – Jazz Club": "img/MAISON MARGIELA JAZZ CLUB.jpg",
@@ -61,36 +62,19 @@ const imageMap = {
   "Polo Blue": "img/POLO BLUE.jpg",
   "Polo Black": "img/POLO BLACK.jpg",
   "Ferragamo – F": "img/F - FERRAGAMO.jpg",
-  "Perry Ellis – Perry Ellis": "img/PERRY ELLIS - PERRY ELLIS.jpg"
+  "Perry Ellis – Perry Ellis": "img/PERRY ELLIS - PERRY ELLIS.jpg",
 };
 
 /* =========================
    CATÁLOGO (SIN God of Fire, SIN Bleu de Chanel)
-   + featured + note en 4 seleccionados
+   + featured + note para 4 seleccionados
    ========================= */
 const products = [
-   let currentFilter = "todos";
-let currentQuery = "";
-
-  // ===== DAMAS =====
-  {
-    cat: "damas",
-    name: "FUGAZZI – Angel Dust",
-    ml5: 1500,
-    ml10: 2800,
-    note: "Ideal para día · limpio · elegante",
-    featured: true
-  },
+  // DAMAS
+  { cat: "damas", name: "FUGAZZI – Angel Dust", ml5: 1500, ml10: 2800, note: "Ideal para día · limpio · elegante", featured: true },
   { cat: "damas", name: "ROOM 1015 – Wavechild", ml5: 1200, ml10: 2250 },
   { cat: "damas", name: "Le Labo – Santal 33", ml5: 1500, ml10: 2700 },
-  {
-    cat: "damas",
-    name: "Sospiro – Vibrato",
-    ml5: 1200,
-    ml10: 2250,
-    note: "Fresco · con carácter",
-    featured: true
-  },
+  { cat: "damas", name: "Sospiro – Vibrato", ml5: 1200, ml10: 2250, note: "Fresco · con carácter", featured: true },
   { cat: "damas", name: "Initio – Musk Therapy", ml5: 1250, ml10: 2300 },
   { cat: "damas", name: "Penhaligon’s – Duchess Rose", ml5: 1400, ml10: 2500 },
   { cat: "damas", name: "Penhaligon’s – Empressa", ml5: 1200, ml10: 2200 },
@@ -100,29 +84,15 @@ let currentQuery = "";
   { cat: "damas", name: "Montale – Ristretto Intense Café", ml5: 900, ml10: 1700 },
   { cat: "damas", name: "Initio – Absolute Aphrodisiac", ml5: 1250, ml10: 2400 },
   { cat: "damas", name: "Nishane – Ani", ml5: 1200, ml10: 2300 },
-  {
-    cat: "damas",
-    name: "BDK – Gris Charnel Extrait",
-    ml5: 1450,
-    ml10: 2600,
-    note: "Ideal para noche · sofisticado",
-    featured: true
-  },
+  { cat: "damas", name: "BDK – Gris Charnel Extrait", ml5: 1450, ml10: 2600, note: "Ideal para noche · sofisticado", featured: true },
   { cat: "damas", name: "Creed – Green Irish Tweed", ml5: 1300, ml10: 2500 },
   { cat: "damas", name: "Parfums de Marly – Carlisle", ml5: 1250, ml10: 2300 },
   { cat: "damas", name: "Xerjoff – Tony Iommi Monkey Special", ml5: 1500, ml10: 2750 },
   { cat: "damas", name: "Parfums de Marly – Sedley", ml5: 1150, ml10: 2200 },
 
-  // ===== CABALLEROS =====
+  // CABALLEROS
   { cat: "caballeros", name: "Gritti – Pomelo Sorrento", ml5: 1150, ml10: 2150 },
-  {
-    cat: "caballeros",
-    name: "Parfums de Marly – Greenley",
-    ml5: 1150,
-    ml10: 2200,
-    note: "Fresco · muy cumplido",
-    featured: true
-  },
+  { cat: "caballeros", name: "Parfums de Marly – Greenley", ml5: 1150, ml10: 2200, note: "Fresco · muy cumplido", featured: true },
   { cat: "caballeros", name: "Narcotica – Limonata", ml5: 1900, ml10: 3600 },
   { cat: "caballeros", name: "Une Nuit Nomade – Sugar Leather", ml5: 1500, ml10: 2800 },
   { cat: "caballeros", name: "Orto Parisi – Bergamask", ml5: 1400, ml10: 2700 },
@@ -149,8 +119,14 @@ let currentQuery = "";
   { cat: "caballeros", name: "Polo Blue", ml5: 600, ml10: 1200 },
   { cat: "caballeros", name: "Polo Black", ml5: 600, ml10: 1200 },
   { cat: "caballeros", name: "Ferragamo – F", ml5: 400, ml10: 800 },
-  { cat: "caballeros", name: "Perry Ellis – Perry Ellis", ml5: 450, ml10: 900 }
+  { cat: "caballeros", name: "Perry Ellis – Perry Ellis", ml5: 450, ml10: 900 },
 ];
+
+/* =========================
+   ESTADO (chips + búsqueda)
+   ========================= */
+let currentFilter = "todos";
+let currentQuery = "";
 
 /* =========================
    HELPERS
@@ -180,33 +156,17 @@ function placeholderDataUri(label = BRAND) {
 }
 
 /* =========================
-   UI: CARD
+   CARD
    ========================= */
 function buildCard(p) {
-   function renderFeatured() {
-  const wrap = document.getElementById("featured");
-  if (!wrap) return;
-
-  const featured = products.filter(p => p.featured).slice(0, 4);
-
-  wrap.innerHTML = `
-    <div style="grid-column:1/-1">
-      <div class="featured-title">Selección C&C</div>
-      <div class="muted small">Nuestros 4 recomendados para decidir rápido</div>
-    </div>
-  `;
-
-  featured.forEach(p => wrap.appendChild(buildCard(p)));
-}
-
   const card = document.createElement("div");
   card.className = "product";
   card.dataset.cat = p.cat;
 
-  // FOTO
+  // Imagen
   const imgWrap = document.createElement("div");
   imgWrap.className = "pimg-wrap";
-  imgWrap.style.position = "relative"; // para el badge
+  imgWrap.style.position = "relative";
 
   const img = document.createElement("img");
   img.className = "pimg";
@@ -219,7 +179,7 @@ function buildCard(p) {
 
   imgWrap.appendChild(img);
 
-  // BADGE "Selección C&C"
+  // Badge Selección
   if (p.featured) {
     const badge = document.createElement("div");
     badge.className = "featured-badge";
@@ -227,18 +187,16 @@ function buildCard(p) {
     imgWrap.appendChild(badge);
   }
 
-  // TOP
+  // Top
   const top = document.createElement("div");
   top.className = "product-top";
 
   const left = document.createElement("div");
-
   const name = document.createElement("div");
   name.className = "product-name";
   name.textContent = p.name;
   left.appendChild(name);
 
-  // MICRO-COPY (note)
   if (p.note) {
     const note = document.createElement("div");
     note.className = "product-note";
@@ -253,7 +211,7 @@ function buildCard(p) {
   top.appendChild(left);
   top.appendChild(tag);
 
-  // PRECIOS
+  // Precios
   const prices = document.createElement("div");
   prices.className = "prices";
 
@@ -268,7 +226,7 @@ function buildCard(p) {
   prices.appendChild(price5);
   prices.appendChild(price10);
 
-  // BOTONES
+  // Botones
   const btnRow = document.createElement("div");
   btnRow.style.display = "grid";
   btnRow.style.gridTemplateColumns = "1fr 1fr";
@@ -279,21 +237,18 @@ function buildCard(p) {
   btn5.target = "_blank";
   btn5.rel = "noopener";
   btn5.textContent = "Pedir 5 ml";
- btn5.href = waLink(`Hola 👋 quiero ${p.name} (5 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
-btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
-
+  btn5.href = waLink(`Hola 👋 quiero ${p.name} (5 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
 
   const btn10 = document.createElement("a");
   btn10.className = "btn btn-primary";
   btn10.target = "_blank";
   btn10.rel = "noopener";
   btn10.textContent = "Pedir 10 ml";
-  btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy? — ${BRAND}`);
+  btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
 
   btnRow.appendChild(btn5);
   btnRow.appendChild(btn10);
 
-  // ENSAMBLA
   card.appendChild(imgWrap);
   card.appendChild(top);
   card.appendChild(prices);
@@ -303,24 +258,18 @@ btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy?
 }
 
 /* =========================
-   RENDER
-   - Featured primero
+   FILTRO + BUSQUEDA + ORDEN
    ========================= */
-function getOrderedProducts(filter) {
-  const filtered = products.filter(p => filter === "todos" ? true : p.cat === filter);
-  // featured arriba, luego el resto
-  return filtered.sort((a, b) => (b.featured === true) - (a.featured === true));
-}
-
 function getOrderedProducts(filter, query) {
   const q = (query || "").trim().toLowerCase();
 
-  let filtered = products.filter(p => (filter === "todos" ? true : p.cat === filter));
+  let filtered = products.filter(p => filter === "todos" ? true : p.cat === filter);
 
   if (q) {
     filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
   }
 
+  // Featured arriba
   return filtered.sort((a, b) => (b.featured === true) - (a.featured === true));
 }
 
@@ -333,6 +282,26 @@ function render(filter = currentFilter, query = currentQuery) {
 
   grid.innerHTML = "";
   getOrderedProducts(filter, query).forEach(p => grid.appendChild(buildCard(p)));
+}
+
+/* =========================
+   FEATURED BLOQUE (opcional)
+   Si no existe #featured en tu HTML, no rompe nada.
+   ========================= */
+function renderFeatured() {
+  const wrap = document.getElementById("featured");
+  if (!wrap) return;
+
+  const featured = products.filter(p => p.featured).slice(0, 4);
+
+  wrap.innerHTML = `
+    <div style="grid-column:1/-1">
+      <div class="featured-title">Selección C&C</div>
+      <div class="muted small">Nuestros 4 recomendados para decidir rápido</div>
+    </div>
+  `;
+
+  featured.forEach(p => wrap.appendChild(buildCard(p)));
 }
 
 /* =========================
@@ -356,26 +325,30 @@ function init() {
     if (el) el.href = generalHref;
   });
 
+  // Chips
   document.querySelectorAll(".chip").forEach(chip => {
     chip.addEventListener("click", () => {
       setActiveChip(chip);
       render(chip.dataset.filter, currentQuery);
     });
   });
-renderFeatured();
 
-  render("todos");
+  // Search
+  const search = document.getElementById("search");
+  if (search) {
+    search.addEventListener("input", (e) => {
+      render(currentFilter, e.target.value);
+    });
+  }
+
+  // Featured (si existe en HTML)
+  renderFeatured();
+
+  // Render inicial
+  render("todos", "");
 }
 
 document.addEventListener("DOMContentLoaded", init);
-
-const search = document.getElementById("search");
-if (search) {
-  search.addEventListener("input", (e) => {
-    render(currentFilter, e.target.value);
-  });
-}
-
 
 
 
