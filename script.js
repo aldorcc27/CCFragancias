@@ -69,6 +69,9 @@ const imageMap = {
    + featured + note en 4 seleccionados
    ========================= */
 const products = [
+   let currentFilter = "todos";
+let currentQuery = "";
+
   // ===== DAMAS =====
   {
     cat: "damas",
@@ -333,3 +336,4 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
