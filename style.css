@@ -362,6 +362,7 @@ h2{
   .top-actions{ display:none; }
   .grid{ grid-template-columns: 1fr; }
 }
+
 /* ====== UPGRADE VISUAL (minimal moderno) ====== */
 
 body{
@@ -512,4 +513,5 @@ body::before{
 @media (max-width: 980px){
   .gallery{ grid-template-columns: 1fr; }
 }
+
 
