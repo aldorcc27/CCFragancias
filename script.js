@@ -279,7 +279,9 @@ function buildCard(p) {
   btn5.target = "_blank";
   btn5.rel = "noopener";
   btn5.textContent = "Pedir 5 ml";
-  btn5.href = waLink(`Hola 👋 quiero ${p.name} (5 ml). ¿Está disponible hoy? — ${BRAND}`);
+ btn5.href = waLink(`Hola 👋 quiero ${p.name} (5 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
+btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
+
 
   const btn10 = document.createElement("a");
   btn10.className = "btn btn-primary";
@@ -373,6 +375,7 @@ if (search) {
     render(currentFilter, e.target.value);
   });
 }
+
 
 
 
