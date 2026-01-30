@@ -134,6 +134,21 @@ let currentQuery = "";
    HELPERS
    ========================= */
 const pesos = (n) => `RD$${Number(n).toLocaleString("es-DO")}`;
+/* =========================
+   BEST SELLERS (LOCAL)
+   ========================= */
+function trackClick(name){
+  const key = "cc_best_sellers";
+  const data = JSON.parse(localStorage.getItem(key) || "{}");
+  data[name] = (data[name] || 0) + 1;
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function getScore(name){
+  const key = "cc_best_sellers";
+  const data = JSON.parse(localStorage.getItem(key) || "{}");
+  return data[name] || 0;
+}
 
 function waLink(message) {
   return `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(message)}`;
@@ -186,6 +201,14 @@ function buildCard(p) {
     const badge = document.createElement("div");
     badge.className = "featured-badge";
     badge.textContent = "Selección C&C";
+    const score = getScore(p.name);
+if(score >= 3){
+  const hot = document.createElement("div");
+  hot.className = "hot-badge";
+  hot.textContent = "Más pedido";
+  imgWrap.appendChild(hot);
+}
+
     imgWrap.appendChild(badge);
   }
 
@@ -234,6 +257,9 @@ function buildCard(p) {
   btnRow.style.gridTemplateColumns = "1fr 1fr";
   btnRow.style.gap = "10px";
 
+btn5.addEventListener("click", () => trackClick(p.name));
+btn10.addEventListener("click", () => trackClick(p.name));
+
   const btn5 = document.createElement("a");
   btn5.className = "btn btn-primary";
   btn5.target = "_blank";
@@ -276,13 +302,18 @@ function getOrderedProducts(filter, query) {
   }
 
   // Featured arriba, resto alfabético
-  return filtered.sort((a, b) => {
-    const fa = a.featured === true ? 1 : 0;
-    const fb = b.featured === true ? 1 : 0;
-    if (fb !== fa) return fb - fa;
-    return a.name.localeCompare(b.name, "es");
-  });
-}
+ return filtered.sort((a, b) => {
+  const fa = a.featured === true ? 1 : 0;
+  const fb = b.featured === true ? 1 : 0;
+  if (fb !== fa) return fb - fa;
+
+  const sa = getScore(a.name);
+  const sb = getScore(b.name);
+  if (sb !== sa) return sb - sa;
+
+  return a.name.localeCompare(b.name, "es");
+});
+
 
 function render(filter = currentFilter, query = currentQuery) {
   currentFilter = filter;
@@ -386,6 +417,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
