@@ -6,6 +6,12 @@
 // ✅ Featured arriba + resto ordenado por nombre
 // ✅ WhatsApp cerrador + ciudad
 // ✅ Fotos desde /img/
+window.addEventListener("error", (e) => {
+  const box = document.createElement("div");
+  box.style.cssText = "position:fixed;left:10px;right:10px;bottom:10px;background:#111;color:#fff;padding:10px 12px;border-radius:14px;z-index:99999;font-size:12px;line-height:1.3;";
+  box.textContent = "ERROR JS: " + (e.message || "desconocido");
+  document.body.appendChild(box);
+});
 
 const PHONE_E164 = "18295733343";
 const BRAND = "C&Cfragancias";
@@ -356,7 +362,20 @@ function renderFeatured() {
 /* =========================
    INIT
    ========================= */
-function setActiveChip(target) {
+const grid = document.getElementById("grid");
+if (!grid) {
+  const box = document.createElement("div");
+  box.style.cssText = "margin:14px;padding:12px;border:1px solid rgba(0,0,0,.15);border-radius:14px;background:rgba(255,255,255,.7)";
+  box.innerHTML = "<b>DEBUG:</b> No encuentro <code>#grid</code>. El catálogo no puede renderizar.";
+  document.body.appendChild(box);
+  return;
+}
+
+grid.innerHTML = `<div class="muted" style="padding:14px;">
+  <b>DEBUG:</b> JS cargó. products=${typeof products !== "undefined" ? products.length : "undefined"}.
+</div>`;
+
+   function setActiveChip(target) {
   document.querySelectorAll(".chip").forEach(ch => {
     const active = ch === target;
     ch.classList.toggle("is-active", active);
@@ -425,6 +444,7 @@ if (params.get("ads") === "1") {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
