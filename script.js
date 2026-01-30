@@ -299,6 +299,61 @@ function render(filter = currentFilter, query = currentQuery) {
   }
   list.forEach(p => grid.appendChild(buildCard(p)));
 }
+/* =========================
+   ROTACIÓN SEMANAL SELECCIÓN C&C
+   ========================= */
+const FEATURED_POOL = [
+  "FUGAZZI – Angel Dust",
+  "BDK – Gris Charnel Extrait",
+  "Sospiro – Vibrato",
+  "Parfums de Marly – Greenley",
+  "Initio – Absolute Aphrodisiac",
+  "Nishane – Ani",
+  "Parfums de Marly – Carlisle",
+  "Creed – Green Irish Tweed",
+  "Orto Parisi – Bergamask",
+  "Maison Margiela – Jazz Club"
+  "Initio – Musk Therapy"
+  "Une Nuit Nomade – Sugar Leather"
+  "Gritti – Pomelo Sorrento"
+  "Le Labo – Santal 33"
+  "ROOM 1015 – Wavechild"
+  "Penhaligon’s – Duchess Rose"
+];
+
+function getWeekKey(){
+  const d = new Date();
+  const oneJan = new Date(d.getFullYear(), 0, 1);
+  const week = Math.ceil((((d - oneJan) / 86400000) + oneJan.getDay() + 1) / 7);
+  return `${d.getFullYear()}-W${week}`;
+}
+
+function rotateFeaturedWeekly(){
+  const key = "cc_featured_week";
+  const currentWeek = getWeekKey();
+
+  let state = JSON.parse(localStorage.getItem(key) || "{}");
+
+  if (state.week !== currentWeek) {
+    // nueva semana → elegir nuevos 4
+    const shuffled = [...FEATURED_POOL].sort(() => 0.5 - Math.random());
+    state = {
+      week: currentWeek,
+      picks: shuffled.slice(0, 4)
+    };
+    localStorage.setItem(key, JSON.stringify(state));
+  }
+
+  // resetear featured
+  products.forEach(p => p.featured = false);
+
+  // aplicar nuevos featured
+  products.forEach(p => {
+    if (state.picks.includes(p.name)) {
+      p.featured = true;
+    }
+  });
+}
 
 function renderFeatured() {
   const wrap = document.getElementById("featured");
@@ -379,6 +434,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
