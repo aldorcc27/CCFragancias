@@ -312,12 +312,12 @@ const FEATURED_POOL = [
   "Parfums de Marly – Carlisle",
   "Creed – Green Irish Tweed",
   "Orto Parisi – Bergamask",
-  "Maison Margiela – Jazz Club"
-  "Initio – Musk Therapy"
-  "Une Nuit Nomade – Sugar Leather"
-  "Gritti – Pomelo Sorrento"
-  "Le Labo – Santal 33"
-  "ROOM 1015 – Wavechild"
+  "Maison Margiela – Jazz Club",
+  "Initio – Musk Therapy",
+  "Une Nuit Nomade – Sugar Leather",
+  "Gritti – Pomelo Sorrento",
+  "Le Labo – Santal 33",
+  "ROOM 1015 – Wavechild",
   "Penhaligon’s – Duchess Rose"
 ];
 
@@ -434,6 +434,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
