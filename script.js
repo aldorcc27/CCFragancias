@@ -131,6 +131,23 @@ const pesos = (n) => `RD$${Number(n).toLocaleString("es-DO")}`;
    CARRITO (LOCAL)
    ========================= */
 const CART_KEY = "cc_cart_v1";
+function toast(msg){
+  const t = document.createElement("div");
+  t.textContent = msg;
+  t.style.cssText = `
+    position:fixed; left:50%; bottom:90px; transform:translateX(-50%);
+    background:#111; color:#fff; padding:10px 14px;
+    border-radius:14px; font-size:13px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+    z-index:10001; opacity:0; transition:.25s;
+  `;
+  document.body.appendChild(t);
+  requestAnimationFrame(()=> t.style.opacity = "1");
+  setTimeout(()=>{
+    t.style.opacity="0";
+    setTimeout(()=> t.remove(), 250);
+  }, 1400);
+}
 
 function loadCart(){
   return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
@@ -142,6 +159,11 @@ function cartLineKey(name, sizeMl){
   return `${name}__${sizeMl}`;
 }
 function addToCart(p, sizeMl){
+   saveCart(cart);
+refreshCartUI();
+toast(`Añadido: ${p.name} (${sizeMl} ml)`);
+if (navigator.vibrate) navigator.vibrate(30);
+
   const cart = loadCart();
   const key = cartLineKey(p.name, sizeMl);
   const existing = cart.find(i => i.key === key);
@@ -171,6 +193,32 @@ function clearCart(){
   refreshCartUI();
 }
 function cartTotals(){
+   function getSuggestion(cart){
+  if (!cart.length) return null;
+  const last = cart[cart.length - 1];
+  const base = products.find(p => p.name === last.name);
+  if (!base || !base.tags) return null;
+  const suggestion = getSuggestion(cart);
+  if (suggestion) {
+    const sug = document.createElement("div");
+    sug.className = "muted";
+    sug.style.marginTop = "10px";
+    sug.innerHTML = `
+      💡 <b>Te puede gustar:</b> ${suggestion.name}
+      <button class="btn-mini" style="margin-left:8px">Añadir 5 ml</button>
+    `;
+    sug.querySelector("button")
+      .addEventListener("click", () => addToCart(suggestion, 5));
+    itemsWrap.appendChild(sug);
+  }
+
+  return products.find(p =>
+    p.name !== base.name &&
+    Array.isArray(p.tags) &&
+    p.tags.some(t => base.tags.includes(t))
+  );
+}
+
   const cart = loadCart();
   const items = cart.reduce((s,i)=> s + i.qty, 0);
   const total = cart.reduce((s,i)=> s + (i.price * i.qty), 0);
@@ -607,6 +655,7 @@ function setupCartUI(){
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
