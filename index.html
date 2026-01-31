@@ -14,22 +14,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles-final.css">
-<script src="script.js?v=20260130"></script>
-</body>
-</html>
-
-
-
+  <link rel="stylesheet" href="styles-final.css">
 </head>
-<script>
-  document.body.insertAdjacentHTML("beforeend","<div style='position:fixed;top:10px;left:10px;background:#000;color:#fff;padding:6px 10px;border-radius:12px;z-index:99999;font-size:12px'>INLINE OK</div>");
-</script>
-<script src="script.js?v=20260130"></script>
 
 <body>
+
+<!-- Debug opcional (puedes borrar esto luego) -->
 <div style="position:fixed;bottom:10px;right:10px;background:#000;color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;z-index:9999;">
-v2
+  v2
 </div>
 
 <header class="header">
@@ -83,53 +75,35 @@ v2
       <p class="muted">Selecciona y pide directo por WhatsApp</p>
     </div>
 
-    <!-- ✅ Selección C&C (si está vacío no pasa nada) -->
+    <!-- ✅ Selección C&C -->
     <div class="featured-section" id="featured"></div>
 
     <!-- ✅ Búsqueda -->
     <div class="searchbar">
       <input id="search" type="search" placeholder="Buscar perfume… (ej: Greenley, Vibrato, Ani)" autocomplete="off">
+      <!-- si tienes botón clearSearch en tu CSS/JS, agrégalo aquí -->
+      <!-- <button id="clearSearch" class="clear">×</button> -->
     </div>
 
-    <!-- ✅ Chips (FILTROS) -->
-  <div class="filters">
-  <button type="button" class="chip is-active" data-filter="todos">Todos</button>
-  <button type="button" class="chip" data-filter="damas">Damas</button>
-  <button type="button" class="chip" data-filter="caballeros">Caballeros</button>
-  <button type="button" class="chip" data-filter="dia">Día</button>
-  <button type="button" class="chip" data-filter="noche">Noche</button>
-  <button type="button" class="chip" data-filter="fresco">Fresco</button>
-  <button type="button" class="chip" data-filter="intenso">Intenso</button>
-  <button type="button" class="chip" data-filter="afrutado">Afrutado</button>
-  <button type="button" class="chip" data-filter="floral">Floral</button>
-  <button type="button" class="chip" data-filter="dulce">Dulce</button>
-</div>
-
+    <!-- ✅ Chips -->
+    <div class="filters">
+      <button type="button" class="chip is-active" data-filter="todos">Todos</button>
+      <button type="button" class="chip" data-filter="damas">Damas</button>
+      <button type="button" class="chip" data-filter="caballeros">Caballeros</button>
+      <button type="button" class="chip" data-filter="dia">Día</button>
+      <button type="button" class="chip" data-filter="noche">Noche</button>
+      <button type="button" class="chip" data-filter="fresco">Fresco</button>
+      <button type="button" class="chip" data-filter="intenso">Intenso</button>
+      <button type="button" class="chip" data-filter="afrutado">Afrutado</button>
+      <button type="button" class="chip" data-filter="floral">Floral</button>
+      <button type="button" class="chip" data-filter="dulce">Dulce</button>
+    </div>
 
     <!-- ✅ Aquí el script pinta los perfumes -->
     <div class="grid" id="grid"></div>
   </div>
 </section>
 
-  <div class="container">
-    <div class="section-head">
-      <h2>Catálogo</h2>
-      <div class="featured-section" id="featured"></div>
-      <p class="muted">Selecciona y pide directo por WhatsApp</p>
-    </div>
-<div class="searchbar">
-  <input id="search" type="search" placeholder="Buscar perfume… (ej: Greenley, Vibrato, Ani)" autocomplete="off">
-</div>
-
-    <div class="filters">
-      <button class="chip is-active" data-filter="todos">Todos</button>
-      <button class="chip" data-filter="damas">Damas</button>
-      <button class="chip" data-filter="caballeros">Caballeros</button>
-    </div>
-
-    <div class="grid" id="grid"></div>
-  </div>
-</section>
 <section class="trust">
   <div class="trust-card">
     <h3>Compra con confianza</h3>
@@ -190,10 +164,21 @@ v2
   </div>
 </div>
 
+<!-- ✅ Carga el script AL FINAL (recomendado) -->
+<script src="script.js?v=20260130"></script>
+
+<!-- INLINE OK (solo para probar, luego lo borras) -->
+<script>
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    "<div style='position:fixed;top:10px;left:10px;background:#000;color:#fff;padding:6px 10px;border-radius:12px;z-index:99999;font-size:12px'>INLINE OK</div>"
+  );
+</script>
+
 </body>
 </html>
 
-<!-- rebuild -->
+
 
 
 
