@@ -159,12 +159,21 @@ function cartLineKey(name, sizeMl){
   return `${name}__${sizeMl}`;
 }
 function addToCart(p, sizeMl){
-   saveCart(cart);
-refreshCartUI();
-toast(`Añadido: ${p.name} (${sizeMl} ml)`);
-if (navigator.vibrate) navigator.vibrate(30);
-
+   function addToCart(p, sizeMl){
   const cart = loadCart();
+  const key = cartLineKey(p.name, sizeMl);
+  const existing = cart.find(i => i.key === key);
+
+  if (existing) existing.qty += 1;
+  else cart.push({ key, name: p.name, sizeMl, price: (sizeMl === 5 ? p.ml5 : p.ml10), qty: 1 });
+
+  saveCart(cart);
+  refreshCartUI();
+
+  toast(`Añadido: ${p.name} (${sizeMl} ml)`);
+  if (navigator.vibrate) navigator.vibrate(30);
+}
+
   const key = cartLineKey(p.name, sizeMl);
   const existing = cart.find(i => i.key === key);
   if (existing) existing.qty += 1;
@@ -193,13 +202,25 @@ function clearCart(){
   refreshCartUI();
 }
 function cartTotals(){
-   function getSuggestion(cart){
+  const cart = loadCart();
+  const items = cart.reduce((s,i)=> s + i.qty, 0);
+  const total = cart.reduce((s,i)=> s + (i.price * i.qty), 0);
+  return { cart, items, total };
+}
+function getSuggestion(cart){
   if (!cart.length) return null;
+
   const last = cart[cart.length - 1];
   const base = products.find(p => p.name === last.name);
-  if (!base || !base.tags) return null;
-  const suggestion = getSuggestion(cart);
-  if (suggestion) {
+  if (!base || !Array.isArray(base.tags)) return null;
+
+  return products.find(p =>
+    p.name !== base.name &&
+    Array.isArray(p.tags) &&
+    p.tags.some(t => base.tags.includes(t))
+  ) || null;
+}
+
     const sug = document.createElement("div");
     sug.className = "muted";
     sug.style.marginTop = "10px";
@@ -628,6 +649,21 @@ function refreshCartUI(){
     itemsWrap.appendChild(row);
   });
 }
+// 💡 SUGERENCIA
+const suggestion = getSuggestion(cart);
+if (suggestion) {
+  const sug = document.createElement("div");
+  sug.className = "muted";
+  sug.style.marginTop = "12px";
+  sug.innerHTML = `
+    💡 <b>Te puede gustar:</b> ${suggestion.name}
+    <button class="btn-mini" style="margin-left:8px">Añadir 5 ml</button>
+  `;
+  sug.querySelector("button")
+    .addEventListener("click", () => addToCart(suggestion, 5));
+
+  itemsWrap.appendChild(sug);
+}
 
 function setupCartUI(){
   const modal = document.getElementById("cartModal");
@@ -655,6 +691,7 @@ function setupCartUI(){
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
