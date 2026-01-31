@@ -1,10 +1,9 @@
-// script.js (INTEGRADO FINAL FIXED)
-// ✅ Chips funcionan + chips extras (dia/noche/fresco/intenso/dulce/floral/afrutado si lo usas)
-// ✅ Búsqueda + limpiar
-// ✅ Render catálogo OK
-// ✅ Best sellers + “Más pedido”
-// ✅ Selección C&C
-// ✅ Ads mode
+// script.js (INTEGRADO FINAL - CART FIX + SUGGESTION OK)
+// ✅ Chips + búsqueda + catálogo
+// ✅ Selección C&C rotación semanal
+// ✅ Carrito: añadir, +/-, total, WhatsApp combinado
+// ✅ Toast + vibración
+// ✅ Sugerencia dentro del carrito
 
 const PHONE_E164 = "18295733343";
 const BRAND = "C&Cfragancias";
@@ -31,7 +30,6 @@ const imageMap = {
   "Parfums de Marly – Carlisle": "img/PARFUMS DE MARLY - CARLISLE.jpg",
   "Xerjoff – Tony Iommi Monkey Special": "img/XERJOFF - TONY IOMMI MONKEY SPECIAL.jpg",
   "Parfums de Marly – Sedley": "img/PARFUMS DE MARLY - SEDLEY.jpg",
-
   "Gritti – Pomelo Sorrento": "img/GRITTI - POMELO SORRENTO.jpg",
   "Parfums de Marly – Greenley": "img/PDM - GREENLEY.jpg",
   "Narcotica – Limonata": "img/NARCOTICA - LIMONATA.jpg",
@@ -127,10 +125,41 @@ let currentQuery = "";
    HELPERS
    ========================= */
 const pesos = (n) => `RD$${Number(n).toLocaleString("es-DO")}`;
+
+function waLink(message) {
+  return `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(message)}`;
+}
+
+function placeholderDataUri(label = BRAND) {
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3eadb"/>
+    </linearGradient></defs>
+    <rect width="100%" height="100%" fill="url(#g)"/>
+    <text x="50%" y="55%" text-anchor="middle" font-family="Arial" font-size="28" fill="#1f1f1f">${label}</text>
+  </svg>`;
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+
 /* =========================
-   CARRITO (LOCAL)
+   BEST SELLERS (LOCAL)
    ========================= */
-const CART_KEY = "cc_cart_v1";
+function trackClick(name){
+  const key = "cc_best_sellers";
+  const data = JSON.parse(localStorage.getItem(key) || "{}");
+  data[name] = (data[name] || 0) + 1;
+  localStorage.setItem(key, JSON.stringify(data));
+}
+function getScore(name){
+  const key = "cc_best_sellers";
+  const data = JSON.parse(localStorage.getItem(key) || "{}");
+  return data[name] || 0;
+}
+
+/* =========================
+   TOAST
+   ========================= */
 function toast(msg){
   const t = document.createElement("div");
   t.textContent = msg;
@@ -149,6 +178,11 @@ function toast(msg){
   }, 1400);
 }
 
+/* =========================
+   CARRITO (LOCAL)
+   ========================= */
+const CART_KEY = "cc_cart_v1";
+
 function loadCart(){
   return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
 }
@@ -158,8 +192,8 @@ function saveCart(items){
 function cartLineKey(name, sizeMl){
   return `${name}__${sizeMl}`;
 }
+
 function addToCart(p, sizeMl){
-   function addToCart(p, sizeMl){
   const cart = loadCart();
   const key = cartLineKey(p.name, sizeMl);
   const existing = cart.find(i => i.key === key);
@@ -174,13 +208,6 @@ function addToCart(p, sizeMl){
   if (navigator.vibrate) navigator.vibrate(30);
 }
 
-  const key = cartLineKey(p.name, sizeMl);
-  const existing = cart.find(i => i.key === key);
-  if (existing) existing.qty += 1;
-  else cart.push({ key, name: p.name, sizeMl, price: (sizeMl === 5 ? p.ml5 : p.ml10), qty: 1 });
-  saveCart(cart);
-  refreshCartUI();
-}
 function incCart(key){
   const cart = loadCart();
   const it = cart.find(i => i.key === key);
@@ -207,6 +234,10 @@ function cartTotals(){
   const total = cart.reduce((s,i)=> s + (i.price * i.qty), 0);
   return { cart, items, total };
 }
+
+/* =========================
+   SUGERENCIA (based on tags)
+   ========================= */
 function getSuggestion(cart){
   if (!cart.length) return null;
 
@@ -219,57 +250,6 @@ function getSuggestion(cart){
     Array.isArray(p.tags) &&
     p.tags.some(t => base.tags.includes(t))
   ) || null;
-}
-
-    const sug = document.createElement("div");
-    sug.className = "muted";
-    sug.style.marginTop = "10px";
-    sug.innerHTML = `
-      💡 <b>Te puede gustar:</b> ${suggestion.name}
-      <button class="btn-mini" style="margin-left:8px">Añadir 5 ml</button>
-    `;
-    sug.querySelector("button")
-      .addEventListener("click", () => addToCart(suggestion, 5));
-    itemsWrap.appendChild(sug);
-  }
-
-  return products.find(p =>
-    p.name !== base.name &&
-    Array.isArray(p.tags) &&
-    p.tags.some(t => base.tags.includes(t))
-  );
-}
-
-  const cart = loadCart();
-  const items = cart.reduce((s,i)=> s + i.qty, 0);
-  const total = cart.reduce((s,i)=> s + (i.price * i.qty), 0);
-  return { cart, items, total };
-}
-
-function trackClick(name){
-  const key = "cc_best_sellers";
-  const data = JSON.parse(localStorage.getItem(key) || "{}");
-  data[name] = (data[name] || 0) + 1;
-  localStorage.setItem(key, JSON.stringify(data));
-}
-function getScore(name){
-  const key = "cc_best_sellers";
-  const data = JSON.parse(localStorage.getItem(key) || "{}");
-  return data[name] || 0;
-}
-function waLink(message) {
-  return `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(message)}`;
-}
-function placeholderDataUri(label = BRAND) {
-  const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
-    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3eadb"/>
-    </linearGradient></defs>
-    <rect width="100%" height="100%" fill="url(#g)"/>
-    <text x="50%" y="55%" text-anchor="middle" font-family="Arial" font-size="28" fill="#1f1f1f">${label}</text>
-  </svg>`;
-  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
 
 /* =========================
@@ -292,7 +272,6 @@ function buildCard(p) {
   img.onerror = () => { img.src = placeholderDataUri(BRAND); };
   imgWrap.appendChild(img);
 
-  // Badges
   if (p.featured) {
     const badge = document.createElement("div");
     badge.className = "featured-badge";
@@ -333,12 +312,15 @@ function buildCard(p) {
 
   const prices = document.createElement("div");
   prices.className = "prices";
+
   const price5 = document.createElement("div");
   price5.className = "price";
   price5.innerHTML = `<div class="ml">5 ml</div><div class="rd">${pesos(p.ml5)}</div>`;
+
   const price10 = document.createElement("div");
   price10.className = "price";
   price10.innerHTML = `<div class="ml">10 ml</div><div class="rd">${pesos(p.ml10)}</div>`;
+
   prices.appendChild(price5);
   prices.appendChild(price10);
 
@@ -348,6 +330,17 @@ function buildCard(p) {
   btnRow.style.gap = "10px";
   btnRow.style.gridAutoRows = "auto";
 
+  const add5 = document.createElement("button");
+  add5.type = "button";
+  add5.className = "btn btn-ghost";
+  add5.textContent = "Añadir 5 ml";
+  add5.addEventListener("click", () => addToCart(p, 5));
+
+  const add10 = document.createElement("button");
+  add10.type = "button";
+  add10.className = "btn btn-ghost";
+  add10.textContent = "Añadir 10 ml";
+  add10.addEventListener("click", () => addToCart(p, 10));
 
   const btn5 = document.createElement("a");
   btn5.className = "btn btn-primary";
@@ -364,19 +357,6 @@ function buildCard(p) {
   btn10.textContent = "Pedir 10 ml";
   btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
   btn10.addEventListener("click", () => trackClick(p.name));
- 
-   // Botones Añadir al carrito
-  const add5 = document.createElement("button");
-  add5.type = "button";
-  add5.className = "btn btn-ghost";
-  add5.textContent = "Añadir 5 ml";
-  add5.addEventListener("click", () => addToCart(p, 5));
-
-  const add10 = document.createElement("button");
-  add10.type = "button";
-  add10.className = "btn btn-ghost";
-  add10.textContent = "Añadir 10 ml";
-  add10.addEventListener("click", () => addToCart(p, 10));
 
   btnRow.appendChild(add5);
   btnRow.appendChild(add10);
@@ -432,8 +412,10 @@ function render(filter = currentFilter, query = currentQuery) {
     grid.innerHTML = `<div class="muted" style="padding:14px;">No encontré ese perfume. Prueba con otra palabra (ej: Greenley, Vibrato).</div>`;
     return;
   }
+
   list.forEach(p => grid.appendChild(buildCard(p)));
 }
+
 /* =========================
    ROTACIÓN SEMANAL SELECCIÓN C&C
    ========================= */
@@ -470,23 +452,14 @@ function rotateFeaturedWeekly(){
   let state = JSON.parse(localStorage.getItem(key) || "{}");
 
   if (state.week !== currentWeek) {
-    // nueva semana → elegir nuevos 4
     const shuffled = [...FEATURED_POOL].sort(() => 0.5 - Math.random());
-    state = {
-      week: currentWeek,
-      picks: shuffled.slice(0, 4)
-    };
+    state = { week: currentWeek, picks: shuffled.slice(0, 4) };
     localStorage.setItem(key, JSON.stringify(state));
   }
 
-  // resetear featured
   products.forEach(p => p.featured = false);
-
-  // aplicar nuevos featured
   products.forEach(p => {
-    if (state.picks.includes(p.name)) {
-      p.featured = true;
-    }
+    if (state.picks.includes(p.name)) p.featured = true;
   });
 }
 
@@ -504,6 +477,132 @@ function renderFeatured() {
   featured.forEach(p => wrap.appendChild(buildCard(p)));
 }
 
+/* =========================
+   CARRITO UI
+   ========================= */
+function buildCartMessage(){
+  const { cart, items, total } = cartTotals();
+  if (items === 0) return waLink(`Hola 👋 quiero información para pedir un decant. — ${BRAND}`);
+
+  const lines = cart.map(i => `• ${i.name} — ${i.sizeMl}ml x${i.qty} = ${pesos(i.price * i.qty)}`);
+  const msg =
+`Hola 👋 quiero hacer este pedido:
+${lines.join("\n")}
+
+Total: ${pesos(total)}
+Soy de: _____.
+— Envíos nacionales desde Higüey — ${BRAND}`;
+
+  return waLink(msg);
+}
+
+function refreshCartUI(){
+  const bar = document.getElementById("cartBar");
+  const summary = document.getElementById("cartSummary");
+  const checkout = document.getElementById("cartCheckout");
+  const checkout2 = document.getElementById("cartCheckout2");
+  const itemsWrap = document.getElementById("cartItems");
+  const totalEl = document.getElementById("cartTotal");
+
+  if (!bar || !summary || !checkout || !itemsWrap || !totalEl) return;
+
+  const { cart, items, total } = cartTotals();
+
+  summary.textContent = items === 1 ? "1 artículo" : `${items} artículos`;
+  totalEl.textContent = pesos(total);
+
+  const link = buildCartMessage();
+  checkout.href = link;
+  if (checkout2) checkout2.href = link;
+
+  itemsWrap.innerHTML = "";
+  if (cart.length === 0) {
+    itemsWrap.innerHTML = `<div class="muted" style="padding:10px 0;">Tu carrito está vacío.</div>`;
+    return;
+  }
+
+  // LISTA DEL CARRITO
+  cart.forEach(i => {
+    const row = document.createElement("div");
+    row.className = "cartrow";
+
+    const left = document.createElement("div");
+    left.innerHTML = `
+      <div class="cartrow-name">${i.name}</div>
+      <div class="cartrow-meta">${i.sizeMl} ml · ${pesos(i.price)} c/u</div>
+    `;
+
+    const right = document.createElement("div");
+    right.className = "cartrow-actions";
+
+    const minus = document.createElement("button");
+    minus.className = "btn-mini";
+    minus.type = "button";
+    minus.textContent = "−";
+    minus.addEventListener("click", () => decCart(i.key));
+
+    const qty = document.createElement("div");
+    qty.className = "qty";
+    qty.textContent = String(i.qty);
+
+    const plus = document.createElement("button");
+    plus.className = "btn-mini";
+    plus.type = "button";
+    plus.textContent = "+";
+    plus.addEventListener("click", () => incCart(i.key));
+
+    right.appendChild(minus);
+    right.appendChild(qty);
+    right.appendChild(plus);
+
+    row.appendChild(left);
+    row.appendChild(right);
+    itemsWrap.appendChild(row);
+  });
+
+  // 💡 SUGERENCIA (AL FINAL)
+  const suggestion = getSuggestion(cart);
+  if (suggestion) {
+    const sug = document.createElement("div");
+    sug.className = "muted";
+    sug.style.marginTop = "12px";
+    sug.innerHTML = `
+      💡 <b>Te puede gustar:</b> ${suggestion.name}
+      <button class="btn-mini" style="margin-left:8px">Añadir 5 ml</button>
+    `;
+    sug.querySelector("button").addEventListener("click", () => addToCart(suggestion, 5));
+    itemsWrap.appendChild(sug);
+  }
+}
+
+function setupCartUI(){
+  const modal = document.getElementById("cartModal");
+  const open = document.getElementById("cartOpen");
+  const close = document.getElementById("cartClose");
+  const clear = document.getElementById("cartClear");
+
+  function show(){
+    if (!modal) return;
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+  }
+  function hide(){
+    if (!modal) return;
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  if (open) open.addEventListener("click", show);
+  if (close) close.addEventListener("click", hide);
+  if (modal) modal.addEventListener("click", (e) => { if (e.target === modal) hide(); });
+  if (clear) clear.addEventListener("click", clearCart);
+
+  refreshCartUI();
+}
+
+/* =========================
+   UI CHIPS
+   ========================= */
 function setActiveChip(target) {
   document.querySelectorAll(".chip").forEach(ch => {
     const active = ch === target;
@@ -512,6 +611,9 @@ function setActiveChip(target) {
   });
 }
 
+/* =========================
+   INIT
+   ========================= */
 function init() {
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
@@ -554,6 +656,7 @@ function init() {
     });
     syncClearButton();
   }
+
   rotateFeaturedWeekly();
   renderFeatured();
 
@@ -564,133 +667,14 @@ function init() {
       if (cat) cat.scrollIntoView({ behavior: "smooth" });
     }, 200);
   }
- 
-   render("todos", "");
-setupCartUI();
-refreshCartUI();
 
-}
-function buildCartMessage(){
-  const { cart, items, total } = cartTotals();
-  if (items === 0) return waLink(`Hola 👋 quiero información para pedir un decant. — ${BRAND}`);
-
-  const lines = cart.map(i => `• ${i.name} — ${i.sizeMl}ml x${i.qty} = ${pesos(i.price * i.qty)}`);
-  const msg =
-`Hola 👋 quiero hacer este pedido:
-${lines.join("\n")}
-
-Total: ${pesos(total)}
-Soy de: _____.
-— Envíos nacionales desde Higüey — ${BRAND}`;
-  return waLink(msg);
-}
-
-function refreshCartUI(){
-  const bar = document.getElementById("cartBar");
-  const summary = document.getElementById("cartSummary");
-  const checkout = document.getElementById("cartCheckout");
-  const checkout2 = document.getElementById("cartCheckout2");
-  const itemsWrap = document.getElementById("cartItems");
-  const totalEl = document.getElementById("cartTotal");
-
-  if (!bar || !summary || !checkout || !itemsWrap || !totalEl) return;
-
-  const { cart, items, total } = cartTotals();
-
-  summary.textContent = items === 1 ? "1 artículo" : `${items} artículos`;
-  totalEl.textContent = pesos(total);
-
-  const link = buildCartMessage();
-  checkout.href = link;
-  if (checkout2) checkout2.href = link;
-
-  // Render items
-  itemsWrap.innerHTML = "";
-  if (cart.length === 0) {
-    itemsWrap.innerHTML = `<div class="muted" style="padding:10px 0;">Tu carrito está vacío.</div>`;
-    return;
-  }
-
-  cart.forEach(i => {
-    const row = document.createElement("div");
-    row.className = "cartrow";
-
-    const left = document.createElement("div");
-    left.innerHTML = `
-      <div class="cartrow-name">${i.name}</div>
-      <div class="cartrow-meta">${i.sizeMl} ml · ${pesos(i.price)} c/u</div>
-    `;
-
-    const right = document.createElement("div");
-    right.className = "cartrow-actions";
-
-    const minus = document.createElement("button");
-    minus.className = "btn-mini";
-    minus.type = "button";
-    minus.textContent = "−";
-    minus.addEventListener("click", () => decCart(i.key));
-
-    const qty = document.createElement("div");
-    qty.className = "qty";
-    qty.textContent = String(i.qty);
-
-    const plus = document.createElement("button");
-    plus.className = "btn-mini";
-    plus.type = "button";
-    plus.textContent = "+";
-    plus.addEventListener("click", () => incCart(i.key));
-
-    right.appendChild(minus);
-    right.appendChild(qty);
-    right.appendChild(plus);
-
-    row.appendChild(left);
-    row.appendChild(right);
-    itemsWrap.appendChild(row);
-  });
-}
-// 💡 SUGERENCIA
-const suggestion = getSuggestion(cart);
-if (suggestion) {
-  const sug = document.createElement("div");
-  sug.className = "muted";
-  sug.style.marginTop = "12px";
-  sug.innerHTML = `
-    💡 <b>Te puede gustar:</b> ${suggestion.name}
-    <button class="btn-mini" style="margin-left:8px">Añadir 5 ml</button>
-  `;
-  sug.querySelector("button")
-    .addEventListener("click", () => addToCart(suggestion, 5));
-
-  itemsWrap.appendChild(sug);
-}
-
-function setupCartUI(){
-  const modal = document.getElementById("cartModal");
-  const open = document.getElementById("cartOpen");
-  const close = document.getElementById("cartClose");
-  const clear = document.getElementById("cartClear");
-
-  function show(){
-    if (!modal) return;
-    modal.classList.add("show");
-    modal.setAttribute("aria-hidden", "false");
-  }
-  function hide(){
-    if (!modal) return;
-    modal.classList.remove("show");
-    modal.setAttribute("aria-hidden", "true");
-  }
-
-  if (open) open.addEventListener("click", show);
-  if (close) close.addEventListener("click", hide);
-  if (modal) modal.addEventListener("click", (e) => { if (e.target === modal) hide(); });
-  if (clear) clear.addEventListener("click", () => clearCart());
-
+  setupCartUI();
   refreshCartUI();
+  render("todos", "");
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
