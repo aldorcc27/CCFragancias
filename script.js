@@ -524,6 +524,8 @@ Ciudad / sector: _____
 ¿Está disponible para envío hoy?
 — Envíos nacionales desde Higüey — ${BRAND}`;
 
+  return waLink(msg);
+}
 
 function refreshCartUI(){
   const bar = document.getElementById("cartBar");
@@ -604,6 +606,7 @@ function refreshCartUI(){
     itemsWrap.appendChild(sug);
   }
 }
+
 
 function setupCartUI(){
   const modal = document.getElementById("cartModal");
@@ -710,6 +713,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
