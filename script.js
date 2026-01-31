@@ -643,6 +643,126 @@ function setActiveChip(target) {
     ch.setAttribute("aria-selected", active ? "true" : "false");
   });
 }
+/* =========================
+   QUIZ PERFIL OLFATIVO
+   ========================= */
+const QUIZ_KEY = "cc_quiz_v1";
+let quizState = { time: null, style: null, vibe: null };
+
+function loadQuiz(){
+  try { return JSON.parse(localStorage.getItem(QUIZ_KEY) || "null"); }
+  catch { return null; }
+}
+function saveQuiz(){
+  localStorage.setItem(QUIZ_KEY, JSON.stringify(quizState));
+}
+function clearQuiz(){
+  quizState = { time: null, style: null, vibe: null };
+  localStorage.removeItem(QUIZ_KEY);
+}
+
+function setQuizChoice(step, value, wrap){
+  quizState[step] = value;
+  saveQuiz();
+
+  // UI: marcar activo en ese grupo
+  wrap.querySelectorAll("button").forEach(b => {
+    const on = b.dataset.value === value;
+    b.classList.toggle("is-active", on);
+    b.setAttribute("aria-selected", on ? "true" : "false");
+  });
+
+  // Si ya están las 3 respuestas, aplicar
+  if (quizState.time && quizState.style && quizState.vibe){
+    applyQuiz();
+  }
+}
+
+function applyQuiz(){
+  // Prioridad de filtro: estilo (fresco/dulce/intenso) > tiempo (dia/noche) > todos
+  const styleTag = quizState.style;
+  const timeTag = (quizState.time === "ambos") ? null : quizState.time;
+
+  const chosenFilter = styleTag || timeTag || "todos";
+
+  // Activa chip si existe (para que el usuario “vea” el filtro)
+  const chip = document.querySelector(`.chip[data-filter="${chosenFilter}"]`);
+  if (chip) setActiveChip(chip);
+
+  // Render con filtro principal
+  render(chosenFilter, "");
+
+  // Mensaje arriba del quiz
+  const box = document.getElementById("quizResult");
+  if (box){
+    const timeTxt = quizState.time === "ambos" ? "día o noche" : quizState.time;
+    box.style.display = "block";
+    box.innerHTML = `
+      <div style="font-weight:600;margin-bottom:6px;">Tu perfil:</div>
+      <div class="muted" style="margin-bottom:10px;">
+        ${timeTxt} · ${quizState.style} · ${quizState.vibe}
+      </div>
+      <button type="button" class="btn btn-ghost" id="quizResetBtn">Reiniciar</button>
+      <a class="btn btn-primary" style="margin-left:8px;" href="#catalogo">Ver resultados</a>
+    `;
+
+    const reset = document.getElementById("quizResetBtn");
+    if (reset){
+      reset.addEventListener("click", () => {
+        clearQuiz();
+        // Reset UI
+        document.querySelectorAll("#quiz .quizopts").forEach(w => {
+          w.querySelectorAll("button").forEach(b => {
+            b.classList.remove("is-active");
+            b.setAttribute("aria-selected", "false");
+          });
+        });
+        box.style.display = "none";
+        // Volver a todo
+        const chipTodos = document.querySelector(`.chip[data-filter="todos"]`);
+        if (chipTodos) setActiveChip(chipTodos);
+        render("todos", "");
+      });
+    }
+  }
+
+  // Scroll suave al catálogo
+  const cat = document.getElementById("catalogo");
+  if (cat) cat.scrollIntoView({ behavior: "smooth" });
+}
+
+function initQuiz(){
+  // cargar estado guardado si existe
+  const saved = loadQuiz();
+  if (saved && typeof saved === "object"){
+    quizState = { ...quizState, ...saved };
+  }
+
+  // bind clicks
+  document.querySelectorAll("#quiz .quizopts").forEach(wrap => {
+    const step = wrap.getAttribute("data-step");
+    wrap.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => setQuizChoice(step, btn.dataset.value, wrap));
+    });
+  });
+
+  // pintar selecciones guardadas
+  document.querySelectorAll("#quiz .quizopts").forEach(wrap => {
+    const step = wrap.getAttribute("data-step");
+    const val = quizState[step];
+    if (!val) return;
+    wrap.querySelectorAll("button").forEach(b => {
+      const on = b.dataset.value === val;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+  });
+
+  // si ya estaba completo, aplicar
+  if (quizState.time && quizState.style && quizState.vibe){
+    applyQuiz();
+  }
+}
 
 function init() {
   // Año (si existe)
@@ -694,6 +814,8 @@ function init() {
   // Featured (rotación)
   rotateFeaturedWeekly();
   renderFeatured();
+  
+   initQuiz();
 
   // Ads mode
   const params = new URLSearchParams(window.location.search);
@@ -713,6 +835,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
