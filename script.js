@@ -1,9 +1,11 @@
-// script.js (INTEGRADO FINAL - CART FIX + SUGGESTION OK)
-// ✅ Chips + búsqueda + catálogo
-// ✅ Selección C&C rotación semanal
-// ✅ Carrito: añadir, +/-, total, WhatsApp combinado
-// ✅ Toast + vibración
-// ✅ Sugerencia dentro del carrito
+// script.js (INTEGRADO FINAL - LIMPIO)
+// ✅ Catálogo + chips + búsqueda + limpiar
+// ✅ Selección C&C con rotación semanal (localStorage)
+// ✅ Best sellers (“Más pedido”) (localStorage)
+// ✅ Carrito (añadir, +/−, vaciar) + checkout WhatsApp
+// ✅ Sugerencia en carrito
+// ✅ Imágenes robustas (por si cambia – por - o ’ por ')
+// ✅ Ads mode (?ads=1)
 
 const PHONE_E164 = "18295733343";
 const BRAND = "C&Cfragancias";
@@ -30,6 +32,7 @@ const imageMap = {
   "Parfums de Marly – Carlisle": "img/PARFUMS DE MARLY - CARLISLE.jpg",
   "Xerjoff – Tony Iommi Monkey Special": "img/XERJOFF - TONY IOMMI MONKEY SPECIAL.jpg",
   "Parfums de Marly – Sedley": "img/PARFUMS DE MARLY - SEDLEY.jpg",
+
   "Gritti – Pomelo Sorrento": "img/GRITTI - POMELO SORRENTO.jpg",
   "Parfums de Marly – Greenley": "img/PDM - GREENLEY.jpg",
   "Narcotica – Limonata": "img/NARCOTICA - LIMONATA.jpg",
@@ -61,10 +64,24 @@ const imageMap = {
   "Perry Ellis – Perry Ellis": "img/PERRY ELLIS - PERRY ELLIS.jpg",
 };
 
+// ✅ lookup robusto (por si cambia – por - o ’ por ')
+function normKey(s){
+  return (s || "")
+    .normalize("NFKD")
+    .replace(/[’‘]/g, "'")
+    .replace(/[–—]/g, "-")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+const imageMapNorm = {};
+Object.entries(imageMap).forEach(([k, v]) => { imageMapNorm[normKey(k)] = v; });
+
 /* =========================
    CATÁLOGO
    ========================= */
 const products = [
+  // DAMAS
   { cat: "damas", name: "FUGAZZI – Angel Dust", ml5: 1500, ml10: 2800, note: "Ideal para día · limpio · elegante", featured: true, tags:["dia","fresco"] },
   { cat: "damas", name: "ROOM 1015 – Wavechild", ml5: 1200, ml10: 2250, tags:["dia","afrutado"] },
   { cat: "damas", name: "Le Labo – Santal 33", ml5: 1500, ml10: 2700, tags:["dia","intenso"] },
@@ -80,6 +97,7 @@ const products = [
   { cat: "damas", name: "Nishane – Ani", ml5: 1200, ml10: 2300, tags:["noche","dulce"] },
   { cat: "damas", name: "BDK – Gris Charnel Extrait", ml5: 1450, ml10: 2600, note: "Ideal para noche · sofisticado", featured: true, tags:["noche","intenso"] },
 
+  // CABALLEROS
   { cat: "caballeros", name: "Gritti – Pomelo Sorrento", ml5: 1150, ml10: 2150, tags:["dia","afrutado"] },
   { cat: "caballeros", name: "Creed – Green Irish Tweed", ml5: 1300, ml10: 2500, tags:["dia","fresco"] },
   { cat: "caballeros", name: "Parfums de Marly – Carlisle", ml5: 1250, ml10: 2300, tags:["noche","intenso"] },
@@ -88,7 +106,7 @@ const products = [
   { cat: "caballeros", name: "Parfums de Marly – Greenley", ml5: 1150, ml10: 2200, note: "Fresco · muy cumplido", featured: true, tags:["dia","fresco"] },
   { cat: "caballeros", name: "Narcotica – Limonata", ml5: 1900, ml10: 3600, tags:["dia","afrutado"] },
   { cat: "caballeros", name: "Une Nuit Nomade – Sugar Leather", ml5: 1500, ml10: 2800, tags:["noche","dulce"] },
-  { cat: "caballeros", name: "Orto Parisi – Bergamask", ml5: 1400, ml10: 2700, tags:["dia","intenso"]},
+  { cat: "caballeros", name: "Orto Parisi – Bergamask", ml5: 1400, ml10: 2700, tags:["dia","intenso"] },
   { cat: "caballeros", name: "Tom Ford – Ombré Leather", ml5: 1200, ml10: 2300, tags:["noche","intenso"] },
   { cat: "caballeros", name: "Armani – Stronger With You Absolutely", ml5: 850, ml10: 1550, tags:["noche","dulce"] },
   { cat: "caballeros", name: "YSL – Y EDT", ml5: 750, ml10: 1350, tags:["dia","fresco"] },
@@ -133,11 +151,15 @@ function waLink(message) {
 function placeholderDataUri(label = BRAND) {
   const svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
-    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3eadb"/>
-    </linearGradient></defs>
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="1" stop-color="#f3eadb"/>
+      </linearGradient>
+    </defs>
     <rect width="100%" height="100%" fill="url(#g)"/>
     <text x="50%" y="55%" text-anchor="middle" font-family="Arial" font-size="28" fill="#1f1f1f">${label}</text>
+    <text x="50%" y="64%" text-anchor="middle" font-family="Arial" font-size="16" fill="#6b6b6b">Imagen no disponible</text>
   </svg>`;
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
@@ -158,8 +180,10 @@ function getScore(name){
 }
 
 /* =========================
-   TOAST
+   CARRITO (LOCAL)
    ========================= */
+const CART_KEY = "cc_cart_v1";
+
 function toast(msg){
   const t = document.createElement("div");
   t.textContent = msg;
@@ -178,11 +202,6 @@ function toast(msg){
   }, 1400);
 }
 
-/* =========================
-   CARRITO (LOCAL)
-   ========================= */
-const CART_KEY = "cc_cart_v1";
-
 function loadCart(){
   return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
 }
@@ -199,11 +218,16 @@ function addToCart(p, sizeMl){
   const existing = cart.find(i => i.key === key);
 
   if (existing) existing.qty += 1;
-  else cart.push({ key, name: p.name, sizeMl, price: (sizeMl === 5 ? p.ml5 : p.ml10), qty: 1 });
+  else cart.push({
+    key,
+    name: p.name,
+    sizeMl,
+    price: (sizeMl === 5 ? p.ml5 : p.ml10),
+    qty: 1
+  });
 
   saveCart(cart);
   refreshCartUI();
-
   toast(`Añadido: ${p.name} (${sizeMl} ml)`);
   if (navigator.vibrate) navigator.vibrate(30);
 }
@@ -235,12 +259,8 @@ function cartTotals(){
   return { cart, items, total };
 }
 
-/* =========================
-   SUGERENCIA (based on tags)
-   ========================= */
 function getSuggestion(cart){
   if (!cart.length) return null;
-
   const last = cart[cart.length - 1];
   const base = products.find(p => p.name === last.name);
   if (!base || !Array.isArray(base.tags)) return null;
@@ -268,10 +288,17 @@ function buildCard(p) {
   img.className = "pimg";
   img.loading = "lazy";
   img.alt = p.name;
-  img.src = (imageMap[p.name] || placeholderDataUri(BRAND));
+
+  img.src = (
+    imageMap[p.name] ||
+    imageMapNorm[normKey(p.name)] ||
+    placeholderDataUri(BRAND)
+  );
   img.onerror = () => { img.src = placeholderDataUri(BRAND); };
+
   imgWrap.appendChild(img);
 
+  // Badges
   if (p.featured) {
     const badge = document.createElement("div");
     badge.className = "featured-badge";
@@ -330,6 +357,7 @@ function buildCard(p) {
   btnRow.style.gap = "10px";
   btnRow.style.gridAutoRows = "auto";
 
+  // Añadir al carrito
   const add5 = document.createElement("button");
   add5.type = "button";
   add5.className = "btn btn-ghost";
@@ -342,6 +370,7 @@ function buildCard(p) {
   add10.textContent = "Añadir 10 ml";
   add10.addEventListener("click", () => addToCart(p, 10));
 
+  // Pedir directo (WhatsApp)
   const btn5 = document.createElement("a");
   btn5.className = "btn btn-primary";
   btn5.target = "_blank";
@@ -372,7 +401,7 @@ function buildCard(p) {
 }
 
 /* =========================
-   FILTRO + BUSQUEDA + ORDEN
+   FILTRO + BÚSQUEDA + ORDEN
    ========================= */
 function getOrderedProducts(filter, query) {
   const q = (query || "").trim().toLowerCase();
@@ -385,6 +414,7 @@ function getOrderedProducts(filter, query) {
 
   if (q) filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
 
+  // Featured arriba, luego más pedido, luego alfabético
   return filtered.sort((a, b) => {
     const fa = a.featured === true ? 1 : 0;
     const fb = b.featured === true ? 1 : 0;
@@ -412,7 +442,6 @@ function render(filter = currentFilter, query = currentQuery) {
     grid.innerHTML = `<div class="muted" style="padding:14px;">No encontré ese perfume. Prueba con otra palabra (ej: Greenley, Vibrato).</div>`;
     return;
   }
-
   list.forEach(p => grid.appendChild(buildCard(p)));
 }
 
@@ -457,10 +486,8 @@ function rotateFeaturedWeekly(){
     localStorage.setItem(key, JSON.stringify(state));
   }
 
-  products.forEach(p => p.featured = false);
-  products.forEach(p => {
-    if (state.picks.includes(p.name)) p.featured = true;
-  });
+  products.forEach(p => { p.featured = false; });
+  products.forEach(p => { if (state.picks.includes(p.name)) p.featured = true; });
 }
 
 function renderFeatured() {
@@ -468,6 +495,7 @@ function renderFeatured() {
   if (!wrap) return;
 
   const featured = products.filter(p => p.featured).slice(0, 4);
+
   wrap.innerHTML = `
     <div style="grid-column:1/-1">
       <div class="featured-title">Selección C&C</div>
@@ -492,7 +520,6 @@ ${lines.join("\n")}
 Total: ${pesos(total)}
 Soy de: _____.
 — Envíos nacionales desde Higüey — ${BRAND}`;
-
   return waLink(msg);
 }
 
@@ -516,12 +543,13 @@ function refreshCartUI(){
   if (checkout2) checkout2.href = link;
 
   itemsWrap.innerHTML = "";
+
   if (cart.length === 0) {
     itemsWrap.innerHTML = `<div class="muted" style="padding:10px 0;">Tu carrito está vacío.</div>`;
     return;
   }
 
-  // LISTA DEL CARRITO
+  // Items
   cart.forEach(i => {
     const row = document.createElement("div");
     row.className = "cartrow";
@@ -560,7 +588,7 @@ function refreshCartUI(){
     itemsWrap.appendChild(row);
   });
 
-  // 💡 SUGERENCIA (AL FINAL)
+  // 💡 Sugerencia (después del listado)
   const suggestion = getSuggestion(cart);
   if (suggestion) {
     const sug = document.createElement("div");
@@ -595,13 +623,13 @@ function setupCartUI(){
   if (open) open.addEventListener("click", show);
   if (close) close.addEventListener("click", hide);
   if (modal) modal.addEventListener("click", (e) => { if (e.target === modal) hide(); });
-  if (clear) clear.addEventListener("click", clearCart);
+  if (clear) clear.addEventListener("click", () => clearCart());
 
   refreshCartUI();
 }
 
 /* =========================
-   UI CHIPS
+   CHIPS + INIT
    ========================= */
 function setActiveChip(target) {
   document.querySelectorAll(".chip").forEach(ch => {
@@ -611,19 +639,19 @@ function setActiveChip(target) {
   });
 }
 
-/* =========================
-   INIT
-   ========================= */
 function init() {
+  // Año (si existe)
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
+  // CTAs generales (si existen)
   const generalHref = waLink(`Hola 👋 quiero información para pedir un decant. — ${BRAND}`);
   ["ctaTop", "ctaHero", "ctaBottom", "ctaFinal"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.href = generalHref;
   });
 
+  // Chips
   document.querySelectorAll(".chip").forEach(chip => {
     chip.addEventListener("click", () => {
       setActiveChip(chip);
@@ -631,6 +659,7 @@ function init() {
     });
   });
 
+  // Search
   const search = document.getElementById("search");
   const clearBtn = document.getElementById("clearSearch");
 
@@ -657,9 +686,11 @@ function init() {
     syncClearButton();
   }
 
+  // Featured (rotación)
   rotateFeaturedWeekly();
   renderFeatured();
 
+  // Ads mode
   const params = new URLSearchParams(window.location.search);
   if (params.get("ads") === "1") {
     setTimeout(() => {
@@ -668,8 +699,11 @@ function init() {
     }, 200);
   }
 
+  // Carrito
   setupCartUI();
   refreshCartUI();
+
+  // Render inicial
   render("todos", "");
 }
 
