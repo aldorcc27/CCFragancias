@@ -1,28 +1,21 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>C&Cfragancias — Perfumes nicho</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Perfumes nicho y diseñadores 100% originales. Decants 5 ml y 10 ml. Envíos nacionales desde Higüey.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Perfumes nicho y diseñadores 100% originales. Decants 5 ml y 10 ml. Envíos nacionales desde Higüey." />
 
-  <!-- Acelera carga de fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Tipografías -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles-final.css">
+  <link rel="stylesheet" href="styles-final.css" />
 </head>
 
 <body>
-
-<!-- Debug opcional (puedes borrar esto luego) -->
-<div style="position:fixed;bottom:10px;right:10px;background:#000;color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;z-index:9999;">
-  v2
-</div>
 
 <header class="header">
   <div class="container">
@@ -42,7 +35,7 @@
   <div class="container hero-grid">
     <div>
       <span class="kicker">DECANTS · 5 ML / 10 ML</span>
-      <h1>Perfumes nicho y diseñadores<br>100% originales</h1>
+      <h1>Perfumes nicho y diseñadores<br />100% originales</h1>
       <p class="lead">
         Prueba antes de comprar el frasco completo. Compra directa por WhatsApp,
         envíos nacionales desde <strong>Higüey</strong>.
@@ -62,7 +55,7 @@
 
     <div class="hero-visual" aria-hidden="true">
       <div class="hero-card">
-        <img src="img/PARFUMS DE MARLY - CARLISLE.jpg" alt="Perfumes nicho">
+        <img src="img/PARFUMS DE MARLY - CARLISLE.jpg" alt="Perfumes nicho" />
       </div>
     </div>
   </div>
@@ -72,20 +65,20 @@
   <div class="container">
     <div class="section-head">
       <h2>Catálogo</h2>
-      <p class="muted">Selecciona y pide directo por WhatsApp</p>
+      <p class="muted">Selecciona varios y envía un solo pedido por WhatsApp</p>
     </div>
 
-    <!-- ✅ Selección C&C -->
+    <!-- Selección C&C -->
     <div class="featured-section" id="featured"></div>
 
-    <!-- ✅ Búsqueda -->
+    <!-- Búsqueda + limpiar -->
     <div class="searchbar">
-      <input id="search" type="search" placeholder="Buscar perfume… (ej: Greenley, Vibrato, Ani)" autocomplete="off">
-      <!-- si tienes botón clearSearch en tu CSS/JS, agrégalo aquí -->
-      <!-- <button id="clearSearch" class="clear">×</button> -->
+      <input id="search" type="search" placeholder="Buscar perfume… (ej: Greenley, Vibrato, Ani)" autocomplete="off" />
+      <!-- Si tu CSS no tiene este botón, igual funciona. El script lo usa si existe. -->
+      <button id="clearSearch" type="button" class="btn btn-ghost" style="display:none;">Limpiar</button>
     </div>
 
-    <!-- ✅ Chips -->
+    <!-- Chips -->
     <div class="filters">
       <button type="button" class="chip is-active" data-filter="todos">Todos</button>
       <button type="button" class="chip" data-filter="damas">Damas</button>
@@ -99,23 +92,36 @@
       <button type="button" class="chip" data-filter="dulce">Dulce</button>
     </div>
 
-    <!-- ✅ Aquí el script pinta los perfumes -->
+    <!-- Grid de productos -->
     <div class="grid" id="grid"></div>
+
+    <!-- CTA abajo del catálogo -->
+    <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn btn-primary" id="ctaBottom" target="_blank" rel="noopener">Comprar por WhatsApp</a>
+      <a class="btn btn-ghost" href="#garantia">Ver garantía</a>
+    </div>
   </div>
 </section>
 
-<section class="trust">
-  <div class="trust-card">
-    <h3>Compra con confianza</h3>
-    <ul>
-      <li>✅ Decants 100% originales</li>
-      <li>✅ Envíos a toda República Dominicana</li>
-      <li>✅ Higüey: entrega rápida (según disponibilidad)</li>
-      <li>✅ Atención por WhatsApp</li>
-    </ul>
-    <p class="trust-mini">
-      Tip: tamaños completos disponibles por encargo, solo pregunta y te lo traemos.
-    </p>
+<!-- Garantía / Confianza -->
+<section id="garantia" class="trust">
+  <div class="container">
+    <div class="trust-card">
+      <h3>Compra con confianza</h3>
+      <ul>
+        <li>✅ Decants 100% originales</li>
+        <li>✅ Envíos a toda República Dominicana</li>
+        <li>✅ Higüey: entrega rápida (según disponibilidad)</li>
+        <li>✅ Atención por WhatsApp</li>
+      </ul>
+      <p class="trust-mini">
+        Tip: tamaños completos disponibles por encargo — solo pregunta y te lo conseguimos.
+      </p>
+
+      <div style="margin-top:14px;">
+        <a class="btn btn-primary" id="ctaFinal" target="_blank" rel="noopener">Comprar por WhatsApp</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -164,16 +170,8 @@
   </div>
 </div>
 
-<!-- ✅ Carga el script AL FINAL (recomendado) -->
+<!-- ✅ Script SOLO una vez y al final -->
 <script src="script.js?v=20260130"></script>
-
-<!-- INLINE OK (solo para probar, luego lo borras) -->
-<script>
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    "<div style='position:fixed;top:10px;left:10px;background:#000;color:#fff;padding:6px 10px;border-radius:12px;z-index:99999;font-size:12px'>INLINE OK</div>"
-  );
-</script>
 
 </body>
 </html>
