@@ -103,7 +103,7 @@ const products = [
   { cat: "caballeros", name: "Parfums de Marly – Carlisle", ml5: 1250, ml10: 2300, tags:["noche","intenso"] },
   { cat: "caballeros", name: "Xerjoff – Tony Iommi Monkey Special", ml5: 1500, ml10: 2750, tags:["noche","intenso"] },
   { cat: "caballeros", name: "Parfums de Marly – Sedley", ml5: 1150, ml10: 2200, tags:["dia","fresco"] },
-  { cat: "caballeros", name: "Parfums de Marly – Greenley", ml5: 1150, ml10: 2200, note: "Fresco · muy cumplido", featured: true, tags:["dia","fresco"] },
+  { cat: "caballeros", name: "Parfums de Marly – Greenley", ml5: 1150, ml10: 2200, note: "Fresco · muchos cumplidos", featured: true, tags:["dia","fresco"] },
   { cat: "caballeros", name: "Narcotica – Limonata", ml5: 1900, ml10: 3600, tags:["dia","afrutado"] },
   { cat: "caballeros", name: "Une Nuit Nomade – Sugar Leather", ml5: 1500, ml10: 2800, tags:["noche","dulce"] },
   { cat: "caballeros", name: "Orto Parisi – Bergamask", ml5: 1400, ml10: 2700, tags:["dia","intenso"] },
@@ -835,6 +835,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
