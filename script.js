@@ -1,4 +1,4 @@
-// script.js (INTEGRADO FINAL - LIMPIO)
+// script.js (INTEGRADO FINAL - LIMPIO + WhatsApp Versión C)
 // ✅ Catálogo + chips + búsqueda + limpiar
 // ✅ Selección C&C con rotación semanal (localStorage)
 // ✅ Best sellers (“Más pedido”) (localStorage)
@@ -6,6 +6,11 @@
 // ✅ Sugerencia en carrito
 // ✅ Imágenes robustas (por si cambia – por - o ’ por ')
 // ✅ Ads mode (?ads=1)
+// ✅ Quiz Perfil Olfativo (localStorage)
+// ✅ WhatsApp “Versión C” (más vendedor) integrado en:
+//    - CTA general
+//    - Comprar 5ml/10ml por producto
+//    - Checkout del carrito
 
 const PHONE_E164 = "18295733343";
 const BRAND = "C&Cfragancias";
@@ -370,13 +375,19 @@ function buildCard(p) {
   add10.textContent = "Añadir 10 ml al carrito";
   add10.addEventListener("click", () => addToCart(p, 10));
 
-  // Pedir directo (WhatsApp)
+  // Pedir directo (WhatsApp) — ✅ VERSIÓN C
   const btn5 = document.createElement("a");
   btn5.className = "btn btn-primary";
   btn5.target = "_blank";
   btn5.rel = "noopener";
   btn5.textContent = "Comprar 5 ml";
-  btn5.href = waLink(`Hola 👋 quiero ${p.name} (5 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
+  btn5.href = waLink(
+`Hola 👋 Quiero probar *${p.name}* en *5 ml*.
+
+Ciudad / sector: _____
+¿Disponible para envío? Si tienes algo similar en el mismo estilo, mándame 1–2 opciones.
+— ${BRAND}`
+  );
   btn5.addEventListener("click", () => trackClick(p.name));
 
   const btn10 = document.createElement("a");
@@ -384,7 +395,13 @@ function buildCard(p) {
   btn10.target = "_blank";
   btn10.rel = "noopener";
   btn10.textContent = "Comprar 10 ml";
-  btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
+  btn10.href = waLink(
+`Hola 👋 Quiero *${p.name}* en *10 ml*.
+
+Ciudad / sector: _____
+¿Disponible para envío hoy/mañana? Si tienes una alternativa similar, también me interesa.
+— ${BRAND}`
+  );
   btn10.addEventListener("click", () => trackClick(p.name));
 
   btnRow.appendChild(add5);
@@ -508,21 +525,35 @@ function renderFeatured() {
 /* =========================
    CARRITO UI
    ========================= */
+// ✅ VERSIÓN C integrada aquí también:
 function buildCartMessage(){
   const { cart, items, total } = cartTotals();
-  if (items === 0) return waLink(`Hola 👋 quiero información para pedir un decant. — ${BRAND}`);
+
+  if (items === 0) {
+    return waLink(
+`Hola 👋 Quiero un decant 100% original y una recomendación rápida.
+
+• Uso: día / noche / ambos
+• Estilo: fresco / dulce / intenso
+• Ciudad / sector: _____
+
+Si me recomiendas 2–3 opciones top y disponibilidad, hago el pedido de una vez.
+— ${BRAND} (envíos desde Higüey)`
+    );
+  }
 
   const lines = cart.map(i => `• ${i.name} — ${i.sizeMl}ml x${i.qty} = ${pesos(i.price * i.qty)}`);
+
   const msg =
-`Hola 👋 quiero hacer este pedido:
+`Hola 👋 Quiero confirmar este pedido:
 
 ${lines.join("\n")}
 
 Total: ${pesos(total)}
 Ciudad / sector: _____
 
-¿Está disponible para envío hoy?
-— Envíos nacionales desde Higüey — ${BRAND}`;
+¿Me confirmas disponibilidad y fecha estimada de entrega? Si falta alguno, sugíereme 1 alternativa similar.
+— ${BRAND} (envíos desde Higüey)`;
 
   return waLink(msg);
 }
@@ -607,7 +638,6 @@ function refreshCartUI(){
   }
 }
 
-
 function setupCartUI(){
   const modal = document.getElementById("cartModal");
   const open = document.getElementById("cartOpen");
@@ -634,7 +664,7 @@ function setupCartUI(){
 }
 
 /* =========================
-   CHIPS + INIT
+   CHIPS
    ========================= */
 function setActiveChip(target) {
   document.querySelectorAll(".filters .chip").forEach(ch => {
@@ -644,11 +674,6 @@ function setActiveChip(target) {
   });
 }
 
-    const active = ch === target;
-    ch.classList.toggle("is-active", active);
-    ch.setAttribute("aria-selected", active ? "true" : "false");
-  });
-}
 /* =========================
    QUIZ PERFIL OLFATIVO
    ========================= */
@@ -770,26 +795,38 @@ function initQuiz(){
   }
 }
 
+/* =========================
+   INIT
+   ========================= */
 function init() {
   // Año (si existe)
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  // CTAs generales (si existen)
-  const generalHref = waLink(`Hola 👋 quiero información para pedir un decant. — ${BRAND}`);
+  // ✅ CTA general — VERSIÓN C
+  const generalHref = waLink(
+`Hola 👋 Quiero un decant 100% original y una recomendación rápida.
+
+• Uso: día / noche / ambos
+• Estilo: fresco / dulce / intenso
+• Ciudad / sector: _____
+
+Si me recomiendas 2–3 opciones top y disponibilidad, hago el pedido de una vez.
+— ${BRAND} (envíos desde Higüey)`
+  );
+
   ["ctaTop", "ctaHero", "ctaBottom", "ctaFinal"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.href = generalHref;
   });
 
   // Chips
- document.querySelectorAll(".filters .chip").forEach(chip => {
-  chip.addEventListener("click", () => {
-    setActiveChip(chip);
-    render(chip.dataset.filter, currentQuery);
+  document.querySelectorAll(".filters .chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      setActiveChip(chip);
+      render(chip.dataset.filter, currentQuery);
+    });
   });
-});
-
 
   // Search
   const search = document.getElementById("search");
@@ -821,8 +858,9 @@ function init() {
   // Featured (rotación)
   rotateFeaturedWeekly();
   renderFeatured();
-  
-   initQuiz();
+
+  // Quiz
+  initQuiz();
 
   // Ads mode
   const params = new URLSearchParams(window.location.search);
@@ -842,6 +880,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
