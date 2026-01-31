@@ -228,7 +228,7 @@ function addToCart(p, sizeMl){
 
   saveCart(cart);
   refreshCartUI();
-  toast(`Añadido: ${p.name} (${sizeMl} ml)`);
+  toast(`Listo ✅ ${p.name} (${sizeMl} ml) agregado al carrito`);
   if (navigator.vibrate) navigator.vibrate(30);
 }
 
@@ -361,13 +361,13 @@ function buildCard(p) {
   const add5 = document.createElement("button");
   add5.type = "button";
   add5.className = "btn btn-ghost";
-  add5.textContent = "Añadir 5 ml";
+  add5.textContent = "Añadir 5ml al carrito";
   add5.addEventListener("click", () => addToCart(p, 5));
 
   const add10 = document.createElement("button");
   add10.type = "button";
   add10.className = "btn btn-ghost";
-  add10.textContent = "Añadir 10 ml";
+  add10.textContent = "Añadir 10 ml al carrito";
   add10.addEventListener("click", () => addToCart(p, 10));
 
   // Pedir directo (WhatsApp)
@@ -375,7 +375,7 @@ function buildCard(p) {
   btn5.className = "btn btn-primary";
   btn5.target = "_blank";
   btn5.rel = "noopener";
-  btn5.textContent = "Pedir 5 ml";
+  btn5.textContent = "Comprar 5 ml";
   btn5.href = waLink(`Hola 👋 quiero ${p.name} (5 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
   btn5.addEventListener("click", () => trackClick(p.name));
 
@@ -383,7 +383,7 @@ function buildCard(p) {
   btn10.className = "btn btn-primary";
   btn10.target = "_blank";
   btn10.rel = "noopener";
-  btn10.textContent = "Pedir 10 ml";
+  btn10.textContent = "Comprar 10 ml";
   btn10.href = waLink(`Hola 👋 quiero ${p.name} (10 ml). ¿Está disponible hoy? Soy de: _____. — Envíos nacionales desde Higüey — ${BRAND}`);
   btn10.addEventListener("click", () => trackClick(p.name));
 
@@ -515,13 +515,15 @@ function buildCartMessage(){
   const lines = cart.map(i => `• ${i.name} — ${i.sizeMl}ml x${i.qty} = ${pesos(i.price * i.qty)}`);
   const msg =
 `Hola 👋 quiero hacer este pedido:
+
 ${lines.join("\n")}
 
 Total: ${pesos(total)}
-Soy de: _____.
+Ciudad / sector: _____
+
+¿Está disponible para envío hoy?
 — Envíos nacionales desde Higüey — ${BRAND}`;
-  return waLink(msg);
-}
+
 
 function refreshCartUI(){
   const bar = document.getElementById("cartBar");
@@ -708,6 +710,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
