@@ -637,7 +637,13 @@ function setupCartUI(){
    CHIPS + INIT
    ========================= */
 function setActiveChip(target) {
-  document.querySelectorAll(".chip").forEach(ch => {
+  document.querySelectorAll(".filters .chip").forEach(ch => {
+    const active = ch === target;
+    ch.classList.toggle("is-active", active);
+    ch.setAttribute("aria-selected", active ? "true" : "false");
+  });
+}
+
     const active = ch === target;
     ch.classList.toggle("is-active", active);
     ch.setAttribute("aria-selected", active ? "true" : "false");
@@ -777,12 +783,13 @@ function init() {
   });
 
   // Chips
-  document.querySelectorAll(".chip").forEach(chip => {
-    chip.addEventListener("click", () => {
-      setActiveChip(chip);
-      render(chip.dataset.filter, currentQuery);
-    });
+ document.querySelectorAll(".filters .chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    setActiveChip(chip);
+    render(chip.dataset.filter, currentQuery);
   });
+});
+
 
   // Search
   const search = document.getElementById("search");
@@ -835,6 +842,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 
 
