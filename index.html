@@ -1,222 +1,1615 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>C&Cfragancias — Perfumes nicho</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Perfumes nicho y diseñadores 100% originales. Decants 5 ml y 10 ml. Envíos nacionales desde Higüey." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Perfumes nicho y diseñadores 100% originales. Decants 5ml y 10ml. Envíos nacionales desde Higüey, RD.">
+    <title>C&C Fragancias — Perfumería Nicho</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cream: #F5F1E8;
+            --dark-brown: #2A2520;
+            --warm-brown: #5C4E42;
+            --sage: #8B9A7F;
+            --terracotta: #C97B63;
+            --light-sage: #B8C5AC;
+            --off-white: #FDFCF9;
+            --shadow: rgba(42, 37, 32, 0.08);
+            --shadow-lg: rgba(42, 37, 32, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--cream);
+            color: var(--dark-brown);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(253, 252, 249, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1.5rem 4%;
+            border-bottom: 1px solid rgba(42, 37, 32, 0.08);
+            animation: slideDown 0.6s ease;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--dark-brown);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--warm-brown);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--sage);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--sage);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--warm-brown);
+            font-size: 1.3rem;
+            position: relative;
+            transition: transform 0.2s;
+        }
+        
+        .icon-btn:hover {
+            transform: scale(1.1);
+            color: var(--sage);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--terracotta);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 8rem 4% 6rem;
+            background: linear-gradient(135deg, var(--off-white) 0%, var(--cream) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 154, 127, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero h1 {
+            font-size: 5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--dark-brown);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--warm-brown);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+        
+        .hero-badges {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .badge-icon {
+            font-size: 1.5rem;
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles-final.css" />
+        
+        
+        .badge-text {
+            font-size: 0.9rem;
+            color: var(--warm-brown);
+        }
+        
+        /* CTA Buttons */
+        .cta-primary {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--dark-brown);
+            color: var(--off-white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .cta-primary:hover {
+            background: var(--warm-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow-lg);
+        }
+        
+        .cta-secondary {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: transparent;
+            color: var(--dark-brown);
+            text-decoration: none;
+            border: 2px solid var(--dark-brown);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-left: 1rem;
+        }
+        
+        .cta-secondary:hover {
+            background: var(--dark-brown);
+            color: var(--off-white);
+        }
+        
+        /* Quiz Section */
+        .quiz-section {
+            padding: 6rem 4%;
+            background: white;
+        }
+        
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--dark-brown);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--warm-brown);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-question {
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .quiz-question:nth-child(2) { animation-delay: 0.1s; }
+        .quiz-question:nth-child(3) { animation-delay: 0.2s; }
+        
+        .question-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-brown);
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+        
+        .quiz-option {
+            padding: 1.5rem;
+            background: var(--cream);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--sage);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px var(--shadow);
+        }
+        
+        .quiz-option.selected {
+            background: var(--sage);
+            color: white;
+            border-color: var(--sage);
+        }
+        
+        /* Catalog Section */
+        .catalog-section {
+            padding: 6rem 4%;
+            background: var(--cream);
+        }
+        
+        .catalog-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .search-bar {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid rgba(42, 37, 32, 0.1);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--sage);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--warm-brown);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid rgba(42, 37, 32, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--warm-brown);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--sage);
+            color: white;
+            border-color: var(--sage);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--shadow);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px var(--shadow-lg);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-brand {
+            font-size: 0.85rem;
+            color: var(--warm-brown);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-name {
+            font-size: 1.3rem;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 0.8rem;
+            color: var(--dark-brown);
+        }
+        
+        .product-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--cream);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--warm-brown);
+        }
+        
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .price {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark-brown);
+        }
+        
+        .price-size {
+            font-size: 0.85rem;
+            color: var(--warm-brown);
+            margin-left: 0.3rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            width: 42px;
+            height: 42px;
+            border: none;
+            background: var(--cream);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .action-btn:hover {
+            background: var(--sage);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .action-btn.favorited {
+            background: var(--terracotta);
+            color: white;
+        }
+        
+        .add-to-cart-btn {
+            flex: 1;
+            padding: 0.8rem 1.5rem;
+            background: var(--dark-brown);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: var(--warm-brown);
+            transform: translateY(-2px);
+        }
+        
+        /* Custom Order Section */
+        .custom-order-section {
+            padding: 6rem 4%;
+            background: white;
+        }
+        
+        .custom-order-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .custom-order-form {
+            margin-top: 3rem;
+            background: var(--cream);
+            padding: 3rem;
+            border-radius: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-brown);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(42, 37, 32, 0.1);
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--sage);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(42, 37, 32, 0.8);
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.4s;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            color: var(--dark-brown);
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--warm-brown);
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: var(--dark-brown);
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--cream);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        
+        .cart-item-size {
+            font-size: 0.9rem;
+            color: var(--warm-brown);
+        }
+        
+        .cart-item-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-brown);
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--terracotta);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+        
+        .remove-item:hover {
+            transform: scale(1.2);
+        }
+        
+        .cart-total {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(42, 37, 32, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .total-label {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .total-price {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--dark-brown);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            color: var(--warm-brown);
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            background: var(--dark-brown);
+            color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+        
+        .admin-login {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .admin-content {
+            display: none;
+        }
+        
+        .admin-content.show {
+            display: block;
+        }
+        
+        .orders-list {
+            margin-top: 2rem;
+        }
+        
+        .order-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .order-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--dark-brown);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow-lg);
+            z-index: 3000;
+            animation: slideInRight 0.4s;
+            display: none;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .toast.show {
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-brown);
+            color: var(--cream);
+            padding: 4rem 4% 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(245, 241, 232, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--light-sage);
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(245, 241, 232, 0.2);
+            text-align: center;
+            color: rgba(245, 241, 232, 0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-badges {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .cta-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+                display: block;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+        
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, var(--cream) 25%, var(--off-white) 50%, var(--cream) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">C&C</a>
+            <div class="nav-links">
+                <a href="#catalogo">Catálogo</a>
+                <a href="#por-encargo">Por Encargo</a>
+                <a href="#contacto">Contacto</a>
+                <button class="icon-btn" id="favoritesBtn" title="Favoritos">
+                    ♥
+                    <span class="cart-count" id="favCount" style="display: none;">0</span>
+                </button>
+                <button class="icon-btn" id="cartBtn" title="Carrito">
+                    🛒
+                    <span class="cart-count" id="cartCount" style="display: none;">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-<header class="header">
-  <div class="container">
-    <div class="brand">
-      <div class="brand-mark">C&C</div>
-      <div>
-        <div class="brand-name">C&Cfragancias</div>
-        <div class="brand-sub">Perfumes nicho · RD</div>
-      </div>
-    </div>
-
-    <a class="btn btn-primary" id="ctaTop" target="_blank" rel="noopener">Comprar por WhatsApp</a>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <span class="kicker">DECANTS · 5 ML / 10 ML</span>
-      <h1>Perfumes nicho y diseñadores<br />100% originales</h1>
-      <p class="lead">
-        Prueba antes de comprar el frasco completo. Compra directa por WhatsApp,
-        envíos nacionales desde <strong>Higüey</strong>.
-      </p>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" id="ctaHero" target="_blank" rel="noopener">Comprar por WhatsApp</a>
-        <a class="btn btn-ghost btn-lg" href="#catalogo">Ver catálogo</a>
-      </div>
-
-      <div class="badges">
-        <span class="badge">📍 Higüey</span>
-        <span class="badge">🚚 Envíos nacionales</span>
-        <span class="badge">✅ Precios fijos</span>
-      </div>
-    </div>
-
-    <div class="hero-visual" aria-hidden="true">
-      <div class="hero-card">
-        <img src="img/PARFUMS DE MARLY - CARLISLE.jpg" alt="Perfumes nicho" />
-      </div>
-    </div>
-  </div>
-</section>
-<!-- PERFIL OLFATIVO (QUIZ) -->
-<section class="section" id="quiz">
-  <div class="container">
-    <div class="section-head">
-      <h2>Descubre tu perfume ideal</h2>
-      <p class="muted">Responde 3 preguntas y te filtramos el catálogo</p>
-    </div>
-
-    <div class="quizcard">
-      <div class="quizstep">
-        <div class="quizq">1) ¿Cuándo lo usarías?</div>
-        <div class="quizopts" data-step="time">
-          <button type="button" class="chip" data-value="dia">Día</button>
-          <button type="button" class="chip" data-value="noche">Noche</button>
-          <button type="button" class="chip" data-value="ambos">Ambos</button>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Descubre tu<br>fragancia perfecta</h1>
+            <p>Perfumes nicho y diseñadores 100% originales. Decants de 5ml y 10ml para que pruebes antes de comprar el frasco completo.</p>
+            <a href="#catalogo" class="cta-primary">Explorar Catálogo</a>
+            <a href="#quiz" class="cta-secondary">Encuentra tu perfume</a>
+            
+            <div class="hero-badges">
+                <div class="badge">
+                    <span class="badge-icon">📍</span>
+                    <span class="badge-text">Desde Higüey, RD</span>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">🚚</span>
+                    <span class="badge-text">Envíos nacionales</span>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">✓</span>
+                    <span class="badge-text">100% Originales</span>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="quizstep">
-        <div class="quizq">2) ¿Qué te gusta más?</div>
-        <div class="quizopts" data-step="style">
-          <button type="button" class="chip" data-value="fresco">Fresco</button>
-          <button type="button" class="chip" data-value="dulce">Dulce</button>
-          <button type="button" class="chip" data-value="intenso">Intenso</button>
+    <!-- Quiz Section -->
+    <section class="quiz-section" id="quiz">
+        <div class="section-container">
+            <h2 class="section-title">¿Qué perfume buscas?</h2>
+            <p class="section-subtitle">Responde 3 preguntas y te filtramos el catálogo perfecto</p>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <h3 class="question-title">1. ¿Cuándo lo usarías?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-filter="dia">☀️ Día</div>
+                        <div class="quiz-option" data-filter="noche">🌙 Noche</div>
+                        <div class="quiz-option" data-filter="ambos">🔄 Ambos</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <h3 class="question-title">2. ¿Qué te gusta más?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-filter="fresco">🌊 Fresco</div>
+                        <div class="quiz-option" data-filter="dulce">🍯 Dulce</div>
+                        <div class="quiz-option" data-filter="intenso">🔥 Intenso</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <h3 class="question-title">3. ¿Qué buscas?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-filter="discreto">🤫 Discreto</div>
+                        <div class="quiz-option" data-filter="cumplidos">💬 Da cumplidos</div>
+                        <div class="quiz-option" data-filter="presencia">👑 Con presencia</div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="quizstep">
-        <div class="quizq">3) ¿Qué buscas?</div>
-        <div class="quizopts" data-step="vibe">
-          <button type="button" class="chip" data-value="discreto">Discreto</button>
-          <button type="button" class="chip" data-value="Da cumplidos">Da cumplidos</button>
-          <button type="button" class="chip" data-value="Con presencia">Con presencia</button>
+    <!-- Catalog Section -->
+    <section class="catalog-section" id="catalogo">
+        <div class="section-container">
+            <h2 class="section-title">Nuestro Catálogo</h2>
+            
+            <div class="catalog-controls">
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Buscar perfume, marca, nota...">
+                </div>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="todos">Todos</button>
+                    <button class="filter-btn" data-filter="damas">Damas</button>
+                    <button class="filter-btn" data-filter="caballeros">Caballeros</button>
+                    <button class="filter-btn" data-filter="unisex">Unisex</button>
+                </div>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here dynamically -->
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div id="quizResult" class="quizresult" style="display:none;"></div>
-    </div>
-  </div>
-</section>
+    <!-- Custom Order Section -->
+    <section class="custom-order-section" id="por-encargo">
+        <div class="custom-order-container">
+            <h2 class="section-title">¿No encuentras tu perfume?</h2>
+            <p class="section-subtitle">Te lo conseguimos por encargo. Solo llena el formulario y te contactamos con disponibilidad y precio.</p>
+            
+            <div class="custom-order-form">
+                <form id="customOrderForm">
+                    <div class="form-group">
+                        <label>Nombre del perfume *</label>
+                        <input type="text" id="perfumeName" required placeholder="Ej: Parfums de Marly - Layton">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tu nombre *</label>
+                        <input type="text" id="customerName" required placeholder="Tu nombre">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>WhatsApp *</label>
+                        <input type="tel" id="customerPhone" required placeholder="809-555-5555">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Comentarios adicionales</label>
+                        <textarea id="customerComments" placeholder="¿Tamaño preferido? ¿Alguna nota especial?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="cta-primary">Solicitar por Encargo</button>
+                </form>
+            </div>
+            
+            <!-- Admin Panel -->
+            <div class="admin-panel" id="adminPanel">
+                <div class="admin-login" id="adminLogin">
+                    <h3>Panel de Administración</h3>
+                    <div class="form-group">
+                        <input type="password" id="adminPassword" placeholder="Contraseña">
+                    </div>
+                    <button class="cta-primary" onclick="loginAdmin()">Acceder</button>
+                </div>
+                
+                <div class="admin-content" id="adminContent">
+                    <h3>Pedidos por Encargo</h3>
+                    <div class="orders-list" id="ordersList"></div>
+                    <button class="cta-secondary" onclick="logoutAdmin()">Cerrar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="catalogo" class="section">
-  <div class="container">
-    <div class="section-head">
-      <h2>Catálogo</h2>
-      <p class="muted">Selecciona varios y envía un solo pedido por WhatsApp</p>
-    </div>
-
-    <!-- Selección C&C -->
-    <div class="featured-section" id="featured"></div>
-
-    <!-- Búsqueda + limpiar -->
-    <div class="searchbar">
-      <input id="search" type="search" placeholder="Buscar perfume… (ej: Greenley, Vibrato, Ani)" autocomplete="off" />
-      <!-- Si tu CSS no tiene este botón, igual funciona. El script lo usa si existe. -->
-      <button id="clearSearch" type="button" class="btn btn-ghost" style="display:none;">Limpiar</button>
-    </div>
-
-    <!-- Chips -->
-    <div class="filters">
-      <button type="button" class="chip is-active" data-filter="todos">Todos</button>
-      <button type="button" class="chip" data-filter="damas">Damas</button>
-      <button type="button" class="chip" data-filter="caballeros">Caballeros</button>
-      <button type="button" class="chip" data-filter="dia">Día</button>
-      <button type="button" class="chip" data-filter="noche">Noche</button>
-      <button type="button" class="chip" data-filter="fresco">Fresco</button>
-      <button type="button" class="chip" data-filter="intenso">Intenso</button>
-      <button type="button" class="chip" data-filter="afrutado">Afrutado</button>
-      <button type="button" class="chip" data-filter="floral">Floral</button>
-      <button type="button" class="chip" data-filter="dulce">Dulce</button>
-    </div>
-
-    <!-- Grid de productos -->
-    <div class="grid" id="grid"></div>
-
-    <!-- CTA abajo del catálogo -->
-    <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
-      <a class="btn btn-primary" id="ctaBottom" target="_blank" rel="noopener">Comprar por WhatsApp</a>
-      <a class="btn btn-ghost" href="#garantia">Ver garantía</a>
-    </div>
-  </div>
-</section>
-
-<!-- Garantía / Confianza -->
-<section id="garantia" class="trust">
-  <div class="container">
-    <div class="trust-card">
-      <h3>Compra con confianza</h3>
-      <ul>
-        <li>✅ Decants 100% originales</li>
-        <li>✅ Envíos a toda República Dominicana</li>
-        <li>✅ Higüey: entrega rápida (según disponibilidad)</li>
-        <li>✅ Atención por WhatsApp</li>
-        <li>✅ Tamaños completos disponibles por encargo — solo pregunta y te lo conseguimos</li>
-      </ul>
-      <p class="trust-mini">
-        Tip: La mejor calidad ASEGURADA.
-      </p>
-
-      <div style="margin-top:14px;">
-        <a class="btn btn-primary" id="ctaFinal" target="_blank" rel="noopener">Comprar por WhatsApp</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container footer-row">
-    <div class="muted small">© <span id="year"></span> C&Cfragancias · RD</div>
-    <a href="#catalogo" class="muted small">Volver arriba ↑</a>
-  </div>
-</footer>
-
-<!-- Carrito -->
-<div id="cartBar" class="cartbar" aria-live="polite">
-  <div class="cartbar-left">
-    <div class="cartbar-title">Carrito</div>
-    <div id="cartSummary" class="cartbar-summary">0 artículos</div>
-  </div>
-
-  <div class="cartbar-right">
-    <button id="cartOpen" class="btn btn-ghost" type="button">Ver</button>
-    <a id="cartCheckout" class="btn btn-primary" target="_blank" rel="noopener">Enviar pedido</a>
-  </div>
-</div>
-
-<div id="cartModal" class="cartmodal" aria-hidden="true">
-  <div class="cartmodal-card">
-    <div class="cartmodal-head">
-      <div>
-        <div class="cartmodal-title">Tu pedido</div>
-        <div class="muted small">Selecciona varios perfumes y envía un solo WhatsApp</div>
-      </div>
-      <button id="cartClose" class="btn btn-ghost" type="button">Cerrar</button>
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Tu Carrito</h2>
+                <button class="close-btn" onclick="closeCart()">×</button>
+            </div>
+            
+            <div id="cartItems"></div>
+            
+            <div class="cart-total">
+                <span class="total-label">Total:</span>
+                <span class="total-price" id="cartTotalPrice">RD$0</span>
+            </div>
+            
+            <button class="cta-primary" style="width: 100%; margin-top: 1.5rem;" onclick="sendWhatsAppOrder()">
+                Enviar Pedido por WhatsApp
+            </button>
+        </div>
     </div>
 
-    <div id="cartItems" class="cartitems"></div>
-
-    <div class="cartmodal-foot">
-      <div class="carttotal">
-        <div class="muted">Total</div>
-        <div id="cartTotal" class="carttotal-amount">RD$0</div>
-      </div>
-      <div class="cartactions">
-        <button id="cartClear" class="btn btn-ghost" type="button">Vaciar</button>
-        <a id="cartCheckout2" class="btn btn-primary" target="_blank" rel="noopener">Enviar pedido</a>
-      </div>
+    <!-- Favorites Modal -->
+    <div class="modal" id="favoritesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Tus Favoritos</h2>
+                <button class="close-btn" onclick="closeFavorites()">×</button>
+            </div>
+            
+            <div id="favoritesItems"></div>
+        </div>
     </div>
-  </div>
-</div>
 
-<!-- ✅ Script SOLO una vez y al final -->
-<script src="script.js?v=20260130"></script>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>C&C Fragancias</h3>
+                <p>Tu tienda de perfumes nicho en República Dominicana. Calidad garantizada y atención personalizada.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📍 Higüey, República Dominicana</p>
+                <p>📱 WhatsApp: <a href="https://wa.me/18095555555">829-573-3343</a></p>
+                <p>📧 aldocastillo345@gmail.com</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Enlaces</h3>
+                <a href="#catalogo">Catálogo</a>
+                <a href="#por-encargo">Pedidos por Encargo</a>
+                <a href="#quiz">Encuentra tu perfume</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2024 C&C Fragancias. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample Product Data
+        const products = [
+            {
+                id: 1,
+                brand: "PARFUMS DE MARLY",
+                name: "Carlisle",
+                price5ml: 350,
+                price10ml: 650,
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400",
+                tags: ["intenso", "dulce", "noche", "caballeros", "cumplidos"],
+                gender: "caballeros"
+            },
+            {
+                id: 2,
+                brand: "INITIO",
+                name: "Side Effect",
+                price5ml: 400,
+                price10ml: 750,
+                image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400",
+                tags: ["intenso", "dulce", "noche", "unisex", "presencia"],
+                gender: "unisex"
+            },
+            {
+                id: 3,
+                brand: "PENHALIGON'S",
+                name: "Lord George",
+                price5ml: 380,
+                price10ml: 700,
+                image: "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400",
+                tags: ["fresco", "dia", "caballeros", "discreto"],
+                gender: "caballeros"
+            },
+            {
+                id: 4,
+                brand: "TOM FORD",
+                name: "Black Orchid",
+                price5ml: 420,
+                price10ml: 780,
+                image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=400",
+                tags: ["intenso", "dulce", "noche", "damas", "presencia"],
+                gender: "damas"
+            },
+            {
+                id: 5,
+                brand: "CREED",
+                name: "Aventus",
+                price5ml: 450,
+                price10ml: 850,
+                image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400",
+                tags: ["fresco", "intenso", "dia", "caballeros", "cumplidos"],
+                gender: "caballeros"
+            },
+            {
+                id: 6,
+                brand: "DIOR",
+                name: "Sauvage Elixir",
+                price5ml: 380,
+                price10ml: 700,
+                image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400",
+                tags: ["intenso", "noche", "caballeros", "cumplidos"],
+                gender: "caballeros"
+            },
+            {
+                id: 7,
+                brand: "YSL",
+                name: "Libre",
+                price5ml: 340,
+                price10ml: 620,
+                image: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400",
+                tags: ["fresco", "dia", "damas", "cumplidos"],
+                gender: "damas"
+            },
+            {
+                id: 8,
+                brand: "MAISON MARGIELA",
+                name: "By the Fireplace",
+                price5ml: 360,
+                price10ml: 680,
+                image: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=400",
+                tags: ["dulce", "noche", "unisex", "discreto"],
+                gender: "unisex"
+            }
+        ];
+
+        // State
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        let quizFilters = [];
+        let activeFilters = ['todos'];
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            updateCartCount();
+            updateFavoritesCount();
+            initializeQuiz();
+            initializeSearch();
+            initializeFilters();
+            loadCustomOrders();
+        });
+
+        // Render Products
+        function renderProducts(filteredProducts = products) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            
+            filteredProducts.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                const isFavorited = favorites.includes(product.id);
+                
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">${product.brand}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-tags">
+                            ${product.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">RD$${product.price5ml}</span>
+                                <span class="price-size">5ml</span>
+                                <span style="margin: 0 0.5rem;">|</span>
+                                <span class="price">RD$${product.price10ml}</span>
+                                <span class="price-size">10ml</span>
+                            </div>
+                        </div>
+                        <div class="product-actions" style="margin-top: 1rem;">
+                            <button class="action-btn ${isFavorited ? 'favorited' : ''}" onclick="toggleFavorite(${product.id})">
+                                ♥
+                            </button>
+                            <button class="add-to-cart-btn" onclick="showSizeSelector(${product.id})">
+                                Agregar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Size Selector
+        function showSizeSelector(productId) {
+            const product = products.find(p => p.id === productId);
+            const size = confirm('Selecciona tamaño:\n\nOK = 5ml (RD$' + product.price5ml + ')\nCancelar = 10ml (RD$' + product.price10ml + ')');
+            addToCart(productId, size ? '5ml' : '10ml');
+        }
+
+        // Cart Functions
+        function addToCart(productId, size) {
+            const product = products.find(p => p.id === productId);
+            const price = size === '5ml' ? product.price5ml : product.price10ml;
+            
+            const cartItem = {
+                ...product,
+                size: size,
+                price: price,
+                cartId: Date.now()
+            };
+            
+            cart.push(cartItem);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showToast(`${product.name} agregado al carrito`);
+        }
+
+        function removeFromCart(cartId) {
+            cart = cart.filter(item => item.cartId !== cartId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+            showToast('Producto eliminado del carrito');
+        }
+
+        function updateCartCount() {
+            const count = cart.length;
+            const countEl = document.getElementById('cartCount');
+            if (count > 0) {
+                countEl.textContent = count;
+                countEl.style.display = 'block';
+            } else {
+                countEl.style.display = 'none';
+            }
+        }
+
+        function openCart() {
+            renderCart();
+            document.getElementById('cartModal').classList.add('show');
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('show');
+        }
+
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
+                document.getElementById('cartTotalPrice').textContent = 'RD$0';
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" class="cart-item-image">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.brand} - ${item.name}</div>
+                        <div class="cart-item-size">${item.size}</div>
+                        <div class="cart-item-price">RD$${item.price}</div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(${item.cartId})">×</button>
+                </div>
+            `).join('');
+            
+            document.getElementById('cartTotalPrice').textContent = `RD$${total}`;
+        }
+
+        function sendWhatsAppOrder() {
+            if (cart.length === 0) {
+                showToast('Tu carrito está vacío');
+                return;
+            }
+            
+            let message = '🛍️ *Nuevo Pedido - C&C Fragancias*\n\n';
+            message += '📦 *Productos:*\n';
+            
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.brand} - ${item.name}\n`;
+                message += `   Tamaño: ${item.size}\n`;
+                message += `   Precio: RD$${item.price}\n\n`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            message += `💰 *Total: RD$${total}*\n\n`;
+            message += '📍 ¿A qué ciudad/zona envío?';
+            
+            const whatsappNumber = '18095555555'; // Replace with actual number
+            const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(url, '_blank');
+        }
+
+        // Favorites Functions
+        function toggleFavorite(productId) {
+            const index = favorites.indexOf(productId);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                showToast('Eliminado de favoritos');
+            } else {
+                favorites.push(productId);
+                showToast('Agregado a favoritos');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            updateFavoritesCount();
+            renderProducts(getFilteredProducts());
+        }
+
+        function updateFavoritesCount() {
+            const count = favorites.length;
+            const countEl = document.getElementById('favCount');
+            if (count > 0) {
+                countEl.textContent = count;
+                countEl.style.display = 'block';
+            } else {
+                countEl.style.display = 'none';
+            }
+        }
+
+        function openFavorites() {
+            renderFavorites();
+            document.getElementById('favoritesModal').classList.add('show');
+        }
+
+        function closeFavorites() {
+            document.getElementById('favoritesModal').classList.remove('show');
+        }
+
+        function renderFavorites() {
+            const favoritesItems = document.getElementById('favoritesItems');
+            const favoriteProducts = products.filter(p => favorites.includes(p.id));
+            
+            if (favoriteProducts.length === 0) {
+                favoritesItems.innerHTML = '<div class="empty-cart">No tienes favoritos aún</div>';
+                return;
+            }
+            
+            favoritesItems.innerHTML = favoriteProducts.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" class="cart-item-image">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.brand} - ${item.name}</div>
+                        <div class="cart-item-size">Desde RD$${item.price5ml}</div>
+                    </div>
+                    <button class="action-btn favorited" onclick="toggleFavorite(${item.id})">♥</button>
+                </div>
+            `).join('');
+        }
+
+        // Quiz Functions
+        function initializeQuiz() {
+            const options = document.querySelectorAll('.quiz-option');
+            
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+                    
+                    // Toggle selection in same question
+                    const siblings = this.parentElement.querySelectorAll('.quiz-option');
+                    siblings.forEach(s => s.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    // Update filters
+                    const filterIndex = quizFilters.indexOf(filter);
+                    if (filterIndex > -1) {
+                        quizFilters.splice(filterIndex, 1);
+                    }
+                    quizFilters.push(filter);
+                    
+                    // Apply filters
+                    applyQuizFilters();
+                });
+            });
+        }
+
+        function applyQuizFilters() {
+            if (quizFilters.length === 0) {
+                renderProducts();
+                return;
+            }
+            
+            const filtered = products.filter(product => {
+                return quizFilters.some(filter => product.tags.includes(filter));
+            });
+            
+            renderProducts(filtered);
+            
+            // Scroll to catalog
+            document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Search Function
+        function initializeSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                const filtered = products.filter(product => {
+                    return product.name.toLowerCase().includes(query) ||
+                           product.brand.toLowerCase().includes(query) ||
+                           product.tags.some(tag => tag.includes(query));
+                });
+                
+                renderProducts(getFilteredProducts(filtered));
+            });
+        }
+
+        // Filter Functions
+        function initializeFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    activeFilters = [filter];
+                    
+                    renderProducts(getFilteredProducts());
+                });
+            });
+        }
+
+        function getFilteredProducts(baseProducts = products) {
+            if (activeFilters.includes('todos')) {
+                return baseProducts;
+            }
+            
+            return baseProducts.filter(product => {
+                return activeFilters.some(filter => 
+                    product.gender === filter || product.tags.includes(filter)
+                );
+            });
+        }
+
+        // Custom Orders
+        document.getElementById('customOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const order = {
+                perfumeName: document.getElementById('perfumeName').value,
+                customerName: document.getElementById('customerName').value,
+                customerPhone: document.getElementById('customerPhone').value,
+                customerComments: document.getElementById('customerComments').value,
+                date: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            let orders = JSON.parse(localStorage.getItem('customOrders')) || [];
+            orders.push(order);
+            localStorage.setItem('customOrders', JSON.stringify(orders));
+            
+            // Send WhatsApp
+            let message = '🔍 *Pedido por Encargo*\n\n';
+            message += `👤 Cliente: ${order.customerName}\n`;
+            message += `📱 WhatsApp: ${order.customerPhone}\n`;
+            message += `🌸 Perfume: ${order.perfumeName}\n`;
+            if (order.customerComments) {
+                message += `💬 Comentarios: ${order.customerComments}\n`;
+            }
+            
+            const whatsappNumber = '18095555555'; // Replace with actual number
+            const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(url, '_blank');
+            
+            // Reset form
+            this.reset();
+            showToast('Pedido enviado! Te contactaremos pronto.');
+        });
+
+        // Admin Functions
+        function loginAdmin() {
+            const password = document.getElementById('adminPassword').value;
+            
+            // Simple password check (in production, use proper authentication)
+            if (password === 'admin123') {
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminContent').classList.add('show');
+                loadCustomOrders();
+            } else {
+                showToast('Contraseña incorrecta');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminLogin').style.display = 'block';
+            document.getElementById('adminContent').classList.remove('show');
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function loadCustomOrders() {
+            const orders = JSON.parse(localStorage.getItem('customOrders')) || [];
+            const ordersList = document.getElementById('ordersList');
+            
+            if (orders.length === 0) {
+                ordersList.innerHTML = '<p style="text-align: center; opacity: 0.6;">No hay pedidos por encargo</p>';
+                return;
+            }
+            
+            ordersList.innerHTML = orders.reverse().map((order, index) => `
+                <div class="order-item">
+                    <div class="order-header">
+                        <strong>${order.customerName}</strong>
+                        <span class="order-date">${new Date(order.date).toLocaleDateString('es-DO')}</span>
+                    </div>
+                    <p><strong>Perfume:</strong> ${order.perfumeName}</p>
+                    <p><strong>WhatsApp:</strong> ${order.customerPhone}</p>
+                    ${order.customerComments ? `<p><strong>Comentarios:</strong> ${order.customerComments}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Event Listeners
+        document.getElementById('cartBtn').addEventListener('click', openCart);
+        document.getElementById('favoritesBtn').addEventListener('click', openFavorites);
+        
+        // Close modals on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('show');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
 
 
 
