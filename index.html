@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Perfumes nicho y diseñadores 100% originales. Decants 5 ml y 10 ml. Envíos nacionales desde Higüey.">
-    <title>C&C Fragancias — Lujo Olfativo Dominicano</title>
+    <meta name="description" content="Perfumes nicho y diseñadores 100% originales. Decants 5ml y 10ml en República Dominicana.">
+    <title>C&C Fragancias — Perfumes Premium</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,39 +20,22 @@
             --sand: #F8F3E8;
             --cream: #FFF9F0;
             --charcoal: #2C2C2C;
-            --ink: #1A1A1A;
-            --success: #4CAF50;
         }
         
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Work Sans', system-ui, sans-serif;
+            font-family: 'Work Sans', sans-serif;
             background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%);
-            color: var(--ink);
+            color: var(--charcoal);
             line-height: 1.6;
         }
         
         .container {
-            width: min(1280px, 94vw);
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 0 20px;
         }
-        
-        /* Typography */
-        h1, h2, h3 { font-family: 'Libre Baskerville', Georgia, serif; }
-        
-        h1 {
-            font-size: clamp(36px, 5vw, 64px);
-            line-height: 1.1;
-            background: linear-gradient(135deg, var(--coral), var(--amber), var(--terracota));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0 0 20px;
-        }
-        
-        h2 { font-size: clamp(28px, 4vw, 42px); margin: 0 0 16px; }
         
         /* Header */
         .header {
@@ -60,14 +43,14 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
-            background: rgba(255, 249, 240, 0.9);
+            background: rgba(255, 249, 240, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 107, 90, 0.1);
             padding: 16px 0;
+            z-index: 1000;
         }
         
-        .header .container {
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -88,11 +71,13 @@
             place-items: center;
             font-weight: 700;
             color: white;
+            font-size: 20px;
         }
         
         .brand-name {
             font-size: 20px;
             font-weight: 700;
+            color: var(--charcoal);
         }
         
         /* Buttons */
@@ -103,10 +88,10 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            display: inline-block;
             font-family: 'Work Sans', sans-serif;
             font-size: 14px;
             text-decoration: none;
+            display: inline-block;
         }
         
         .btn-primary {
@@ -126,11 +111,6 @@
             border: 2px solid rgba(255, 107, 90, 0.2);
         }
         
-        .btn-ghost:hover {
-            background: white;
-            border-color: var(--coral);
-        }
-        
         /* Hero */
         .hero {
             padding: 120px 0 60px;
@@ -143,6 +123,22 @@
             align-items: center;
         }
         
+        .hero h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(36px, 5vw, 56px);
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--coral), var(--amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .hero-lead {
+            font-size: 18px;
+            color: var(--ocean);
+            margin-bottom: 28px;
+        }
+        
         .kicker {
             display: inline-block;
             padding: 6px 16px;
@@ -151,25 +147,12 @@
             border-radius: 999px;
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--coral);
             margin-bottom: 20px;
         }
         
-        .lead {
-            font-size: 18px;
-            color: var(--ocean);
-            margin-bottom: 28px;
-        }
-        
-        .hero-actions {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-        
-        .hero-card img {
+        .hero-image img {
             width: 100%;
             border-radius: 24px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
@@ -186,7 +169,7 @@
             margin-bottom: 40px;
         }
         
-        .tab-nav .container {
+        .tab-buttons {
             display: flex;
             gap: 8px;
             padding: 12px 0;
@@ -204,10 +187,6 @@
             cursor: pointer;
             transition: all 0.3s;
             white-space: nowrap;
-        }
-        
-        .tab-btn:hover {
-            background: rgba(255, 107, 90, 0.05);
         }
         
         .tab-btn.active {
@@ -238,6 +217,11 @@
         .section-header {
             text-align: center;
             margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(28px, 4vw, 42px);
         }
         
         /* Products Grid */
@@ -285,7 +269,6 @@
             background: rgba(255, 255, 255, 0.95);
             font-size: 18px;
             cursor: pointer;
-            z-index: 10;
         }
         
         .product-badge {
@@ -297,7 +280,6 @@
             border-radius: 999px;
             font-size: 10px;
             font-weight: 700;
-            text-transform: uppercase;
         }
         
         .product-info {
@@ -333,13 +315,16 @@
         .price-amount {
             font-size: 16px;
             font-weight: 700;
-            color: var(--charcoal);
         }
         
         .product-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
+        }
+        
+        .btn-view-details {
+            grid-column: 1 / -1;
         }
         
         /* Modal */
@@ -355,9 +340,7 @@
             padding: 20px;
         }
         
-        .modal.show {
-            display: flex;
-        }
+        .modal.show { display: flex; }
         
         .modal-content {
             background: white;
@@ -399,7 +382,6 @@
             max-height: calc(90vh - 100px);
         }
         
-        /* Product Detail */
         .product-detail-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -413,19 +395,14 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
         
-        .product-detail-info {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .notes-section {
+        .detail-section {
             background: rgba(248, 243, 232, 0.6);
             border-radius: 16px;
             padding: 20px;
+            margin-bottom: 16px;
         }
         
-        .notes-title {
+        .section-title {
             font-weight: 700;
             font-size: 16px;
             margin-bottom: 16px;
@@ -457,7 +434,7 @@
             font-size: 12px;
         }
         
-        .performance-section {
+        .performance-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
@@ -482,22 +459,54 @@
             background: rgba(255, 107, 90, 0.1);
             border-radius: 999px;
             overflow: hidden;
+            margin-bottom: 6px;
         }
         
         .performance-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--coral), var(--amber));
-            border-radius: 999px;
         }
         
         .performance-value {
             font-size: 20px;
             font-weight: 700;
             color: var(--coral);
-            margin-top: 6px;
         }
         
-        /* Reviews Section */
+        .size-selector {
+            background: rgba(248, 243, 232, 0.6);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .size-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .size-option {
+            padding: 16px;
+            background: white;
+            border: 2px solid rgba(255, 107, 90, 0.15);
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .size-option:hover {
+            border-color: var(--coral);
+        }
+        
+        .size-option.selected {
+            border-color: var(--coral);
+            background: rgba(255, 107, 90, 0.05);
+        }
+        
+        /* Reviews */
         .reviews-section {
             margin-top: 24px;
             padding: 24px;
@@ -517,9 +526,7 @@
             border-bottom: 1px solid rgba(255, 107, 90, 0.1);
         }
         
-        .review-item:last-child {
-            border-bottom: none;
-        }
+        .review-item:last-child { border-bottom: none; }
         
         .review-header {
             display: flex;
@@ -530,7 +537,6 @@
         
         .review-author {
             font-weight: 600;
-            color: var(--charcoal);
         }
         
         .review-stars {
@@ -550,13 +556,15 @@
             margin-top: 4px;
         }
         
-        /* Review Form */
         .review-form {
             margin-top: 16px;
             padding: 20px;
             background: white;
             border-radius: 12px;
+            display: none;
         }
+        
+        .review-form.show { display: block; }
         
         .form-group {
             margin-bottom: 16px;
@@ -599,39 +607,6 @@
             color: var(--amber);
         }
         
-        /* Size Selector */
-        .size-selector {
-            background: rgba(248, 243, 232, 0.6);
-            border-radius: 16px;
-            padding: 20px;
-        }
-        
-        .size-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        
-        .size-option {
-            padding: 16px;
-            background: white;
-            border: 2px solid rgba(255, 107, 90, 0.15);
-            border-radius: 12px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        
-        .size-option:hover {
-            border-color: var(--coral);
-        }
-        
-        .size-option.is-selected {
-            border-color: var(--coral);
-            background: rgba(255, 107, 90, 0.05);
-        }
-        
         /* Cart Bar */
         .cart-bar {
             position: fixed;
@@ -650,11 +625,6 @@
             z-index: 998;
         }
         
-        .cart-info {
-            display: flex;
-            flex-direction: column;
-        }
-        
         .cart-title {
             font-weight: 700;
             font-size: 15px;
@@ -663,28 +633,6 @@
         .cart-summary {
             font-size: 12px;
             color: var(--ocean);
-        }
-        
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--ocean);
-        }
-        
-        .empty-state-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.3;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--deep-blue);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 32px 0;
-            margin-top: 60px;
-            text-align: center;
         }
         
         /* Toast */
@@ -705,76 +653,88 @@
             transition: opacity 0.3s;
         }
         
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--ocean);
+            grid-column: 1/-1;
+        }
+        
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--deep-blue);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 32px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .hero-grid {
                 grid-template-columns: 1fr;
             }
-            
             .product-detail-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .tab-nav {
-                top: 70px;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- Header -->
 <header class="header">
     <div class="container">
-        <div class="brand">
-            <div class="brand-mark">C&C</div>
-            <div>
+        <div class="header-content">
+            <div class="brand">
+                <div class="brand-mark">C&C</div>
                 <div class="brand-name">C&C Fragancias</div>
             </div>
+            <a href="#" class="btn btn-primary" id="headerWa">💬 WhatsApp</a>
         </div>
-        <a class="btn btn-primary" id="ctaHeader" target="_blank" rel="noopener">💬 WhatsApp</a>
     </div>
 </header>
 
-<!-- Hero -->
 <section class="hero">
     <div class="container">
         <div class="hero-grid">
             <div>
                 <span class="kicker">Decants Premium · 5ml / 10ml</span>
                 <h1>Descubre fragancias que cuentan tu historia</h1>
-                <p class="lead">
-                    Perfumes nicho y diseñadores 100% originales. Desde Higüey a toda República Dominicana.
-                </p>
-                <div class="hero-actions">
-                    <button class="btn btn-primary" onclick="switchTab('damas')">Explorar</button>
-                </div>
+                <p class="hero-lead">Perfumes nicho y diseñadores 100% originales. Desde Higüey a toda República Dominicana.</p>
+                <button class="btn btn-primary" onclick="switchTab('damas')">Explorar Colección</button>
             </div>
-            <div class="hero-card">
+            <div class="hero-image">
                 <img src="img/PARFUMS DE MARLY - CARLISLE.jpg" alt="Perfumes">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Tab Nav -->
 <nav class="tab-nav">
     <div class="container">
-        <button class="tab-btn active" data-tab="inicio">🏠 Inicio</button>
-        <button class="tab-btn" data-tab="damas">👗 Damas</button>
-        <button class="tab-btn" data-tab="caballeros">🎩 Caballeros</button>
-        <button class="tab-btn" data-tab="favoritos">💝 Favoritos</button>
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="inicio">🏠 Inicio</button>
+            <button class="tab-btn" data-tab="damas">👗 Damas</button>
+            <button class="tab-btn" data-tab="caballeros">🎩 Caballeros</button>
+            <button class="tab-btn" data-tab="favoritos">💝 Favoritos</button>
+        </div>
     </div>
 </nav>
 
-<!-- Tabs Content -->
 <div class="tab-content active" id="tab-inicio">
     <section class="section">
         <div class="container">
             <div class="section-header">
                 <h2>Selección Destacada</h2>
             </div>
-            <div class="products-grid" id="featuredGrid"></div>
+            <div class="products-grid" id="gridInicio"></div>
         </div>
     </section>
 </div>
@@ -785,7 +745,7 @@
             <div class="section-header">
                 <h2>Fragancias para Damas</h2>
             </div>
-            <div class="products-grid" id="damasGrid"></div>
+            <div class="products-grid" id="gridDamas"></div>
         </div>
     </section>
 </div>
@@ -796,7 +756,7 @@
             <div class="section-header">
                 <h2>Fragancias para Caballeros</h2>
             </div>
-            <div class="products-grid" id="caballerosGrid"></div>
+            <div class="products-grid" id="gridCaballeros"></div>
         </div>
     </section>
 </div>
@@ -805,48 +765,41 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Tus Favoritos 💝</h2>
+                <h2>Tus Favoritos</h2>
             </div>
-            <div class="products-grid" id="favoritosGrid"></div>
+            <div class="products-grid" id="gridFavoritos"></div>
         </div>
     </section>
 </div>
 
-<!-- Footer -->
 <footer class="footer">
     <div class="container">
-        <div>© <span id="year"></span> C&C Fragancias · República Dominicana</div>
+        © <span id="year"></span> C&C Fragancias · República Dominicana
     </div>
 </footer>
 
-<!-- Cart Bar -->
-<div class="cart-bar" id="cartBar">
-    <div class="cart-info">
+<div class="cart-bar">
+    <div>
         <div class="cart-title">Carrito</div>
         <div class="cart-summary" id="cartSummary">0 artículos</div>
     </div>
-    <div>
-        <button class="btn btn-primary btn-sm" id="cartCheckout">Ver Carrito</button>
-    </div>
+    <button class="btn btn-primary" id="checkoutBtn">Ver Carrito</button>
 </div>
 
-<!-- Product Modal -->
 <div class="modal" id="productModal">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title" id="productModalTitle">Detalles</h3>
-            <button class="close-btn" id="productModalClose">×</button>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <button class="close-btn" onclick="closeModal()">×</button>
         </div>
-        <div class="modal-body" id="productModalBody"></div>
+        <div class="modal-body" id="modalBody"></div>
     </div>
 </div>
 
 <script>
-// CONFIGURATION
 const PHONE = "18295733343";
 const BRAND = "C&C Fragancias";
 
-// IMAGE MAP
 const imageMap = {
   "FUGAZZI – Angel Dust": "img/fugazzi angel dust.jpg",
   "Le Labo – Santal 33": "img/Le labo santal 33.jpg",
@@ -856,94 +809,367 @@ const imageMap = {
   "BDK – Gris Charnel Extrait": "img/BDK GRIS CHARNEL EXTRAIT.jpg",
   "Creed – Green Irish Tweed": "img/CREED - GREEN IRISH TWEED.jpg",
   "Chanel – Allure Homme": "img/CHANEL - ALLURE HOMME.jpg",
-  "Tom Ford – Ombré Leather": "img/TOM FORD - OMBRE LEATHER.jpg",
+  "Tom Ford – Ombré Leather": "img/TOM FORD - OMBRE LEATHER.jpg"
 };
 
-function normKey(s) {
-  return (s || "").normalize("NFKD").replace(/['']/g, "'").replace(/[–—]/g, "-").replace(/\s+/g, " ").trim().toLowerCase();
+function getImage(name) {
+  return imageMap[name] || `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='600'%3E%3Crect fill='%23F8F3E8' width='400' height='600'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%232C2C2C' font-size='20'%3E${BRAND}%3C/text%3E%3C/svg%3E`;
 }
 
-const imageMapNorm = {};
-Object.entries(imageMap).forEach(([k, v]) => { imageMapNorm[normKey(k)] = v; });
-
-function placeholderDataUri() {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF9F0"/><stop offset="1" stop-color="#F8F3E8"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><text x="50%" y="50%" text-anchor="middle" font-family="Arial" font-size="24" fill="#2C2C2C">${BRAND}</text></svg>`;
-  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-}
-
-// PRODUCTS
 const products = [
+  // DAMAS (14)
   { cat: "damas", name: "FUGAZZI – Angel Dust", ml5: 1500, ml10: 2800, featured: true },
+  { cat: "damas", name: "ROOM 1015 – Wavechild", ml5: 1350, ml10: 2500 },
   { cat: "damas", name: "Le Labo – Santal 33", ml5: 1500, ml10: 2700 },
   { cat: "damas", name: "Sospiro – Vibrato", ml5: 1200, ml10: 2250, featured: true },
+  { cat: "damas", name: "Initio – Musk Therapy", ml5: 1400, ml10: 2600 },
+  { cat: "damas", name: "Penhaligon's – Duchess Rose", ml5: 1250, ml10: 2350 },
+  { cat: "damas", name: "Penhaligon's – Empressa", ml5: 1250, ml10: 2350 },
+  { cat: "damas", name: "Gucci – Flora Gorgeous Gardenia", ml5: 800, ml10: 1550 },
+  { cat: "damas", name: "Chanel – Chance", ml5: 950, ml10: 1800 },
+  { cat: "damas", name: "Prada – Milano d'Iris", ml5: 1100, ml10: 2100 },
+  { cat: "damas", name: "Montale – Ristretto Intense Café", ml5: 900, ml10: 1700 },
+  { cat: "damas", name: "Initio – Absolute Aphrodisiac", ml5: 1450, ml10: 2650 },
+  { cat: "damas", name: "Nishane – Ani", ml5: 1300, ml10: 2400 },
   { cat: "damas", name: "BDK – Gris Charnel Extrait", ml5: 1450, ml10: 2600, featured: true },
+  
+  // CABALLEROS (34)
+  { cat: "caballeros", name: "Gritti – Pomelo Sorrento", ml5: 1350, ml10: 2500 },
   { cat: "caballeros", name: "Creed – Green Irish Tweed", ml5: 1300, ml10: 2500 },
   { cat: "caballeros", name: "Parfums de Marly – Carlisle", ml5: 1250, ml10: 2300 },
+  { cat: "caballeros", name: "Xerjoff – Tony Iommi Monkey Special", ml5: 1600, ml10: 3000 },
+  { cat: "caballeros", name: "Parfums de Marly – Sedley", ml5: 1200, ml10: 2250 },
   { cat: "caballeros", name: "Parfums de Marly – Greenley", ml5: 1150, ml10: 2200, featured: true },
+  { cat: "caballeros", name: "Narcotica – Limonata", ml5: 1100, ml10: 2000 },
+  { cat: "caballeros", name: "Une Nuit Nomade – Sugar Leather", ml5: 1250, ml10: 2300 },
+  { cat: "caballeros", name: "Orto Parisi – Bergamask", ml5: 1400, ml10: 2600 },
   { cat: "caballeros", name: "Tom Ford – Ombré Leather", ml5: 1200, ml10: 2300 },
+  { cat: "caballeros", name: "Armani – Stronger With You Absolutely", ml5: 750, ml10: 1450 },
+  { cat: "caballeros", name: "Yves Saint Laurent – Y EDT", ml5: 600, ml10: 1200 },
+  { cat: "caballeros", name: "Yves Saint Laurent – MYSLF", ml5: 750, ml10: 1450 },
+  { cat: "caballeros", name: "Valentino – Born in Roma Coral Fantasy", ml5: 800, ml10: 1550 },
+  { cat: "caballeros", name: "Paco Rabanne – Invictus Parfum", ml5: 700, ml10: 1350 },
+  { cat: "caballeros", name: "Yves Saint Laurent – La Nuit de L'Homme Bleu Électrique", ml5: 750, ml10: 1450 },
+  { cat: "caballeros", name: "Carolina Herrera – CH", ml5: 550, ml10: 1100 },
+  { cat: "caballeros", name: "Jean Paul Gaultier – Le Beau", ml5: 650, ml10: 1250 },
+  { cat: "caballeros", name: "Paco Rabanne – 1 Million Lucky", ml5: 650, ml10: 1250 },
+  { cat: "caballeros", name: "Valentino – Uomo Born in Roma", ml5: 800, ml10: 1550 },
   { cat: "caballeros", name: "Chanel – Allure Homme", ml5: 650, ml10: 1300 },
+  { cat: "caballeros", name: "Montblanc – Explorer", ml5: 500, ml10: 1000 },
+  { cat: "caballeros", name: "Maison Margiela – Jazz Club", ml5: 850, ml10: 1650 },
+  { cat: "caballeros", name: "Chanel – Égoïste Platinum", ml5: 800, ml10: 1550 },
+  { cat: "caballeros", name: "Montblanc – Legend", ml5: 500, ml10: 1000 },
+  { cat: "caballeros", name: "Ferragamo – Uomo Urban Feel", ml5: 600, ml10: 1150 },
+  { cat: "caballeros", name: "Cartier – Déclaration L'Eau", ml5: 750, ml10: 1450 },
+  { cat: "caballeros", name: "Hermès – Terre d'Hermès", ml5: 950, ml10: 1850 },
+  { cat: "caballeros", name: "Jean Paul Gaultier – Monsieur", ml5: 650, ml10: 1250 },
+  { cat: "caballeros", name: "Ralph Lauren – Polo Blue", ml5: 550, ml10: 1100 },
+  { cat: "caballeros", name: "Ralph Lauren – Polo Black", ml5: 550, ml10: 1100 },
+  { cat: "caballeros", name: "Ferragamo – F", ml5: 600, ml10: 1150 },
+  { cat: "caballeros", name: "Perry Ellis – Perry Ellis", ml5: 400, ml10: 800 },
+  { cat: "caballeros", name: "Chanel – Bleu de Chanel", ml5: 850, ml10: 1650 }
 ];
 
 const productDetails = {
+  // DAMAS
   "FUGAZZI – Angel Dust": {
-    description: "Limpio, celestial y adictivo. Iris en polvo con almizcle blanco te envuelve como una nube de elegancia.",
+    desc: "Limpio, celestial y adictivo. Iris en polvo con almizcle blanco te envuelve como una nube de elegancia.",
     notes: { top: ["Coco", "Bergamota"], heart: ["Iris", "Heliotropo"], base: ["Almizcle Blanco", "Cedro"] },
-    performance: { longevity: 8, projection: 7 },
+    perf: { longevity: 8, projection: 7 },
     vibe: "Día · Todo el año"
   },
+  "ROOM 1015 – Wavechild": {
+    desc: "Perfume solar que captura la brisa marina. Sal, cítricos y maderas flotantes.",
+    notes: { top: ["Sal Marina", "Bergamota"], heart: ["Lavanda", "Salvia"], base: ["Cedro", "Almizcle"] },
+    perf: { longevity: 7, projection: 8 },
+    vibe: "Día · Verano"
+  },
   "Le Labo – Santal 33": {
-    description: "El icónico perfume de Nueva York. Sándalo cremoso con cuero y cedro. Sofisticado y unisex.",
+    desc: "El icónico perfume de Nueva York. Sándalo cremoso con cuero y cedro. Sofisticado y unisex.",
     notes: { top: ["Cardamomo", "Iris"], heart: ["Papiro", "Cedro"], base: ["Sándalo", "Cuero"] },
-    performance: { longevity: 8, projection: 7 },
+    perf: { longevity: 8, projection: 7 },
     vibe: "Todo el día"
   },
   "Sospiro – Vibrato": {
-    description: "Mandarina explosiva con jazmín. Afrutado, luminoso y con carácter italiano.",
+    desc: "Mandarina explosiva con jazmín. Afrutado, luminoso y con carácter italiano.",
     notes: { top: ["Mandarina", "Bergamota"], heart: ["Jazmín", "Melocotón"], base: ["Vainilla", "Almizcle"] },
-    performance: { longevity: 8, projection: 9 },
+    perf: { longevity: 8, projection: 9 },
     vibe: "Día · Primavera/Verano"
   },
-  "BDK – Gris Charnel Extrait": {
-    description: "Sofisticación parisina. Cardamomo, higo y té negro con vainilla cremosa. Unisex refinado.",
-    notes: { top: ["Cardamomo", "Higo"], heart: ["Iris", "Vetiver"], base: ["Vainilla", "Sándalo"] },
-    performance: { longevity: 9, projection: 8 },
+  "Initio – Musk Therapy": {
+    desc: "Almizcle blanco hipnótico. Sensual, limpio y adictivo. Terapia olfativa pura.",
+    notes: { top: ["Mandarina"], heart: ["Almizcle Blanco"], base: ["Almizcle Blanco", "Cashmeran"] },
+    perf: { longevity: 9, projection: 8 },
     vibe: "Noche · Todo el año"
   },
+  "Penhaligon's – Duchess Rose": {
+    desc: "Rosa inglesa con té y limón. Elegancia británica en forma líquida.",
+    notes: { top: ["Limón", "Té Negro"], heart: ["Rosa", "Geranio"], base: ["Cedro", "Almizcle"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Primavera"
+  },
+  "Penhaligon's – Empressa": {
+    desc: "Melocotón jugoso con rosa. Dulce pero refinado, con alma aristocrática.",
+    notes: { top: ["Melocotón", "Mandarina"], heart: ["Rosa", "Té Rooibos"], base: ["Pachulí", "Cachemira"] },
+    perf: { longevity: 8, projection: 7 },
+    vibe: "Día · Primavera/Verano"
+  },
+  "Gucci – Flora Gorgeous Gardenia": {
+    desc: "Gardenia blanca radiante. Fresco, floral y luminoso. Jardín italiano en primavera.",
+    notes: { top: ["Pera Roja"], heart: ["Gardenia", "Jazmín"], base: ["Pachulí", "Almizcle"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Primavera"
+  },
+  "Chanel – Chance": {
+    desc: "Pimienta rosa con jazmín. Fresco, chispeante y sofisticado. Chanel en su esencia más alegre.",
+    notes: { top: ["Pimienta Rosa", "Limón"], heart: ["Jazmín", "Iris"], base: ["Almizcle Blanco", "Vainilla"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Prada – Milano d'Iris": {
+    desc: "Iris en polvo milanés. Minimalista, elegante y cremoso.",
+    notes: { top: ["Neroli", "Mandarina"], heart: ["Iris", "Ylang"], base: ["Vainilla", "Incienso"] },
+    perf: { longevity: 8, projection: 7 },
+    vibe: "Día · Otoño/Invierno"
+  },
+  "Montale – Ristretto Intense Café": {
+    desc: "Café espresso con vainilla. Intenso, dulce y envolvente. Para amantes del café.",
+    notes: { top: ["Café"], heart: ["Rosa", "Jazmín"], base: ["Vainilla", "Almizcle Blanco"] },
+    perf: { longevity: 9, projection: 8 },
+    vibe: "Noche · Otoño/Invierno"
+  },
+  "Initio – Absolute Aphrodisiac": {
+    desc: "Vainilla oscura con almizcle. Sensual, magnético y prohibido.",
+    notes: { top: ["Castóreo"], heart: ["Vainilla"], base: ["Almizcle", "Ámbar"] },
+    perf: { longevity: 9, projection: 9 },
+    vibe: "Noche · Todo el año"
+  },
+  "Nishane – Ani": {
+    desc: "Vainilla turca con jengibre y bergamota. Especiado, dulce y exótico.",
+    notes: { top: ["Jengibre", "Bergamota"], heart: ["Cardamomo", "Rosa"], base: ["Vainilla", "Sándalo"] },
+    perf: { longevity: 9, projection: 8 },
+    vibe: "Noche · Otoño/Invierno"
+  },
+  "BDK – Gris Charnel Extrait": {
+    desc: "Sofisticación parisina. Cardamomo, higo y té negro con vainilla cremosa.",
+    notes: { top: ["Cardamomo", "Higo"], heart: ["Iris", "Vetiver"], base: ["Vainilla", "Sándalo"] },
+    perf: { longevity: 9, projection: 8 },
+    vibe: "Noche · Todo el año"
+  },
+  
+  // CABALLEROS
+  "Gritti – Pomelo Sorrento": {
+    desc: "Toronja de Sorrento con madera de cedro. Fresco mediterráneo con elegancia italiana.",
+    notes: { top: ["Toronja", "Bergamota"], heart: ["Cedro", "Vetiver"], base: ["Pachulí", "Almizcle"] },
+    perf: { longevity: 8, projection: 8 },
+    vibe: "Día · Verano"
+  },
   "Creed – Green Irish Tweed": {
-    description: "El clásico atemporal. Fresco y verde con violeta. Elegancia masculina refinada.",
+    desc: "El clásico atemporal. Fresco y verde con violeta. Elegancia masculina refinada.",
     notes: { top: ["Limón", "Menta"], heart: ["Violeta", "Iris"], base: ["Sándalo", "Almizcle"] },
-    performance: { longevity: 8, projection: 8 },
+    perf: { longevity: 8, projection: 8 },
     vibe: "Día · Todo el año"
   },
   "Parfums de Marly – Carlisle": {
-    description: "Misterioso y poderoso. Manzana verde especiada con vainilla oscura. Intenso y magnético.",
+    desc: "Misterioso y poderoso. Manzana verde especiada con vainilla oscura.",
     notes: { top: ["Manzana Verde", "Azafrán"], heart: ["Rosa", "Tonka"], base: ["Vainilla", "Pachulí"] },
-    performance: { longevity: 9, projection: 9 },
+    perf: { longevity: 9, projection: 9 },
     vibe: "Noche · Otoño/Invierno"
   },
+  "Xerjoff – Tony Iommi Monkey Special": {
+    desc: "Edición limitada. Especias oscuras con ámbar y maderas preciosas.",
+    notes: { top: ["Pimienta", "Azafrán"], heart: ["Oud", "Rosa"], base: ["Ámbar", "Almizcle"] },
+    perf: { longevity: 10, projection: 9 },
+    vibe: "Noche · Todo el año"
+  },
+  "Parfums de Marly – Sedley": {
+    desc: "Frescura acuática con bergamota y menta. Sofisticado y vibrante.",
+    notes: { top: ["Bergamota", "Menta"], heart: ["Lavanda", "Geranio"], base: ["Cedro", "Almizcle"] },
+    perf: { longevity: 8, projection: 8 },
+    vibe: "Día · Primavera/Verano"
+  },
   "Parfums de Marly – Greenley": {
-    description: "Energía verde vibrante. Manzana con cítricos y violeta. Gran proyección.",
+    desc: "Energía verde vibrante. Manzana con cítricos y violeta.",
     notes: { top: ["Manzana Verde", "Mandarina"], heart: ["Violeta", "Cedro"], base: ["Almizcle", "Oakmoss"] },
-    performance: { longevity: 8, projection: 9 },
+    perf: { longevity: 8, projection: 9 },
+    vibe: "Día · Primavera/Verano"
+  },
+  "Narcotica – Limonata": {
+    desc: "Limonada efervescente con toque dulce. Refrescante y alegre.",
+    notes: { top: ["Limón", "Limoncello"], heart: ["Neroli", "Petit Grain"], base: ["Vainilla", "Almizcle"] },
+    perf: { longevity: 7, projection: 8 },
+    vibe: "Día · Verano"
+  },
+  "Une Nuit Nomade – Sugar Leather": {
+    desc: "Cuero dulce con azúcar quemada. Contraste adictivo.",
+    notes: { top: ["Bergamota"], heart: ["Cuero", "Azúcar"], base: ["Vainilla", "Tonka"] },
+    perf: { longevity: 8, projection: 8 },
+    vibe: "Noche · Otoño/Invierno"
+  },
+  "Orto Parisi – Bergamask": {
+    desc: "Bergamota verde intensa. Explosivo, fresco y con carácter único.",
+    notes: { top: ["Bergamota", "Limón"], heart: ["Hojas Verdes"], base: ["Almizcle", "Cedro"] },
+    perf: { longevity: 8, projection: 9 },
     vibe: "Día · Primavera/Verano"
   },
   "Tom Ford – Ombré Leather": {
-    description: "Cuero texano intenso. Jazmín sobre cuero con ámbar. Masculino y sexy.",
+    desc: "Cuero texano intenso. Jazmín sobre cuero con ámbar.",
     notes: { top: ["Cardamomo"], heart: ["Jazmín", "Cuero"], base: ["Pachulí", "Ámbar"] },
-    performance: { longevity: 9, projection: 9 },
+    perf: { longevity: 9, projection: 9 },
     vibe: "Noche · Otoño/Invierno"
   },
-  "Chanel – Allure Homme": {
-    description: "Elegancia francesa. Cítricos con vainilla tonka. Sofisticado y versátil.",
-    notes: { top: ["Limón", "Mandarina"], heart: ["Pimienta", "Cedro"], base: ["Vainilla", "Tonka"] },
-    performance: { longevity: 7, projection: 7 },
+  "Armani – Stronger With You Absolutely": {
+    desc: "Ron con vainilla caramelizada. Dulce, cálido y magnético.",
+    notes: { top: ["Elemi", "Bergamota"], heart: ["Ron", "Lavanda"], base: ["Vainilla", "Cedro"] },
+    perf: { longevity: 8, projection: 8 },
+    vibe: "Noche · Otoño/Invierno"
+  },
+  "Yves Saint Laurent – Y EDT": {
+    desc: "Manzana fresca con salvia. Energético y versátil.",
+    notes: { top: ["Manzana", "Jengibre"], heart: ["Salvia", "Geranio"], base: ["Cedro", "Olíbano"] },
+    perf: { longevity: 7, projection: 7 },
     vibe: "Día · Todo el año"
+  },
+  "Yves Saint Laurent – MYSLF": {
+    desc: "Naranja flor con almizcle blanco. Moderno y luminoso.",
+    notes: { top: ["Bergamota"], heart: ["Naranja Flor"], base: ["Almizcle Blanco", "Pachulí"] },
+    perf: { longevity: 8, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Valentino – Born in Roma Coral Fantasy": {
+    desc: "Ginger tropical con sal marina. Vibrante y fresco.",
+    notes: { top: ["Jengibre", "Sal"], heart: ["Lavanda"], base: ["Vainilla", "Cedro"] },
+    perf: { longevity: 7, projection: 8 },
+    vibe: "Día · Verano"
+  },
+  "Paco Rabanne – Invictus Parfum": {
+    desc: "Toronja amaderada. Masculino, intenso y deportivo.",
+    notes: { top: ["Toronja", "Sal Marina"], heart: ["Laurel"], base: ["Pachulí", "Ámbar Gris"] },
+    perf: { longevity: 8, projection: 8 },
+    vibe: "Noche · Todo el año"
+  },
+  "Yves Saint Laurent – La Nuit de L'Homme Bleu Électrique": {
+    desc: "Lavanda eléctrica con jengibre. Magnético y nocturno.",
+    notes: { top: ["Jengibre", "Menta"], heart: ["Lavanda"], base: ["Cedro", "Vetiver"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Noche · Todo el año"
+  },
+  "Carolina Herrera – CH": {
+    desc: "Canela con vainilla. Dulce, cálido y envolvente.",
+    notes: { top: ["Limón", "Azúcar"], heart: ["Canela", "Jazmín"], base: ["Vainilla", "Ámbar"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Noche · Otoño/Invierno"
+  },
+  "Jean Paul Gaultier – Le Beau": {
+    desc: "Coco fresco con lavanda. Masculino pero suave.",
+    notes: { top: ["Coco", "Bergamota"], heart: ["Lavanda", "Salvia"], base: ["Tonka", "Sándalo"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Verano"
+  },
+  "Paco Rabanne – 1 Million Lucky": {
+    desc: "Ciruela dulce con avellana. Goloso y vibrante.",
+    notes: { top: ["Ciruela", "Ozónico"], heart: ["Avellana", "Cedro"], base: ["Pachulí", "Ámbar"] },
+    perf: { longevity: 7, projection: 8 },
+    vibe: "Noche · Todo el año"
+  },
+  "Valentino – Uomo Born in Roma": {
+    desc: "Lavanda moderna con sal. Sofisticado y fresco.",
+    notes: { top: ["Jengibre", "Sal"], heart: ["Lavanda"], base: ["Vainilla", "Vetiver"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Chanel – Allure Homme": {
+    desc: "Elegancia francesa. Cítricos con vainilla tonka.",
+    notes: { top: ["Limón", "Mandarina"], heart: ["Pimienta", "Cedro"], base: ["Vainilla", "Tonka"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Montblanc – Explorer": {
+    desc: "Bergamota con pachulí. Versátil y accesible.",
+    notes: { top: ["Bergamota", "Pimienta"], heart: ["Vetiver"], base: ["Pachulí", "Cuero"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Maison Margiela – Jazz Club": {
+    desc: "Ron con tabaco dulce. Club nocturno en Nueva York.",
+    notes: { top: ["Pimienta", "Neroli"], heart: ["Ron", "Salvia"], base: ["Tabaco", "Vainilla"] },
+    perf: { longevity: 8, projection: 7 },
+    vibe: "Noche · Otoño/Invierno"
+  },
+  "Chanel – Égoïste Platinum": {
+    desc: "Lavanda con vetiver. Masculino refinado y atemporal.",
+    notes: { top: ["Lavanda", "Romero"], heart: ["Geranio"], base: ["Vetiver", "Cedro"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Montblanc – Legend": {
+    desc: "Lavanda con tonka. Clásico y confiable.",
+    notes: { top: ["Bergamota", "Lavanda"], heart: ["Geranio", "Pachulí"], base: ["Tonka", "Sándalo"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Ferragamo – Uomo Urban Feel": {
+    desc: "Cítricos urbanos con cedro. Moderno y dinámico.",
+    notes: { top: ["Limón", "Toronja"], heart: ["Geranio"], base: ["Cedro", "Pachulí"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Primavera/Verano"
+  },
+  "Cartier – Déclaration L'Eau": {
+    desc: "Cítricos transparentes. Ligero y sofisticado.",
+    notes: { top: ["Limón", "Bergamota"], heart: ["Cardamomo"], base: ["Cedro", "Vetiver"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Verano"
+  },
+  "Hermès – Terre d'Hermès": {
+    desc: "Naranja con vetiver terroso. Elegancia mineral.",
+    notes: { top: ["Naranja", "Toronja"], heart: ["Pimienta", "Geranio"], base: ["Vetiver", "Cedro"] },
+    perf: { longevity: 8, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Jean Paul Gaultier – Monsieur": {
+    desc: "Lavanda con vainilla. Elegante y romántico.",
+    notes: { top: ["Lavanda", "Menta"], heart: ["Vainilla", "Canela"], base: ["Ámbar", "Tonka"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Noche · Todo el año"
+  },
+  "Ralph Lauren – Polo Blue": {
+    desc: "Melón acuático fresco. Deportivo y limpio.",
+    notes: { top: ["Melón", "Pepino"], heart: ["Albahaca", "Salvia"], base: ["Almizcle", "Gamuza"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Verano"
+  },
+  "Ralph Lauren – Polo Black": {
+    desc: "Mango con sándalo. Oscuro y seductor.",
+    notes: { top: ["Mango", "Limón"], heart: ["Salvia"], base: ["Sándalo", "Tonka"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Noche · Todo el año"
+  },
+  "Ferragamo – F": {
+    desc: "Manzana con lavanda. Clásico italiano rejuvenecido.",
+    notes: { top: ["Manzana", "Lavanda"], heart: ["Pimienta"], base: ["Ámbar", "Tonka"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Perry Ellis – Perry Ellis": {
+    desc: "Lavanda con almizcle. Accesible y versátil.",
+    notes: { top: ["Lavanda", "Limón"], heart: ["Clavel"], base: ["Almizcle", "Ámbar"] },
+    perf: { longevity: 7, projection: 7 },
+    vibe: "Día · Todo el año"
+  },
+  "Chanel – Bleu de Chanel": {
+    desc: "Cítricos amaderados. El bestseller masculino de Chanel.",
+    notes: { top: ["Limón", "Menta"], heart: ["Jengibre", "Jazmín"], base: ["Sándalo", "Cedro"] },
+    perf: { longevity: 8, projection: 8 },
+    vibe: "Día/Noche · Todo el año"
   }
 };
 
-// REVIEWS SYSTEM
+// STORAGE KEYS
 const REVIEWS_KEY = "cc_reviews";
+const WISHLIST_KEY = "cc_wishlist";
+const CART_KEY = "cc_cart";
 
+// REVIEWS
 function loadReviews(productName) {
   const all = JSON.parse(localStorage.getItem(REVIEWS_KEY) || "{}");
   return all[productName] || [];
@@ -956,17 +1182,7 @@ function saveReview(productName, review) {
   localStorage.setItem(REVIEWS_KEY, JSON.stringify(all));
 }
 
-function deleteReview(productName, index) {
-  const all = JSON.parse(localStorage.getItem(REVIEWS_KEY) || "{}");
-  if (all[productName]) {
-    all[productName].splice(index, 1);
-    localStorage.setItem(REVIEWS_KEY, JSON.stringify(all));
-  }
-}
-
 // WISHLIST
-const WISHLIST_KEY = "cc_wishlist";
-
 function loadWishlist() {
   return JSON.parse(localStorage.getItem(WISHLIST_KEY) || "[]");
 }
@@ -994,8 +1210,6 @@ function updateWishlistUI() {
 }
 
 // CART
-const CART_KEY = "cc_cart";
-
 function loadCart() {
   return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
 }
@@ -1004,8 +1218,11 @@ function addToCart(p, size) {
   const cart = loadCart();
   const key = `${p.name}__${size}`;
   const existing = cart.find(i => i.key === key);
-  if (existing) existing.qty += 1;
-  else cart.push({ key, name: p.name, size, price: (size === 5 ? p.ml5 : p.ml10), qty: 1 });
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ key, name: p.name, size, price: (size === 5 ? p.ml5 : p.ml10), qty: 1 });
+  }
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
   updateCartUI();
   toast(`✨ ${p.name} (${size}ml) agregado`);
@@ -1036,180 +1253,129 @@ function waLink(msg) {
 
 // BUILD CARD
 function buildCard(p) {
-  const card = document.createElement("div");
-  card.className = "product-card";
+  const div = document.createElement("div");
+  div.className = "product-card";
   
-  const imgWrap = document.createElement("div");
-  imgWrap.className = "product-image-wrapper";
-  
-  const img = document.createElement("img");
-  img.className = "product-image";
-  img.src = imageMap[p.name] || imageMapNorm[normKey(p.name)] || placeholderDataUri();
-  img.alt = p.name;
-  imgWrap.appendChild(img);
-  
-  const wishBtn = document.createElement("button");
-  wishBtn.className = "wishlist-btn";
-  wishBtn.dataset.name = p.name;
-  wishBtn.textContent = loadWishlist().includes(p.name) ? '❤️' : '🤍';
-  wishBtn.onclick = (e) => toggleWishlist(p.name, e);
-  imgWrap.appendChild(wishBtn);
-  
-  if (p.featured) {
-    const badge = document.createElement("div");
-    badge.className = "product-badge";
-    badge.textContent = "✨ Destacado";
-    imgWrap.appendChild(badge);
-  }
-  
-  const info = document.createElement("div");
-  info.className = "product-info";
-  
-  const name = document.createElement("div");
-  name.className = "product-name";
-  name.textContent = p.name;
-  info.appendChild(name);
-  
-  const prices = document.createElement("div");
-  prices.className = "product-prices";
-  prices.innerHTML = `
-    <div class="price-box">
-      <div class="price-size">5ml</div>
-      <div class="price-amount">RD$${p.ml5.toLocaleString()}</div>
+  div.innerHTML = `
+    <div class="product-image-wrapper">
+      <img class="product-image" src="${getImage(p.name)}" alt="${p.name}">
+      <button class="wishlist-btn" data-name="${p.name}">🤍</button>
+      ${p.featured ? '<div class="product-badge">✨ Destacado</div>' : ''}
     </div>
-    <div class="price-box">
-      <div class="price-size">10ml</div>
-      <div class="price-amount">RD$${p.ml10.toLocaleString()}</div>
+    <div class="product-info">
+      <div class="product-name">${p.name}</div>
+      <div class="product-prices">
+        <div class="price-box">
+          <div class="price-size">5ml</div>
+          <div class="price-amount">RD$${p.ml5.toLocaleString()}</div>
+        </div>
+        <div class="price-box">
+          <div class="price-size">10ml</div>
+          <div class="price-amount">RD$${p.ml10.toLocaleString()}</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="btn btn-ghost" onclick='addToCart(${JSON.stringify(p)}, 5)'>+ 5ml</button>
+        <button class="btn btn-ghost" onclick='addToCart(${JSON.stringify(p)}, 10)'>+ 10ml</button>
+        <button class="btn btn-primary btn-view-details" onclick='openModal(${JSON.stringify(p)})'>Ver Detalles</button>
+      </div>
     </div>
   `;
-  info.appendChild(prices);
   
-  const actions = document.createElement("div");
-  actions.className = "product-actions";
+  div.querySelector('.wishlist-btn').onclick = (e) => toggleWishlist(p.name, e);
   
-  const btn5 = document.createElement("button");
-  btn5.className = "btn btn-ghost";
-  btn5.textContent = "+ 5ml";
-  btn5.onclick = () => addToCart(p, 5);
-  
-  const btn10 = document.createElement("button");
-  btn10.className = "btn btn-ghost";
-  btn10.textContent = "+ 10ml";
-  btn10.onclick = () => addToCart(p, 10);
-  
-  const btnView = document.createElement("button");
-  btnView.className = "btn btn-primary";
-  btnView.textContent = "Ver Detalles";
-  btnView.style.gridColumn = "1 / -1";
-  btnView.onclick = () => openProductModal(p);
-  
-  actions.appendChild(btn5);
-  actions.appendChild(btn10);
-  actions.appendChild(btnView);
-  info.appendChild(actions);
-  
-  card.appendChild(imgWrap);
-  card.appendChild(info);
-  
-  return card;
+  return div;
 }
 
-// PRODUCT MODAL
-let selectedSize = 5;
+// MODAL
 let currentProduct = null;
+let selectedSize = 5;
 let reviewRating = 5;
 
-function openProductModal(p) {
+function openModal(p) {
   currentProduct = p;
-  const modal = document.getElementById('productModal');
-  const body = document.getElementById('productModalBody');
-  const title = document.getElementById('productModalTitle');
+  selectedSize = 5;
+  reviewRating = 5;
   
   const details = productDetails[p.name] || {
-    description: "Fragancia premium de alta calidad.",
-    notes: { top: ["Por consultar"], heart: ["Por consultar"], base: ["Por consultar"] },
-    performance: { longevity: 7, projection: 7 },
+    desc: "Fragancia premium.",
+    notes: { top: ["Consultar"], heart: ["Consultar"], base: ["Consultar"] },
+    perf: { longevity: 7, projection: 7 },
     vibe: "Versátil"
   };
   
-  title.textContent = p.name;
-  
-  // Load reviews
   const reviews = loadReviews(p.name);
   
-  body.innerHTML = `
+  document.getElementById('modalTitle').textContent = p.name;
+  document.getElementById('modalBody').innerHTML = `
     <div class="product-detail-grid">
       <div>
-        <img class="product-detail-image" src="${imageMap[p.name] || imageMapNorm[normKey(p.name)] || placeholderDataUri()}" alt="${p.name}">
+        <img class="product-detail-image" src="${getImage(p.name)}" alt="${p.name}">
       </div>
-      <div class="product-detail-info">
-        <div>
-          <h3 style="font-size: 20px; margin-bottom: 12px;">${p.name}</h3>
-          <p style="color: var(--ocean); margin-bottom: 16px;">${details.description}</p>
-          <div style="background: rgba(255, 184, 77, 0.1); padding: 12px; border-radius: 8px; border-left: 4px solid var(--amber); font-weight: 600; color: var(--terracota);">
-            ✨ ${details.vibe}
-          </div>
+      <div>
+        <h3 style="font-size: 20px; margin-bottom: 12px;">${p.name}</h3>
+        <p style="color: var(--ocean); margin-bottom: 16px;">${details.desc}</p>
+        <div style="background: rgba(255, 184, 77, 0.1); padding: 12px; border-radius: 8px; border-left: 4px solid var(--amber); font-weight: 600; color: var(--terracota);">
+          ✨ ${details.vibe}
         </div>
-        
-        <div class="notes-section">
-          <div class="notes-title">🌸 Notas Olfativas</div>
-          <div class="notes-layer">
-            <div class="notes-layer-title">↗ Salida</div>
-            <div class="notes-tags">${details.notes.top.map(n => `<span class="note-tag">${n}</span>`).join('')}</div>
-          </div>
-          <div class="notes-layer">
-            <div class="notes-layer-title">→ Corazón</div>
-            <div class="notes-tags">${details.notes.heart.map(n => `<span class="note-tag">${n}</span>`).join('')}</div>
-          </div>
-          <div class="notes-layer">
-            <div class="notes-layer-title">↘ Base</div>
-            <div class="notes-tags">${details.notes.base.map(n => `<span class="note-tag">${n}</span>`).join('')}</div>
-          </div>
-        </div>
-        
-        <div class="performance-section">
-          <div class="performance-item">
-            <div class="performance-label">⏱️ Duración</div>
-            <div class="performance-bar"><div class="performance-fill" style="width: ${details.performance.longevity * 10}%;"></div></div>
-            <div class="performance-value">${details.performance.longevity}/10</div>
-          </div>
-          <div class="performance-item">
-            <div class="performance-label">📡 Proyección</div>
-            <div class="performance-bar"><div class="performance-fill" style="width: ${details.performance.projection * 10}%;"></div></div>
-            <div class="performance-value">${details.performance.projection}/10</div>
-          </div>
-        </div>
+      </div>
+    </div>
+    
+    <div class="detail-section">
+      <div class="section-title">🌸 Notas Olfativas</div>
+      <div class="notes-layer">
+        <div class="notes-layer-title">↗ Salida</div>
+        <div class="notes-tags">${details.notes.top.map(n => `<span class="note-tag">${n}</span>`).join('')}</div>
+      </div>
+      <div class="notes-layer">
+        <div class="notes-layer-title">→ Corazón</div>
+        <div class="notes-tags">${details.notes.heart.map(n => `<span class="note-tag">${n}</span>`).join('')}</div>
+      </div>
+      <div class="notes-layer">
+        <div class="notes-layer-title">↘ Base</div>
+        <div class="notes-tags">${details.notes.base.map(n => `<span class="note-tag">${n}</span>`).join('')}</div>
+      </div>
+    </div>
+    
+    <div class="performance-grid">
+      <div class="performance-item">
+        <div class="performance-label">⏱️ Duración</div>
+        <div class="performance-bar"><div class="performance-fill" style="width: ${details.perf.longevity * 10}%"></div></div>
+        <div class="performance-value">${details.perf.longevity}/10</div>
+      </div>
+      <div class="performance-item">
+        <div class="performance-label">📡 Proyección</div>
+        <div class="performance-bar"><div class="performance-fill" style="width: ${details.perf.projection * 10}%"></div></div>
+        <div class="performance-value">${details.perf.projection}/10</div>
       </div>
     </div>
     
     <div class="size-selector">
-      <div class="notes-title" style="margin-bottom: 12px;">Selecciona tu tamaño</div>
+      <div class="section-title">Selecciona tu tamaño</div>
       <div class="size-options">
-        <div class="size-option is-selected" data-size="5" onclick="selectSize(5)">
-          <div style="font-weight: 700; margin-bottom: 4px;">5 ml</div>
+        <div class="size-option selected" onclick="selectSize(5)">
+          <div style="font-weight: 700;">5 ml</div>
           <div style="font-size: 18px; font-weight: 700; color: var(--coral);">RD$${p.ml5.toLocaleString()}</div>
         </div>
-        <div class="size-option" data-size="10" onclick="selectSize(10)">
-          <div style="font-weight: 700; margin-bottom: 4px;">10 ml</div>
+        <div class="size-option" onclick="selectSize(10)">
+          <div style="font-weight: 700;">10 ml</div>
           <div style="font-size: 18px; font-weight: 700; color: var(--coral);">RD$${p.ml10.toLocaleString()}</div>
         </div>
       </div>
-      <div style="display: grid; gap: 8px;">
-        <button class="btn btn-primary" onclick="addToCartFromModal()" style="width: 100%;">🛒 Agregar al Carrito</button>
-        <a class="btn btn-ghost" href="${waLink(`Hola 👋 Me interesa *${p.name}*\n\n¿Disponible?\n— ${BRAND}`)}" target="_blank" style="text-align: center; text-decoration: none;">💬 Consultar por WhatsApp</a>
-      </div>
+      <button class="btn btn-primary" style="width: 100%; margin-bottom: 8px;" onclick="addToCartFromModal()">🛒 Agregar al Carrito</button>
+      <a href="${waLink(`Hola 👋 Me interesa *${p.name}*`)}" target="_blank" class="btn btn-ghost" style="width: 100%; text-align: center; text-decoration: none;">💬 Consultar por WhatsApp</a>
     </div>
     
     <div class="reviews-section">
       <div class="reviews-header">
-        <div class="notes-title" style="margin: 0;">⭐ Opiniones de Clientes (${reviews.length})</div>
-        <button class="btn btn-ghost" onclick="toggleReviewForm()" style="padding: 8px 16px; font-size: 13px;">Dejar opinión</button>
+        <div class="section-title" style="margin: 0;">⭐ Opiniones (${reviews.length})</div>
+        <button class="btn btn-ghost" style="padding: 8px 16px; font-size: 13px;" onclick="toggleReviewForm()">Dejar opinión</button>
       </div>
       
-      <div class="review-form" id="reviewForm" style="display: none;">
+      <div class="review-form" id="reviewForm">
         <div class="form-group">
           <label class="form-label">Tu nombre</label>
-          <input type="text" class="form-input" id="reviewName" placeholder="Nombre o iniciales">
+          <input type="text" class="form-input" id="reviewName" placeholder="Nombre">
         </div>
         <div class="form-group">
           <label class="form-label">Calificación</label>
@@ -1223,14 +1389,14 @@ function openProductModal(p) {
         </div>
         <div class="form-group">
           <label class="form-label">Tu opinión</label>
-          <textarea class="form-textarea" id="reviewText" placeholder="Cuéntanos tu experiencia con este perfume..."></textarea>
+          <textarea class="form-textarea" id="reviewText" placeholder="Cuéntanos tu experiencia..."></textarea>
         </div>
-        <button class="btn btn-primary" onclick="submitReview()">Publicar opinión</button>
+        <button class="btn btn-primary" onclick="submitReview()">Publicar</button>
       </div>
       
       <div id="reviewsList">
-        ${reviews.length === 0 ? '<p style="text-align: center; color: var(--ocean); padding: 20px;">Sé el primero en opinar sobre este perfume</p>' : 
-          reviews.map((r, i) => `
+        ${reviews.length === 0 ? '<p style="text-align: center; color: var(--ocean); padding: 20px;">Sé el primero en opinar</p>' : 
+          reviews.map(r => `
             <div class="review-item">
               <div class="review-header">
                 <span class="review-author">${r.name}</span>
@@ -1244,28 +1410,29 @@ function openProductModal(p) {
     </div>
   `;
   
-  selectedSize = 5;
-  reviewRating = 5;
-  modal.classList.add('show');
+  document.getElementById('productModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('productModal').classList.remove('show');
 }
 
 function selectSize(size) {
   selectedSize = size;
   document.querySelectorAll('.size-option').forEach(opt => {
-    opt.classList.toggle('is-selected', opt.dataset.size == size);
+    opt.classList.toggle('selected', opt.textContent.includes(`${size} ml`));
   });
 }
 
 function addToCartFromModal() {
   if (currentProduct) {
     addToCart(currentProduct, selectedSize);
-    document.getElementById('productModal').classList.remove('show');
+    closeModal();
   }
 }
 
 function toggleReviewForm() {
-  const form = document.getElementById('reviewForm');
-  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  document.getElementById('reviewForm').classList.toggle('show');
 }
 
 function setRating(rating) {
@@ -1280,47 +1447,44 @@ function submitReview() {
   const text = document.getElementById('reviewText').value.trim();
   
   if (!name || !text) {
-    toast('⚠️ Por favor completa todos los campos');
+    toast('⚠️ Completa todos los campos');
     return;
   }
   
-  const review = {
+  saveReview(currentProduct.name, {
     name,
     rating: reviewRating,
     text,
     date: new Date().toLocaleDateString('es-DO')
-  };
+  });
   
-  saveReview(currentProduct.name, review);
   toast('✨ ¡Gracias por tu opinión!');
-  
-  // Refresh modal
-  openProductModal(currentProduct);
+  openModal(currentProduct);
 }
 
 // RENDER
-function renderProducts(containerId, category) {
-  const grid = document.getElementById(containerId);
+function renderProducts(gridId, cat) {
+  const grid = document.getElementById(gridId);
   if (!grid) return;
   grid.innerHTML = "";
-  products.filter(p => p.cat === category).forEach(p => grid.appendChild(buildCard(p)));
+  products.filter(p => p.cat === cat).forEach(p => grid.appendChild(buildCard(p)));
 }
 
 function renderFeatured() {
-  const grid = document.getElementById('featuredGrid');
+  const grid = document.getElementById('gridInicio');
   if (!grid) return;
   grid.innerHTML = "";
   products.filter(p => p.featured).forEach(p => grid.appendChild(buildCard(p)));
 }
 
-function renderWishlist() {
-  const grid = document.getElementById('favoritosGrid');
+function renderFavoritos() {
+  const grid = document.getElementById('gridFavoritos');
   if (!grid) return;
   const wishlist = loadWishlist();
   const favs = products.filter(p => wishlist.includes(p.name));
   
   if (favs.length === 0) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><div class="empty-state-icon">💝</div><p>No tienes favoritos aún</p></div>';
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">💝</div><p>No tienes favoritos</p></div>';
     return;
   }
   
@@ -1328,7 +1492,7 @@ function renderWishlist() {
   favs.forEach(p => grid.appendChild(buildCard(p)));
 }
 
-// TAB SWITCHING
+// TABS
 function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === name);
@@ -1338,17 +1502,17 @@ function switchTab(name) {
     content.classList.toggle('active', content.id === `tab-${name}`);
   });
   
-  if (name === 'favoritos') renderWishlist();
+  if (name === 'favoritos') renderFavoritos();
 }
 
-// SETUP
+// INIT
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('year').textContent = new Date().getFullYear();
-  document.getElementById('ctaHeader').href = waLink(`Hola 👋 Quiero consultar sobre perfumes.\n\n— ${BRAND}`);
+  document.getElementById('headerWa').href = waLink(`Hola 👋 Quiero consultar sobre perfumes.\n— ${BRAND}`);
   
   renderFeatured();
-  renderProducts('damasGrid', 'damas');
-  renderProducts('caballerosGrid', 'caballeros');
+  renderProducts('gridDamas', 'damas');
+  renderProducts('gridCaballeros', 'caballeros');
   updateCartUI();
   updateWishlistUI();
   
@@ -1356,21 +1520,31 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
   
-  document.getElementById('productModalClose').addEventListener('click', () => {
-    document.getElementById('productModal').classList.remove('show');
+  document.getElementById('productModal').addEventListener('click', (e) => {
+    if (e.target.id === 'productModal') closeModal();
   });
   
-  document.getElementById('productModal').addEventListener('click', (e) => {
-    if (e.target.id === 'productModal') {
-      document.getElementById('productModal').classList.remove('show');
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    const cart = loadCart();
+    if (cart.length === 0) {
+      toast('⚠️ Carrito vacío');
+      return;
     }
+    
+    let msg = `🛒 *Mi Pedido*\n\n`;
+    cart.forEach(item => {
+      msg += `• ${item.name} (${item.size}ml) x${item.qty} = RD$${(item.price * item.qty).toLocaleString()}\n`;
+    });
+    const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+    msg += `\n*Total: RD$${total.toLocaleString()}*\n\n— ${BRAND}`;
+    
+    window.open(waLink(msg), '_blank');
   });
 });
 </script>
 
 </body>
 </html>
-
 
 
 
